@@ -35,7 +35,7 @@ export class AppService {
     this.snackbarModel.color = color;
 
     this._snackBar.openFromComponent(SnackbarAnnotatedComponent, {
-      duration:  5000,
+      duration:  10000,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: this.snackbarModel

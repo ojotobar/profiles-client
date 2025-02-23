@@ -41,7 +41,7 @@ export class ToolBarComponent implements OnInit {
     this.appService
       .setIsLoggedIn(!this.loggedIn);
 
-    this.appService.openSnackBar("Logged in successfully. With some random text to test if the texts will wrap on overflow.", SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+    this.appService.openSnackBar("Logged in successfully. With some random text to test if the texts will wrap on overflow. How long can this extend. This is crazy they actually want this to span a 1400px screen device.", SnackbarClassEnum.Success, SnackbarIconEnum.Success)
   }
 
   toggleShowSidebar() {

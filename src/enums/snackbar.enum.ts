@@ -1,8 +1,8 @@
 export enum SnackbarClassEnum {
-    Danger = 'text-danger',
-    Success = 'text-success',
-    Warning = 'text-warning',
-    Info = 'text-info'
+    Danger = 'bg-danger',
+    Success = 'bg-success',
+    Warning = 'bg-warning',
+    Info = 'bg-info'
 }
 
 export enum SnackbarIconEnum{

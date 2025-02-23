@@ -1,11 +1,13 @@
-<span class="{{model.color}} d-flex justify-contents-center align-items-center" matSnackBarLabel>
-    <span>
-        <mat-icon>{{model.icon}}</mat-icon>
+<div class="snack-label">
+    <span class="{{model.color}} snack-label" matSnackBarLabel>
+        <span>
+            <mat-icon>{{model.icon}}</mat-icon>
+        </span>
+        <span class="px-2">{{model.message}}</span>
     </span>
-    <span class="px-2">{{model.message}}</span>
-</span>
-<span matSnackBarActions>
-    <button mat-button matSnackBarAction (click)="snackBarRef.dismissWithAction()">
-        <mat-icon>close</mat-icon>
-    </button>
-</span>
+    <span matSnackBarActions>
+        <button mat-icon-button matSnackBarAction (click)="snackBarRef.dismissWithAction()">
+            <mat-icon class="text-light">close</mat-icon>
+        </button>
+    </span>
+</div>
