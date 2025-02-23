@@ -19,12 +19,15 @@ import { RouterLink } from '@angular/router';
   styleUrl: './tool-bar.component.scss'
 })
 export class ToolBarComponent implements OnInit {
-  loggedIn: boolean = true;
+  loggedIn: boolean = false;
   isSideBarOpened: boolean = false;
 
   constructor(private appService: AppService){
     this.appService.getIsSidebarOpened
       .subscribe(s => this.isSideBarOpened = s);
+
+    this.appService.getIsLoggedIn
+      .subscribe(l => this.loggedIn = l);
   }
 
   ngOnInit(): void {
@@ -32,7 +35,8 @@ export class ToolBarComponent implements OnInit {
   }
 
   toggleLogin(): void {
-    this.loggedIn = !this.loggedIn;
+    this.appService
+      .setIsLoggedIn(!this.loggedIn);
   }
 
   toggleShowSidebar() {

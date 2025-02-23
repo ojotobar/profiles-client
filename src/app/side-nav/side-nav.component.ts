@@ -25,10 +25,14 @@ export class SideNavComponent implements OnInit {
   @Input() isExpanded: boolean = false;
   @Output() toggleSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
   isSidebarOpened: boolean = false;
+  isLoggedIn: boolean = false;
 
   constructor(private appService: AppService){
     this.appService.getIsSidebarOpened
       .subscribe(s => this.isSidebarOpened = s);
+
+    this.appService.getIsLoggedIn
+      .subscribe(l => this.isLoggedIn = l);
   }
 
   ngOnInit(): void {

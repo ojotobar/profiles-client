@@ -12,15 +12,25 @@
         </div>
         <div class="content">
           <div class="link">
-            <div class="content" [routerLink]="['/']" [routerLinkActive]="'active'">
+            <div class="content py-3" [routerLink]="['/']" [routerLinkActive]="'active'">
               <div class="icon">
                 <mat-icon>home</mat-icon>
               </div>
               <div class="title">Home</div>
             </div>
           </div>
+          @if(isLoggedIn){
+            <div class="link">
+                <div class="content py-3" [routerLink]="['/dashboard']" [routerLinkActive]="'active'">
+                    <div class="icon">
+                        <mat-icon>dashboard</mat-icon>
+                    </div>
+                    <div class="title">Dashboard</div>
+                </div>
+            </div>
+          }
           <div class="link">
-            <div class="content" [routerLink]="['/about']" [routerLinkActive]="'active'">
+            <div class="content py-3" [routerLink]="['/about']" [routerLinkActive]="'active'">
               <div class="icon">
                 <mat-icon>info</mat-icon>
               </div>
@@ -28,7 +38,7 @@
             </div>
           </div>
           <div class="link">
-            <div class="content" [routerLink]="['/contact']" [routerLinkActive]="'active'">
+            <div class="content py-3" [routerLink]="['/contact']" [routerLinkActive]="'active'">
               <div class="icon">
                 <mat-icon> forum</mat-icon>
               </div>
@@ -36,7 +46,7 @@
             </div>
           </div>
           <div class="link">
-            <div class="content" [routerLink]="['/faqs']" [routerLinkActive]="'active'">
+            <div class="content py-3" [routerLink]="['/faqs']" [routerLinkActive]="'active'">
               <div class="icon">
                 <mat-icon>help</mat-icon>
               </div>
