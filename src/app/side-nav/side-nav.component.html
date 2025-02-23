@@ -1,0 +1,48 @@
+@if(isSidebarOpened){
+    <div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+        <div class="header">
+          <h1 class="title"></h1>
+          <div class="toggle" (click)="handleSidebarToggle()">
+            @if(isExpanded){
+                <mat-icon>chevron_left</mat-icon>
+            } @else {
+                <mat-icon>chevron_right</mat-icon>
+            }
+          </div>
+        </div>
+        <div class="content">
+          <div class="link">
+            <div class="content" [routerLink]="['/']" [routerLinkActive]="'active'">
+              <div class="icon">
+                <mat-icon>home</mat-icon>
+              </div>
+              <div class="title">Home</div>
+            </div>
+          </div>
+          <div class="link">
+            <div class="content" [routerLink]="['/about']" [routerLinkActive]="'active'">
+              <div class="icon">
+                <mat-icon>info</mat-icon>
+              </div>
+              <div class="title">About</div>
+            </div>
+          </div>
+          <div class="link">
+            <div class="content" [routerLink]="['/contact']" [routerLinkActive]="'active'">
+              <div class="icon">
+                <mat-icon> forum</mat-icon>
+              </div>
+              <div class="title">Contact Us</div>
+            </div>
+          </div>
+          <div class="link">
+            <div class="content" [routerLink]="['/faqs']" [routerLinkActive]="'active'">
+              <div class="icon">
+                <mat-icon>help</mat-icon>
+              </div>
+              <div class="title">FAQs</div>
+            </div>
+          </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,17 @@
+.toolbar-spacer {
+    flex: 1 1 auto;
+}
+
+.toolbar-button {
+    padding: 0;
+}
+
+.bg-dark {
+    background: #0f1017 !important;    
+}
+
+@media only screen and (max-width: 767px) {
+    .title {
+        display: none !important;
+    }
+}

@@ -1,0 +1,11 @@
+.content {
+    margin-left: 60px;
+    transition: 0.3s;
+    &.sidebarExpanded {
+      margin-left: 180px;
+    }
+
+    &.isSidebarClosed{
+        margin-left: 0;
+    }
+}
