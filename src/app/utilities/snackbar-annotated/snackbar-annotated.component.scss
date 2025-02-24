@@ -4,10 +4,6 @@
 
 .snack-label {
     display: flex !important;
-    justify-content: center !important;
+    justify-content: start;
     align-items: center !important;
-}
-
-.snack-container {
-    max-width: 30%;
 }

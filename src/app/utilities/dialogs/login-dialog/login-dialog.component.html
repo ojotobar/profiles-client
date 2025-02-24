@@ -1,0 +1,37 @@
+<mat-dialog-content class="shadow-lg bg-secondary text-light">
+    <header>
+        <p class="fs-4">Login</p>
+        <hr />
+    </header>
+    <div>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <mat-icon matPrefix>drafts</mat-icon>
+            <input matInput type="email" [formControl]="emailFormControl" placeholder="example@email.com" [errorStateMatcher]="errorMatcher">
+            @if (emailFormControl.hasError('required')) {
+                <mat-error>Email is required</mat-error>
+            }
+            @if (emailFormControl.hasError('email')) {
+                <mat-error>Enter a valid email address</mat-error>
+            }
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <mat-icon matPrefix>lock</mat-icon>
+            <input matInput type="password" [formControl]="passwordFormControl" placeholder="Password" [errorStateMatcher]="errorMatcher">
+            @if (emailFormControl.hasError('required')) {
+                <mat-error>Password is required</mat-error>
+            }
+        </mat-form-field>
+    </div>
+    <span>
+        <p class="linked text-info py-1 m-0" (click)="openRegisterDialog()">Don't have an account?</p>
+        <p class="linked text-danger py-1 m-0" (click)="openPasswordResetDialog()">Forgot password?</p>
+    </span>
+</mat-dialog-content>
+<mat-dialog-actions align="center" class="shadow-lg bg-secondary">
+    <button mat-raised-button class="bg-primary text-light my-1">Login</button>
+    <button mat-raised-button mat-dialog-close class="bg-dark text-light my-1">Cancel</button>
+</mat-dialog-actions>

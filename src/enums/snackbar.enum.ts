@@ -6,8 +6,8 @@ export enum SnackbarClassEnum {
 }
 
 export enum SnackbarIconEnum{
-    Danger = 'error_outline',
-    Success = 'check',
+    Danger = 'bug_report',
+    Success = 'check_circle_outline',
     Warning = 'warning',
     Info = 'info'
 }

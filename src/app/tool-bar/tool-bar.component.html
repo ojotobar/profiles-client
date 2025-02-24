@@ -13,18 +13,18 @@
         </span>
         <span class="toolbar-spacer"></span>
         @if(loggedIn){
-            <button mat-icon-button (click)="toggleLogin()">
+            <button mat-icon-button (click)="toggleLoginDialogue()">
                 <mat-icon class="text-danger">power_settings_new</mat-icon>
             </button>
             <button mat-icon-button>
                 <mat-icon class="text-secondary">account_circle</mat-icon>
             </button>
         } @else{
-            <button mat-icon-button (click)="toggleLogin()">
+            <button mat-icon-button (click)="toggleLoginDialogue()">
                 <mat-icon class="text-success">login</mat-icon>
             </button>
             <button mat-icon-button>
-                <mat-icon class="text-primary">person_add</mat-icon>
+                <mat-icon class="text-primary" (click)="openRegisterDialog()">person_add</mat-icon>
             </button>
         }
     </div>

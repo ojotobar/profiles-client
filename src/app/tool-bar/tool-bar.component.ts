@@ -7,6 +7,9 @@ import { AppService } from '../app.service';
 import { RouterLink } from '@angular/router';
 import { SnackbarModel } from '../../models/snackbar.model';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../../enums/snackbar.enum';
+import { LoginDialogComponent } from '../utilities/dialogs/login-dialog/login-dialog.component';
+import { DialogPosition, MatDialog } from '@angular/material/dialog';
+import { RegisterDialogComponent } from '../utilities/dialogs/register-dialog/register-dialog.component';
 
 @Component({
   selector: 'app-tool-bar',
@@ -25,7 +28,7 @@ export class ToolBarComponent implements OnInit {
   isSideBarOpened: boolean = false;
   snackBarModel: SnackbarModel = new SnackbarModel();
 
-  constructor(private appService: AppService){
+  constructor(private appService: AppService, private dialog: MatDialog){
     this.appService.getIsSidebarOpened
       .subscribe(s => this.isSideBarOpened = s);
 
@@ -37,11 +40,24 @@ export class ToolBarComponent implements OnInit {
     
   }
 
-  toggleLogin(): void {
+  toggleLoginDialogue(): void {
+    this.dialog.closeAll()
+    this.dialog.open(LoginDialogComponent, {
+      position: { top: '12vh' },
+      disableClose: true
+    });
     this.appService
       .setIsLoggedIn(!this.loggedIn);
 
-    this.appService.openSnackBar("Logged in successfully. With some random text to test if the texts will wrap on overflow. How long can this extend. This is crazy they actually want this to span a 1400px screen device.", SnackbarClassEnum.Success, SnackbarIconEnum.Success)
+    this.appService.openSnackBar("Logged in successfully.", SnackbarClassEnum.Success, SnackbarIconEnum.Success)
+  }
+
+  openRegisterDialog() {
+    this.dialog.closeAll()
+    this.dialog.open(RegisterDialogComponent, {
+      position: { top: '12vh' },
+      disableClose: true
+    });
   }
 
   toggleShowSidebar() {
