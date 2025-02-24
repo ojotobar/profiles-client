@@ -29,7 +29,7 @@ import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
   styleUrl: './register-dialog.component.scss'
 })
 export class RegisterDialogComponent {
-  value: number = GenderEnum.NotSpecified;
+  value: string = GenderEnum.NotSpecified;
   options = [
     {label: 'Not Specified', value: GenderEnum.NotSpecified},
     {label: 'Male', value: GenderEnum.Male},
