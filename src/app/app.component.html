@@ -1,10 +1,8 @@
-<app-tool-bar />
+<app-side-nav 
+    [isExpanded]="sidebarExpanded" 
+    (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
+/>
 <div class="content" [ngClass]="{ 'sidebarExpanded': sidebarExpanded, 'isSidebarClosed': isSidebarClosed }">
-    <app-side-nav 
-        [isExpanded]="sidebarExpanded" 
-        (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
-    />
-    {{sidebarExpanded}}
-    {{getScreenWidth}}
+    <app-tool-bar [style]="'position:fixed;width:100%;'"/>
     <router-outlet></router-outlet>
 </div>
