@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AppService } from '../app.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,5 +7,5 @@ import { AppService } from '../app.service';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  
+
 }

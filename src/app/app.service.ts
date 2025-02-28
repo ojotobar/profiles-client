@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SnackbarIconEnum, SnackbarClassEnum } from '../enums/snackbar.enum';
 import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
 import { SnackbarAnnotatedComponent } from './utilities/snackbar-annotated/snackbar-annotated.component';
-import { SnackbarModel } from '../models/snackbar.model';
+import { SnackbarClassEnum, SnackbarIconEnum } from './enums/snackbar-enum';
+import { SnackbarModel } from './models/common/snackbar-model';
 
 @Injectable({
   providedIn: 'root'

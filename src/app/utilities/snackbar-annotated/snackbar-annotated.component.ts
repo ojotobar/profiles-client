@@ -8,8 +8,7 @@ import {
   MatSnackBarLabel, 
   MatSnackBarRef
 } from '@angular/material/snack-bar';
-import { SnackbarModel } from '../../../models/snackbar.model';
-
+import { SnackbarModel } from '../../models/common/snackbar-model';
 
 @Component({
   selector: 'app-snackbar-annotated',

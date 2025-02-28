@@ -4,5 +4,7 @@
         [isExpanded]="sidebarExpanded" 
         (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
     />
+    {{sidebarExpanded}}
+    {{getScreenWidth}}
     <router-outlet></router-outlet>
 </div>

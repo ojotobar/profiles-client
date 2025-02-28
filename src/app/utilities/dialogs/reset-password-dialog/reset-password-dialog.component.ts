@@ -7,7 +7,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AppService } from '../../../app.service';
 import { LoginDialogComponent } from '../login-dialog/login-dialog.component';
 import { FormsModule, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { FormErrorStateMatcher } from '../../../../models/error-state-matcher';
+import { FormErrorStateMatcher } from '../../../models/common/error-state-matcher';
+import { PasswordResetModel } from '../../../models/account/password-reset-model';
 
 @Component({
   selector: 'app-reset-password-dialog',
@@ -26,6 +27,13 @@ import { FormErrorStateMatcher } from '../../../../models/error-state-matcher';
 export class ResetPasswordDialogComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   errorMatcher = new FormErrorStateMatcher();
+  resetModel: PasswordResetModel = {
+    emailAddress: ''
+  }
+
+  processPasswordReset(form: any){
+    console.log(this.resetModel)
+  }
 
   constructor(private dialog: MatDialog){}
 

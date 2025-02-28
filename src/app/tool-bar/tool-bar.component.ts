@@ -5,11 +5,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { AppService } from '../app.service';
 import { RouterLink } from '@angular/router';
-import { SnackbarModel } from '../../models/snackbar.model';
-import { SnackbarClassEnum, SnackbarIconEnum } from '../../enums/snackbar.enum';
 import { LoginDialogComponent } from '../utilities/dialogs/login-dialog/login-dialog.component';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { RegisterDialogComponent } from '../utilities/dialogs/register-dialog/register-dialog.component';
+import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
+import { SnackbarModel } from '../models/common/snackbar-model';
 
 @Component({
   selector: 'app-tool-bar',

@@ -1,4 +1,4 @@
-import { SnackbarIconEnum, SnackbarClassEnum } from '../enums/snackbar.enum';
+import { SnackbarClassEnum, SnackbarIconEnum } from "../../enums/snackbar-enum";
 
 export class SnackbarModel{
     message: string = "Success!!!";

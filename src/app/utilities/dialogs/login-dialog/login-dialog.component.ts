@@ -8,7 +8,8 @@ import { AppService } from '../../../app.service';
 import { RegisterDialogComponent } from '../register-dialog/register-dialog.component';
 import { ResetPasswordDialogComponent } from '../reset-password-dialog/reset-password-dialog.component';
 import { FormsModule, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { FormErrorStateMatcher } from '../../../../models/error-state-matcher';
+import { FormErrorStateMatcher } from '../../../models/common/error-state-matcher';
+import { LoginModel } from '../../../models/account/login-model';
 
 @Component({
   selector: 'app-login-dialog',
@@ -28,8 +29,17 @@ export class LoginDialogComponent {
   passwordFormControl = new FormControl('', [Validators.required]);
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   errorMatcher = new FormErrorStateMatcher();
+  loginModel: LoginModel = {
+    email: '',
+    password: ''
+  };
 
   constructor(private appService: AppService, private dialog: MatDialog){}
+
+  login(form: any){
+    console.log(this.loginModel)
+  }
+
   openRegisterDialog() {
       this.dialog.closeAll()
       this.dialog.open(RegisterDialogComponent, {
