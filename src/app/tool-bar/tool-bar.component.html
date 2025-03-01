@@ -1,5 +1,6 @@
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+	<div class="container-fluid">
+		<!-- <a class="navbar-brand" [routerLink]="'.'">Responsive navbar</a> -->
         <button mat-icon-button (click)="toggleShowSidebar()">
             @if(isSideBarOpened){
                 <mat-icon>cancel</mat-icon>
@@ -11,21 +12,33 @@
             <span class="text-danger">Pro</span>
             <span class="text-secondary">files</span>
         </span>
-        <span class="toolbar-spacer"></span>
-        @if(loggedIn){
-            <button mat-icon-button (click)="toggleLoginDialogue()">
-                <mat-icon class="text-danger">power_settings_new</mat-icon>
-            </button>
-            <button mat-icon-button>
-                <mat-icon class="text-secondary">account_circle</mat-icon>
-            </button>
-        } @else{
-            <button mat-icon-button (click)="toggleLoginDialogue()">
-                <mat-icon class="text-success">login</mat-icon>
-            </button>
-            <button mat-icon-button>
-                <mat-icon class="text-primary" (click)="openRegisterDialog()">person_add</mat-icon>
-            </button>
-        }
-    </div>
+		<!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
+		<button 
+            mat-icon-button
+            class="navbar-toggler" 
+            type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+		<!-- Step 2: Add the ngbCollapse directive to the element below. -->
+		<div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+			<ul class="navbar-nav d-flex">
+				@if(loggedIn){
+                    <button mat-icon-button (click)="toggleLoginDialogue()">
+                        <mat-icon class="text-danger">power_settings_new</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon class="text-secondary">account_circle</mat-icon>
+                    </button>
+                } @else{
+                    <button mat-icon-button (click)="toggleLoginDialogue()">
+                        <mat-icon class="text-success">login</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon class="text-primary" (click)="openRegisterDialog()">person_add</mat-icon>
+                    </button>
+                }
+			</ul>
+		</div>
+	</div>
 </nav>

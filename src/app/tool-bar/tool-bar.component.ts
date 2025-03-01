@@ -6,10 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppService } from '../app.service';
 import { RouterLink } from '@angular/router';
 import { LoginDialogComponent } from '../utilities/dialogs/login-dialog/login-dialog.component';
-import { DialogPosition, MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { RegisterDialogComponent } from '../utilities/dialogs/register-dialog/register-dialog.component';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
 import { SnackbarModel } from '../models/common/snackbar-model';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tool-bar',
@@ -18,6 +19,7 @@ import { SnackbarModel } from '../models/common/snackbar-model';
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
+    NgbCollapseModule,
     RouterLink
   ],
   templateUrl: './tool-bar.component.html',
@@ -27,6 +29,7 @@ export class ToolBarComponent implements OnInit {
   loggedIn: boolean = false;
   isSideBarOpened: boolean = false;
   snackBarModel: SnackbarModel = new SnackbarModel();
+  isMenuCollapsed = true;
 
   constructor(private appService: AppService, private dialog: MatDialog){
     this.appService.getIsSidebarOpened
