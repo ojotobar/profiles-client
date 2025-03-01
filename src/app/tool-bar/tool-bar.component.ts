@@ -52,7 +52,7 @@ export class ToolBarComponent implements OnInit {
     this.appService
       .setIsLoggedIn(!this.loggedIn);
 
-    this.appService.openSnackBar("Logged in successfully.", SnackbarClassEnum.Success, SnackbarIconEnum.Success)
+    //this.appService.openSnackBar("Logged in successfully.", SnackbarClassEnum.Success, SnackbarIconEnum.Success)
   }
 
   openRegisterDialog() {

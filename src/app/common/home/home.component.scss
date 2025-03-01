@@ -4,8 +4,8 @@
     padding: 20px;
 }
 .hero {
-    background: #f4f4f4;
-    padding: 50px;
+    background: #e3e3e3;
+    padding: 2rem 0.5rem;
 }
 .hero h1 {
     font-size: 2.5rem;
@@ -28,15 +28,11 @@
     background: #0056b3;
 }
 .benefits {
-    display: flex;
-    justify-content: space-around;
-    margin: 50px 0;
+    margin: 3.125rem 0;
 }
 .benefit {
-    padding: 20px;
-    background: #e3e3e3;
-    border-radius: 8px;
-    width: 22%;
+    background: #f4f4f4 !important;
+    padding: 1.5rem 0 !important;
 }
 .how-it-works ul {
     list-style-type: none;
@@ -47,9 +43,9 @@
     margin: 10px 0;
 }
 .cta {
-    background: #007bff;
+    background: #01012b;
     color: white;
-    padding: 40px;
+    text-align: center !important;
 }
 .cta h2 {
     font-size: 2rem;
