@@ -40,4 +40,14 @@ export class SideNavComponent implements OnInit {
   }
 
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
+
+  openRegisterDialog() {
+    this.appService.openRegistrationDialog();
+  }
+
+  openLoginDialog() {
+    this.appService.openLoginDialogue();
+    this.appService
+      .setIsLoggedIn(!this.isLoggedIn);
+  }
 }

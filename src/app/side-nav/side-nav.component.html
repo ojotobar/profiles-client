@@ -53,6 +53,41 @@
               <div class="title">FAQs</div>
             </div>
           </div>
+          @if(isLoggedIn){
+            <div class="link" >
+              <div class="content py-3 text-danger" [routerLinkActive]="'active'" (click)="openLoginDialog()">
+                <div class="icon">
+                  <mat-icon>power_settings_new</mat-icon>
+                </div>
+                <div class="title">Logout</div>
+              </div>
+            </div>
+            <div class="link" >
+              <div class="content py-3" [routerLink]="['/profile']" [routerLinkActive]="'active'">
+                <div class="icon">
+                  <mat-icon>account_circle</mat-icon>
+                </div>
+                <div class="title">Profile</div>
+              </div>
+            </div>
+          } @else {
+            <div class="link" >
+              <div class="content py-3 text-success" [routerLinkActive]="'active'" (click)="openLoginDialog()">
+                <div class="icon">
+                  <mat-icon>login</mat-icon>
+                </div>
+                <div class="title">Login</div>
+              </div>
+            </div>
+            <div class="link" >
+              <div class="content py-3 text-primary" [routerLinkActive]="'active'" (click)="openRegisterDialog()">
+                <div class="icon">
+                  <mat-icon>person_add</mat-icon>
+                </div>
+                <div class="title">Register</div>
+              </div>
+            </div>
+          }
         </div>
     </div>
 }

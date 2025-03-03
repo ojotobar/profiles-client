@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 import { LoginDialogComponent } from '../utilities/dialogs/login-dialog/login-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterDialogComponent } from '../utilities/dialogs/register-dialog/register-dialog.component';
-import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
+//import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
 import { SnackbarModel } from '../models/common/snackbar-model';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 

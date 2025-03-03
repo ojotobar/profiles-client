@@ -14,39 +14,28 @@
     font-size: 1.2rem;
     color: #666;
 }
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: #fff;
-    background: #007bff;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-}
-.btn:hover {
-    background: #0056b3;
-}
-.benefits {
-    margin: 3.125rem 0;
-}
+
 .benefit {
     background: #f4f4f4 !important;
     padding: 1.5rem 0 !important;
 }
+
 .how-it-works ul {
     list-style-type: none;
     padding: 0;
 }
+
 .how-it-works li {
     font-size: 1.2rem;
     margin: 10px 0;
 }
+
 .cta {
-    background: #01012b;
+    // background: #01012b;
     color: white;
     text-align: center !important;
 }
+
 .cta h2 {
     font-size: 2rem;
 }

@@ -3,8 +3,8 @@
     (toggleSidebar)="sidebarExpanded = !sidebarExpanded"
 />
 <div class="content" [ngClass]="{ 'sidebarExpanded': sidebarExpanded, 'isSidebarClosed': isSidebarClosed }">
-    <app-tool-bar [style]="'position:fixed;width:100%;'"/>
-    <div class="container" [style]="'padding-top: 4rem;box-sizing: border-box;z-index: -1'">
+    <app-tool-bar [style]="'width:100%;position:sticky;'"/>
+    <div class="container" [style]="'padding-top: 2rem;box-sizing: border-box;'">
         <router-outlet></router-outlet>
     </div>
 </div>

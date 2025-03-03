@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3" [style]="'z-index: 999'">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
 	<div class="container-fluid">
 		<!-- <a class="navbar-brand" [routerLink]="'.'">Responsive navbar</a> -->
         <button mat-icon-button (click)="toggleShowSidebar()">
@@ -19,25 +19,11 @@
             type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
             <mat-icon>menu</mat-icon>
         </button>
-
-		<!-- Step 2: Add the ngbCollapse directive to the element below. -->
 		<div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-			<ul class="navbar-nav d-flex">
-				@if(loggedIn){
-                    <button mat-icon-button (click)="toggleLoginDialogue()">
-                        <mat-icon class="text-danger">power_settings_new</mat-icon>
-                    </button>
-                    <button mat-icon-button>
-                        <mat-icon class="text-secondary">account_circle</mat-icon>
-                    </button>
-                } @else{
-                    <button mat-icon-button (click)="toggleLoginDialogue()">
-                        <mat-icon class="text-success">login</mat-icon>
-                    </button>
-                    <button mat-icon-button>
-                        <mat-icon class="text-primary" (click)="openRegisterDialog()">person_add</mat-icon>
-                    </button>
-                }
+			<ul class="navbar-nav d-flex justify-content-end w-75 px-5">
+                <li class="nav-item active" role="button">
+                    <mat-icon class="text-primary">facebook</mat-icon>
+                </li>
 			</ul>
 		</div>
 	</div>
