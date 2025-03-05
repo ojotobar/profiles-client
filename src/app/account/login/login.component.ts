@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AppService } from '../../app.service';
 import { LoginModel } from '../../models/account/login-model';
 import { RouterLink } from '@angular/router';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,7 @@ import { RouterLink } from '@angular/router';
 })
 
 export class LoginComponent {
-  constructor(private appService: AppService){}
+  constructor(private appService: AppService, private accountService: AccountService){}
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
@@ -46,7 +47,7 @@ export class LoginComponent {
         email: this.loginForm.value.emailAddress as string,
         password: this.loginForm.value.password as string
       }
-      console.log(loginPayload)
+      this.accountService.login(loginPayload)
     }
   }
 
