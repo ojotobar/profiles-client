@@ -72,7 +72,7 @@
             </div>
           } @else {
             <div class="link" >
-              <div class="content py-3 text-success" [routerLinkActive]="'active'" (click)="openLoginDialog()">
+              <div class="content py-3 text-success" [routerLink]="['/account/login']" [routerLinkActive]="'active'">
                 <div class="icon">
                   <mat-icon>login</mat-icon>
                 </div>
@@ -80,7 +80,7 @@
               </div>
             </div>
             <div class="link" >
-              <div class="content py-3 text-primary" [routerLinkActive]="'active'" (click)="openRegisterDialog()">
+              <div class="content py-3 text-primary" [routerLink]="['/account/register']" [routerLinkActive]="'active'">
                 <div class="icon">
                   <mat-icon>person_add</mat-icon>
                 </div>

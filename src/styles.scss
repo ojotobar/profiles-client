@@ -19,3 +19,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .app-bg {
     background: #0f1017 !important;
 }
+
+.app-bg-rgb{
+    background: rgba($color: #0f1017, $alpha: 0.5);
+}

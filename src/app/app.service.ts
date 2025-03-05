@@ -7,6 +7,8 @@ import { SnackbarModel } from './models/common/snackbar-model';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterDialogComponent } from './utilities/dialogs/register-dialog/register-dialog.component';
 import { LoginDialogComponent } from './utilities/dialogs/login-dialog/login-dialog.component';
+import { UserClaimsModel } from './models/account/user-claims-model';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +24,24 @@ export class AppService {
   getIsSidebarOpened = this.isSidebarOpened.asObservable();
   getIsLoggedIn = this.isLoggedIn.asObservable();
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private location: Location) { }
 
+  goBack(){
+    this.location.back();
+  }
+  
   setIsSidebarOpened(isSidebarOpened: boolean){
     this.isSidebarOpened.next(isSidebarOpened);
+  }
+
+  setClaims(claim: UserClaimsModel){
+    localStorage.setItem('accessToken', claim.accessToken);
+    this.isLoggedIn.next(localStorage.getItem('accessToken') != null)
+  }
+
+  logoutUser(){
+    localStorage.clear();
+    this.isLoggedIn.next(false);
   }
 
   setIsLoggedIn(isLoggedIn: boolean){

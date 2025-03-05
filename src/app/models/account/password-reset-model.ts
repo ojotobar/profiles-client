@@ -1,3 +1,3 @@
 export interface PasswordResetModel{
-    emailAddress: string | '';
+    emailAddress: string;
 }
