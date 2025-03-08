@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AppService } from '../app.service';
 import { MatIconModule } from '@angular/material/icon'
+import { AccountService } from '../services/account.service';
+import { UserRoleEnum } from '../enums/user-role-enum';
 
 @Component({
   selector: 'app-side-nav',
@@ -27,7 +29,7 @@ export class SideNavComponent implements OnInit {
   isSidebarOpened: boolean = false;
   isLoggedIn: boolean = false;
 
-  constructor(private appService: AppService){
+  constructor(private appService: AppService, private readonly accountService: AccountService){
     this.appService.getIsSidebarOpened
       .subscribe(s => this.isSidebarOpened = s);
 
@@ -41,13 +43,15 @@ export class SideNavComponent implements OnInit {
 
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
 
-  openRegisterDialog() {
-    this.appService.openRegistrationDialog();
+  logOut(){
+    this.appService.logoutUser()
   }
 
-  openLoginDialog() {
-    this.appService.openLoginDialogue();
-    this.appService
-      .setIsLoggedIn(!this.isLoggedIn);
+  canViewDashboard(): boolean {
+    if(this.accountService.canViewPage([UserRoleEnum.admin])){
+      return true;
+    } else{
+      return false;
+    }
   }
 }

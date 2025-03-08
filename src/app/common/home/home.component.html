@@ -9,7 +9,7 @@
             <p>Create a stunning portfolio website by simply filling out your work experience, skills, and projects. No coding required!</p>
         </mat-card-content>
         <mat-card-actions align="end" class="my-2" >
-          <button mat-raised-button class="text-light app-bg" (click)="openRegisterDialog()">Get Started for Free</button>
+          <button mat-raised-button class="text-light app-bg" [routerLink]="['/account/register']">Get Started for Free</button>
         </mat-card-actions>
     </mat-card>
     
@@ -43,7 +43,7 @@
         <div class="card-body">
           <h2 class="card-title">Start Building Your Professional Portfolio Today</h2>
           <div class="mt-5">
-            <button mat-raised-button class="bg-light text-dark" (click)="openRegisterDialog()">Sign Up</button>
+            <button mat-raised-button class="bg-light text-dark" [routerLink]="['/account/register']">Sign Up</button>
           </div>
         </div>
     </div>

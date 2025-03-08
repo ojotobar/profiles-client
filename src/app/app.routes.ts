@@ -10,6 +10,10 @@ import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { ResetPasswordComponent } from './account/reset-password/reset-password.component';
 import { TermsAndConditionsComponent } from './common/terms-and-conditions/terms-and-conditions.component';
+import { authGuard } from './guards/auth.guard';
+import { adminGuard } from './guards/admin.guard';
+import { UserDashboardComponent } from './admin/user-dashboard/user-dashboard.component';
+import { ProfileComponent } from './profile/profile/profile.component';
 
 export const routes: Routes = [
     {
@@ -34,7 +38,18 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [authGuard, adminGuard]
+    },
+    {
+        path: 'pro-dashboard',
+        component: UserDashboardComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'account/login',

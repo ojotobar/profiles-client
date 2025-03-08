@@ -1,4 +1,4 @@
-export interface UserClaimsModel {
-    accessToken: string;
-    refreshToken: string;
+export class UserClaimsModel {
+    accessToken: string = '';
+    refreshToken: string = '';
 }

@@ -19,7 +19,7 @@
               <div class="title">Home</div>
             </div>
           </div>
-          @if(isLoggedIn){
+          @if(canViewDashboard()){
             <div class="link">
                 <div class="content py-3" [routerLink]="['/dashboard']" [routerLinkActive]="'active'">
                     <div class="icon">
@@ -27,6 +27,16 @@
                     </div>
                     <div class="title">Dashboard</div>
                 </div>
+            </div>
+          }
+          @if(isLoggedIn){
+            <div class="link">
+              <div class="content py-3" [routerLink]="['/pro-dashboard']" [routerLinkActive]="'active'">
+                  <div class="icon">
+                      <mat-icon class="text-danger">dashboard</mat-icon>
+                  </div>
+                  <div class="title"><span class="text-danger">Pro</span>file</div>
+              </div>
             </div>
           }
           <div class="link">
@@ -55,7 +65,7 @@
           </div>
           @if(isLoggedIn){
             <div class="link" >
-              <div class="content py-3 text-danger" [routerLinkActive]="'active'" (click)="openLoginDialog()">
+              <div class="content py-3 text-danger" [routerLinkActive]="'active'" (click)="logOut()">
                 <div class="icon">
                   <mat-icon>power_settings_new</mat-icon>
                 </div>
