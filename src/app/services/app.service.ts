@@ -1,13 +1,11 @@
-import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import {MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition} from '@angular/material/snack-bar';
-import { SnackbarAnnotatedComponent } from './utilities/snackbar-annotated/snackbar-annotated.component';
-import { SnackbarClassEnum, SnackbarIconEnum } from './enums/snackbar-enum';
-import { SnackbarModel } from './models/common/snackbar-model';
+import { inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { RegisterDialogComponent } from './utilities/dialogs/register-dialog/register-dialog.component';
-import { LoginDialogComponent } from './utilities/dialogs/login-dialog/login-dialog.component';
-import { UserClaimsModel } from './models/account/user-claims-model';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { BehaviorSubject } from 'rxjs';
+import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
+import { UserClaimsModel } from '../models/account/user-claims-model';
+import { SnackbarModel } from '../models/common/snackbar-model';
+import { SnackbarAnnotatedComponent } from '../utilities/snackbar-annotated/snackbar-annotated.component';
 import { Location } from '@angular/common';
 
 @Injectable({
@@ -24,7 +22,7 @@ export class AppService {
   getIsSidebarOpened = this.isSidebarOpened.asObservable();
   getIsLoggedIn = this.isLoggedIn.asObservable();
 
-  constructor(private dialog: MatDialog, private location: Location) { }
+  constructor(private readonly dialog: MatDialog, private readonly location: Location) { }
 
   goBack(){
     this.location.back();
@@ -53,22 +51,6 @@ export class AppService {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: this.snackbarModel
-    });
-  }
-
-  openRegistrationDialog(): void {
-    this.dialog.closeAll()
-    this.dialog.open(RegisterDialogComponent, {
-      position: { top: '12vh' },
-      disableClose: true
-    });
-  }
-
-  openLoginDialogue(): void {
-    this.dialog.closeAll()
-    this.dialog.open(LoginDialogComponent, {
-      position: { top: '12vh' },
-      disableClose: true
     });
   }
 }

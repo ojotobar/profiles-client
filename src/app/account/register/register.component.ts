@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AccountService } from '../../services/account.service';
-import { AppService } from '../../app.service';
 import { GenderEnum } from '../../enums/gender-enum';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { GenderOption } from '../../models/profile/gender-option-model';
 import { RouterLink } from '@angular/router';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-register',

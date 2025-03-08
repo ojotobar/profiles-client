@@ -4,10 +4,10 @@ import {FormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AppService } from '../app.service';
 import { MatIconModule } from '@angular/material/icon'
 import { AccountService } from '../services/account.service';
 import { UserRoleEnum } from '../enums/user-role-enum';
+import { AppService } from '../services/app.service';
 
 @Component({
   selector: 'app-side-nav',

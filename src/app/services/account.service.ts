@@ -3,11 +3,11 @@ import { Apollo } from 'apollo-angular';
 import { BehaviorSubject } from 'rxjs';
 import { LoginMutation } from './mutations/account-mutations';
 import { LoginModel } from '../models/account/login-model';
-import { AppService } from '../app.service';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
 import { Router } from '@angular/router';
 import { UserClaimsModel } from '../models/account/user-claims-model';
 import { UserClaimsEnum } from '../enums/user-claims-enum';
+import { AppService } from './app.service';
 
 @Injectable({
   providedIn: 'root'

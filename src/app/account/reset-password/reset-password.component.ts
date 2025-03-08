@@ -1,12 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppService } from '../../app.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { PasswordResetModel } from '../../models/account/password-reset-model';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { merge } from 'rxjs';
 import { MatInputModule } from '@angular/material/input';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-reset-password',

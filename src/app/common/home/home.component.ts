@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {MatCardContent, MatCardModule} from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { AppService } from '../../app.service';
 import { RouterLink } from '@angular/router';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-home',
@@ -16,9 +16,4 @@ import { RouterLink } from '@angular/router';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  constructor(private appService: AppService){}
-  
-  openRegisterDialog() {
-    this.appService.openRegistrationDialog();
-  }
 }

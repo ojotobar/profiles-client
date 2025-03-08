@@ -5,10 +5,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AppService } from '../../app.service';
 import { LoginModel } from '../../models/account/login-model';
 import { RouterLink } from '@angular/router';
 import { AccountService } from '../../services/account.service';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-login',
