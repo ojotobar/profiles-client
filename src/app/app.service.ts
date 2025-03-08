@@ -15,7 +15,7 @@ import { Location } from '@angular/common';
 })
 export class AppService {
   private isSidebarOpened = new BehaviorSubject(false);
-  private isLoggedIn = new BehaviorSubject(false);
+  private isLoggedIn = new BehaviorSubject(localStorage.getItem('accessToken') !== null);
   private snackbarModel = new SnackbarModel();
   private _snackBar = inject(MatSnackBar);
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
@@ -36,12 +36,7 @@ export class AppService {
 
   setClaims(claim: UserClaimsModel){
     localStorage.setItem('accessToken', claim.accessToken);
-    this.isLoggedIn.next(localStorage.getItem('accessToken') != null)
-  }
-
-  logoutUser(){
-    localStorage.clear();
-    this.isLoggedIn.next(false);
+    this.isLoggedIn.next(localStorage.getItem('accessToken') !== null)
   }
 
   setIsLoggedIn(isLoggedIn: boolean){

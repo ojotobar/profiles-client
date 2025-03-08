@@ -13,6 +13,9 @@ import { UserClaimsEnum } from '../enums/user-claims-enum';
   providedIn: 'root'
 })
 export class AccountService {
+  private safePages: string[] = [
+    '/', '/faqs', '/contact', '/about', '/terms-and-conditions'
+  ]
   private isHidden = new BehaviorSubject(true);
   appService = inject(AppService);
   router = inject(Router)
@@ -37,6 +40,7 @@ export class AccountService {
           let result = (<any>data).data.loginUser.loginResult
           if(result.successful && result.accessToken){
             localStorage.setItem('accessToken', result.accessToken);
+            localStorage.setItem('role', this.getUserRoles())
             this.claims.accessToken = result.accessToken;
             this.appService.setClaims(this.claims)
             this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
@@ -51,6 +55,14 @@ export class AccountService {
           this.appService.openSnackBar(e.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
         }
       });
+  }
+
+  logout(){
+    localStorage.clear();
+    this.appService.setIsLoggedIn(false);
+    if(!this.safePages.includes(this.router.url)){
+      this.router.navigate(['/']);
+    }
   }
 
   hide = this.isHidden.asObservable();

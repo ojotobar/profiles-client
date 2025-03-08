@@ -39,7 +39,7 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent,
-        canActivate: [authGuard, adminGuard]
+        canActivate: [adminGuard]
     },
     {
         path: 'pro-dashboard',

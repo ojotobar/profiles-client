@@ -29,7 +29,7 @@ export class SideNavComponent implements OnInit {
   isSidebarOpened: boolean = false;
   isLoggedIn: boolean = false;
 
-  constructor(private appService: AppService, private readonly accountService: AccountService){
+  constructor(private readonly appService: AppService, private readonly accountService: AccountService){
     this.appService.getIsSidebarOpened
       .subscribe(s => this.isSidebarOpened = s);
 
@@ -44,14 +44,10 @@ export class SideNavComponent implements OnInit {
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
 
   logOut(){
-    this.appService.logoutUser()
+    this.accountService.logout()
   }
 
   canViewDashboard(): boolean {
-    if(this.accountService.canViewPage([UserRoleEnum.admin])){
-      return true;
-    } else{
-      return false;
-    }
+    return this.accountService.canViewPage([UserRoleEnum.admin])
   }
 }
