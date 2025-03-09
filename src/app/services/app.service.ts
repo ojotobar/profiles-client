@@ -7,6 +7,7 @@ import { UserClaimsModel } from '../models/account/user-claims-model';
 import { SnackbarModel } from '../models/common/snackbar-model';
 import { SnackbarAnnotatedComponent } from '../utilities/snackbar-annotated/snackbar-annotated.component';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,15 @@ export class AppService {
       verticalPosition: this.verticalPosition,
       data: this.snackbarModel
     });
+  }
+
+  getQueryParam(route: ActivatedRoute, param: string): string | null {
+    let valueToReturn: string | null = ''
+    route.queryParamMap.subscribe((params) => {
+      const value = params.get(param);
+      valueToReturn = value;
+    })
+
+    return valueToReturn;
   }
 }

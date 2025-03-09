@@ -13,6 +13,7 @@ import { GenderOption } from '../../models/profile/gender-option-model';
 import { RouterLink } from '@angular/router';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AppService } from '../../services/app.service';
+import { RegisterModel } from '../../models/account/register-model';
 
 @Component({
   selector: 'app-register',
@@ -64,11 +65,23 @@ export class RegisterComponent {
     if(this.registerForm.valid){
       if(this.registerForm.value.terms === true){
         this.isTermAccepted = true;
-        console.log(this.registerForm.value)
+        let payload: RegisterModel = {
+          firstName: this.registerForm.value.firstName as string,
+          lastName: this.registerForm.value.lastName as string,
+          middleName: this.registerForm.value.middleName as string,
+          emailAddress: this.registerForm.value.emailAddress as string,
+          password: this.registerForm.value.password as string,
+          confirmPassword: this.registerForm.value.confirmPassword as string,
+          phoneNumber: this.registerForm.value.phoneNumber as string,
+          gender: this.registerForm.value.gender as GenderEnum
+        }
+        this.accountService.register(payload)
       }
       else{
         this.isTermAccepted = false;
       }
+    }else{
+      this.isTermAccepted = false;
     }
   }
 

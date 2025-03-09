@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-0 col-md-3 col-lg-4"></div>
+        <div class="col-sm-12 col-md-6 col-lg-4 rounded border app-bg-rgb text-white" [style]="'min-height: 30vh;'">
+            <p class="h4 pt-2 pb-0 mb-0">Verify Email</p>
+            <hr class="mt-0 pt-0"/>
+            <form [formGroup]="confirmationForm" (ngSubmit)="ProcessConfirmation()">
+                <div class="">
+                    <mat-form-field class="w-100">
+                        <mat-label>Enter your OTP</mat-label>
+                        <mat-icon matSuffix>lock</mat-icon>
+                        <input matInput name="otp" formControlName="otp" type="number">
+                    </mat-form-field>
+                </div>
+                <span class="mt-0 mb-2">
+                    <p class="linked text-info m-0 w-75" (click)="ResendOtp()">Resend Code</p>
+                </span>
+                <div class="row mt-0 pt-0 mx-1 mb-3 mt-2">
+                    <div class="col-sm-12 col-md-6 mb-1">
+                        <button mat-raised-button type="submit" class="app-bg text-white w-100">Verify</button>
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-1">
+                        <button mat-raised-button class="bg-secondary text-light w-100" [routerLink]="['/']">Home</button>
+                    </div>
+                </div>
+            </form>           
+        </div>
+        <div class="col-sm-0 col-md-3 col-lg-4"></div>
+    </div>
+</div>

@@ -14,6 +14,9 @@ import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
 import { UserDashboardComponent } from './admin/user-dashboard/user-dashboard.component';
 import { ProfileComponent } from './profile/profile/profile.component';
+import { unauthGuard } from './guards/unauth.guard';
+import { AccountConfirmationComponent } from './account/account-confirmation/account-confirmation.component';
+import { ChangePasswordComponent } from './account/change-password/change-password.component';
 
 export const routes: Routes = [
     {
@@ -53,15 +56,28 @@ export const routes: Routes = [
     },
     {
         path: 'account/login',
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [unauthGuard]
     },
     {
         path: 'account/register',
-        component: RegisterComponent
+        component: RegisterComponent,
+        canActivate: [unauthGuard]
     },
     {
         path: 'account/reset-password',
-        component: ResetPasswordComponent
+        component: ResetPasswordComponent,
+        canActivate: [unauthGuard]
+    },
+    {
+        path: 'account/confirm',
+        component: AccountConfirmationComponent,
+        canActivate: [unauthGuard]
+    },
+    {
+        path: 'account/change-password',
+        component: ChangePasswordComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'terms-and-conditions',

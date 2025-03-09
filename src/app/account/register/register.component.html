@@ -42,30 +42,14 @@
                         <mat-form-field class="w-100">
                             <mat-label>Enter Password</mat-label>
                             <input matInput name="password" [type]="isHidden ? 'password' : 'text'" formControlName="password"/>
-                            <button
-                              mat-icon-button
-                              matSuffix
-                              (click)="clickEvent($event)"
-                              [attr.aria-label]="'Hide password'"
-                              [attr.aria-pressed]="isHidden"
-                            >
-                              <mat-icon>{{isHidden ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
+                            <mat-icon matSuffix (click)="clickEvent($event)" class="point">{{isHidden ? 'visibility_off' : 'visibility'}}</mat-icon>
                           </mat-form-field>
                     </div>
                     <div class="col-sm-12 col-md-6">
                         <mat-form-field class="w-100">
                             <mat-label>Enter Confirm Password</mat-label>
                             <input matInput name="confirmPassword" [type]="isHidden ? 'password' : 'text'" formControlName="confirmPassword"/>
-                            <button
-                              mat-icon-button
-                              matSuffix
-                              (click)="clickEvent($event)"
-                              [attr.aria-label]="'Hide password'"
-                              [attr.aria-pressed]="isHidden"
-                            >
-                              <mat-icon>{{isHidden ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
+                            <mat-icon matSuffix (click)="clickEvent($event)" class="point">{{isHidden ? 'visibility_off' : 'visibility'}}</mat-icon>
                           </mat-form-field>
                     </div>
                 </div>
@@ -89,7 +73,7 @@
                     </div>
                 </div>
                 <span>
-                    <p class="linked text-info m-0" [routerLink]="['/account/login']">Have have an account?</p>
+                    <p class="linked text-info m-0 w-50" [routerLink]="['/account/login']">Have have an account?</p>
                     <mat-checkbox class="mb-3" name="terms" formControlName="terms">
                         <span class="text-light">Accept </span> <span class="linked text-info" [routerLink]="['/terms-and-conditions']">Terms and Conditions</span>
                     </mat-checkbox>

@@ -8,9 +8,16 @@
         <mat-card-content>
             <p>Create a stunning portfolio website by simply filling out your work experience, skills, and projects. No coding required!</p>
         </mat-card-content>
-        <mat-card-actions align="end" class="my-2" >
-          <button mat-raised-button class="text-light app-bg" [routerLink]="['/account/register']">Get Started for Free</button>
-        </mat-card-actions>
+        @if(!isLoggedIn){
+          <mat-card-actions align="end" class="my-2" >
+            <button mat-raised-button class="text-light app-bg" [routerLink]="['/account/register']">Get Started for Free</button>
+          </mat-card-actions>
+        } @else {
+          <mat-card-actions align="end" class="my-2" >
+            <button mat-raised-button class="text-light app-bg" [routerLink]="['/pro-dashboard']">Go To Dashboard</button>
+          </mat-card-actions>
+        }
+        
     </mat-card>
     
     <div class="container px-4">
@@ -43,7 +50,11 @@
         <div class="card-body">
           <h2 class="card-title">Start Building Your Professional Portfolio Today</h2>
           <div class="mt-5">
-            <button mat-raised-button class="bg-light text-dark" [routerLink]="['/account/register']">Sign Up</button>
+            @if(isLoggedIn){
+              <button mat-raised-button class="bg-light text-dark" [routerLink]="['/pro-dashboard']">Dashboard</button>
+            } @else{
+              <button mat-raised-button class="bg-light text-dark" [routerLink]="['/account/register']">Sign Up</button>
+            }
           </div>
         </div>
     </div>

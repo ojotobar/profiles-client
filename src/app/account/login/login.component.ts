@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -17,7 +16,6 @@ import { AppService } from '../../services/app.service';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
     RouterLink
