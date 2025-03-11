@@ -1,1 +1,31 @@
-<p>user-dashboard works!</p>
+<div class="container mb-5">
+    <div class="card-container inset-box">
+        <main class="content">
+            <div class="content-header pt-5">
+                <h1>Good day, Toba</h1>
+                <p class="px-2">Manage your professional information effortlessly and showcase your expertise.</p>
+            </div>
+            <div class="container">
+                <div class="row gx-2 my-5 cards-container">
+                    @for (section of sections; track $index) {
+                        <div class="col-sm-12 col-md-6 col-lg-3 mb-2 carded" [routerLink]="[sections[$index].route]">
+                            <div class="p-3 text-center rounded inset-box card-main">
+                                {{section.label}}
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="container my-5 inset-box-dark">
+        <div class="docs-card app-bg rounded p-5">
+            <h2>Enhance Your Profile</h2>
+            <hr class="m-0 pb-3"/>
+            <p>Your dashboard provides a structured way to manage and present your professional profile. You can add details about your education, skills, work experience, certifications, and projects to build a compelling portfolio.</p>
+            <p>Each section is designed to highlight key aspects of your career, making it easier for potential employers or clients to assess your expertise.</p>
+            <p>Click on any section above to add or update your information.</p>
+            <p>If you need further information, refer to our comprehensive <a [routerLink]="['/docs/v1']">documentation</a> or <a [routerLink]="['/contact']">reach out</a> to our support team for guidance.</p>
+        </div>
+    </div>
+</div>

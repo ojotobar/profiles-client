@@ -35,7 +35,15 @@
                   <div class="icon">
                       <mat-icon class="text-danger">dashboard</mat-icon>
                   </div>
-                  <div class="title"><span class="text-danger">Pro</span>file</div>
+                  <div class="title"><span class="text-danger">Pro</span>board</div>
+              </div>
+            </div>
+            <div class="link">
+              <div class="content py-3" [routerLink]="['/docs/v1']" [routerLinkActive]="'active'">
+                <div class="icon">
+                  <mat-icon>description</mat-icon>
+                </div>
+                <div class="title">Docs</div>
               </div>
             </div>
           }
@@ -50,9 +58,9 @@
           <div class="link">
             <div class="content py-3" [routerLink]="['/contact']" [routerLinkActive]="'active'">
               <div class="icon">
-                <mat-icon> forum</mat-icon>
+                <mat-icon>contact_support</mat-icon>
               </div>
-              <div class="title">Contact Us</div>
+              <div class="title">Support</div>
             </div>
           </div>
           <div class="link">
@@ -65,19 +73,19 @@
           </div>
           @if(isLoggedIn){
             <div class="link" >
-              <div class="content py-3 text-danger" [routerLinkActive]="'active'" (click)="logOut()">
-                <div class="icon">
-                  <mat-icon>power_settings_new</mat-icon>
-                </div>
-                <div class="title">Logout</div>
-              </div>
-            </div>
-            <div class="link" >
               <div class="content py-3" [routerLink]="['/profile']" [routerLinkActive]="'active'">
                 <div class="icon">
                   <mat-icon>account_circle</mat-icon>
                 </div>
                 <div class="title">Profile</div>
+              </div>
+            </div>
+            <div class="link" >
+              <div class="content py-3 text-danger" [routerLinkActive]="'active'" (click)="logOut()">
+                <div class="icon">
+                  <mat-icon>power_settings_new</mat-icon>
+                </div>
+                <div class="title">Logout</div>
               </div>
             </div>
           } @else {

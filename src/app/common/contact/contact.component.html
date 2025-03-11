@@ -1,1 +1,95 @@
-<p>contact works!</p>
+<div class="container">
+    <div>
+        <header class="text-center mb-3">
+            <h1>Get in Touch with Us</h1>
+            <p>Have questions? Need support? We're here to help!</p>
+        </header>
+    </div>
+    <div class="row gx-3">
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+        <div class="col-sm-12 col-md-5 col-lg-4 mb-3">
+            <div class="inset-box contact-cards pb-2">
+                <p class="fs-3 text-center p-0 m-0">General Inquiries</p>
+                <p class="d-flex p-0 m-0 px-3 py-1 justify-content-start">
+                    <mat-icon class="fs-5">mail</mat-icon>  
+                    <a href="mailto:support@profiles.com">{{supportEmail}}</a>
+                </p>
+                <p class="d-flex m-0 p-0 px-3 py-1 justify-content-start">
+                    <mat-icon class="fs-5">phone</mat-icon>
+                    <a href="tel:+1234567890"> +1 (123) 456-7890</a>
+                </p>
+                <p class="d-flex m-0 p-0 px-3 py-1 justify-content-start">
+                    <mat-icon class="fs-5">room</mat-icon> <span>12th Ave, Lagos, Nigeria.</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-5 col-lg-4 mb-3">
+            <div class="inset-box contact-cards pb-2">
+                <p class="fs-3 text-center p-0 m-0">Support & Help Center</p>
+                <a class="linked px-3 py-1" [routerLink]="['/faqs']">FAQs & Guides</a>
+                <p class="px-3 py-1">Live Chat Coming Soon...</p>
+                <p class="px-3 p-0 m-0">
+                    <a href="#">LinkedIn</a> | <a href="#">Twitter</a> | <a href="#">Facebook</a>
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-0 col-md-2 col-lg-3"></div>
+            <div class="col-sm-12 col-md-8 col-lg-6 mb-3 p-0 m-0">
+                <hr [style]="'border:1px solid black;'"/>
+                <div class="rounded inset-box inquiry-card px-3 py-3">
+                    <p class="h4 pt-2 pb-0 mb-0">Send Us a Message</p>
+                    <hr class="mt-0 pt-0"/>
+                    <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+                        <div class="w-100">
+                            <mat-form-field class="w-100">
+                                <mat-label>Your Name</mat-label>
+                                <input matInput placeholder="John Doe" name="name" formControlName="name">
+                            </mat-form-field>
+                        </div>
+                        <div class="w-100">
+                            <mat-form-field class="w-100">
+                                <mat-label>Your Email</mat-label>
+                                <input matInput placeholder="example@email.com" type="email" name="email" formControlName="email">
+                            </mat-form-field>
+                        </div>
+                        <div class="w-100">
+                            <mat-form-field class="w-100">
+                                <mat-label>Subject</mat-label>
+                                <mat-select name="subject" formControlName="subject">
+                                    @for (subject of subjectOptions; track $index) {
+                                        <mat-option [value]="subject.value">{{subject.label}}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="w-100">
+                            <mat-form-field class="w-100">
+                                <mat-label>Leave a message</mat-label>
+                                <textarea matInput placeholder="Your Message"
+                                cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="4"
+                                cdkAutosizeMaxRows="20"
+                                name="message"
+                                formControlName="message"
+                                ></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <div class="col-sm-12 col-md-6 mb-1">
+                                <button mat-raised-button  type="submit" class="app-bg text-white w-100">
+                                    <mat-icon>send</mat-icon> Send
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-0 col-md-2 col-lg-3"></div>
+        </div>
+    </div>
+</div>

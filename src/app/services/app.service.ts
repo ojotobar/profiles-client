@@ -8,6 +8,10 @@ import { SnackbarModel } from '../models/common/snackbar-model';
 import { SnackbarAnnotatedComponent } from '../utilities/snackbar-annotated/snackbar-annotated.component';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { SectionsModel } from '../models/common/sections-model';
+import { MessageSubjectModel } from '../models/common/message-subject-model';
+import { MessageSubjectEnum } from '../enums/message-subject-enum';
+import { ContactMessageModel } from '../models/common/contact-message-model';
 
 @Injectable({
   providedIn: 'root'
@@ -63,5 +67,29 @@ export class AppService {
     })
 
     return valueToReturn;
+  }
+
+  getSections(): SectionsModel[] {
+    return [
+      new SectionsModel('experience', 'Experience', '/experience'),
+      new SectionsModel('education', 'Education', '/education'),
+      new SectionsModel('skills', 'Skills', '/skills'),
+      new SectionsModel('certifications', 'Certifications', '/certifications'),
+      new SectionsModel('projects', 'Projects', '/projects'),
+      new SectionsModel('careersummary', 'Career Summary', '/career-summary')
+    ]
+  }
+
+  getMessageSubjectOptions(): MessageSubjectModel[] {
+    return [
+      new MessageSubjectModel('General Inquiry', MessageSubjectEnum.GeneralInquiry),
+      new MessageSubjectModel('Support', MessageSubjectEnum.Support),
+      new MessageSubjectModel('Business Inquiry', MessageSubjectEnum.BusinessInquiry),
+      new MessageSubjectModel('Other', MessageSubjectEnum.Other)
+    ]
+  }
+
+  sendContactMessage(payload: ContactMessageModel){
+    this.openSnackBar('Thanks for reaching out! We’ll get back to you soon.', SnackbarClassEnum.Success, SnackbarIconEnum.Success);
   }
 }

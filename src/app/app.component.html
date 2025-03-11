@@ -4,7 +4,7 @@
 />
 <div class="content" [ngClass]="{ 'sidebarExpanded': sidebarExpanded, 'isSidebarClosed': isSidebarClosed }">
     <app-tool-bar [style]="'width:100%;position:sticky;'"/>
-    <div class="container" [style]="'padding-top: 2rem;box-sizing: border-box;'">
+    <div class="container" [style]="'padding-top: 2rem;box-sizing: border-box;padding-bottom: 0.5rem;'">
         <router-outlet></router-outlet>
     </div>
 </div>

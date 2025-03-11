@@ -5,11 +5,15 @@
 @use "bootstrap-icons/font/bootstrap-icons.css";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Arial, Roboto, "Helvetica Neue", sans-serif; }
 .linked {
     cursor: pointer;
     text-decoration: underline;
     color: #0d6efd;
+}
+
+.inset-box{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .point {
@@ -22,4 +26,44 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .app-bg-rgb{
     background: rgba($color: #0f1017, $alpha: 0.5);
+}
+
+.card-container{
+    background: #e3e3e3;
+    border-radius: 0.5rem;
+    min-height: 10vh;
+}
+
+.docs-card {
+    min-height: 20vh;
+    color: #bbb8b8;
+    box-shadow: 0 14px 18px rgba(255, 255, 255, 0.5);
+}
+
+.content-header {
+    text-align: center;
+    h1 {
+        color: #0f1017;
+        font-size: 2.5rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 30px;
+    }
+}
+
+.carded {
+    transition: transform 0.3s;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.card-main {
+    background: #dad6d6;
+}
+
+.carded:hover {
+    transform: scale(1.05);
 }

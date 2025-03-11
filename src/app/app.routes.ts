@@ -17,6 +17,8 @@ import { ProfileComponent } from './profile/profile/profile.component';
 import { unauthGuard } from './guards/unauth.guard';
 import { AccountConfirmationComponent } from './account/account-confirmation/account-confirmation.component';
 import { ChangePasswordComponent } from './account/change-password/change-password.component';
+import { DocsComponent } from './common/docs/docs.component';
+import { ApiHomeComponent } from './apis/api-home/api-home.component';
 
 export const routes: Routes = [
     {
@@ -77,6 +79,16 @@ export const routes: Routes = [
     {
         path: 'account/change-password',
         component: ChangePasswordComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'docs/v1',
+        component: DocsComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'docs/apis',
+        component: ApiHomeComponent,
         canActivate: [authGuard]
     },
     {

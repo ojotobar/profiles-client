@@ -1,0 +1,72 @@
+<div class="container mb-5">
+    <div class="card-container inset-box">
+        <div class="p-3">
+            <p class="fs-3 fw-bold">Project Documentation</p>
+            <div>
+                <p class="fs-5 pt-3 fw-bold pb-0 mb-0">Overview</p>
+                <p>The Professional Portfolio Web App allows professionals to create and manage their career profiles, including education, skills, work experience, certifications, projects, and location.</p>
+            </div>
+            <div>
+                <p class="fs-5 pt-3 fw-bold pb-0 mb-0">Features</p>
+                <ul>
+                    <li>User Authentication</li>
+                    <li>Profile Management</li>
+                    <li>Portfolio Generation</li>
+                    <li>Dashboard</li>
+                    <li>Responsive Design</li>
+                    <li>Dockerized Deployment</li>
+                </ul>
+            </div>
+            <div>
+                <p class="fs-5 mb-0 pb-0 pt-3 fw-bold">System Architecture</p>
+                <p class="mb-0 pb-0">The system follows a client-server architecture:</p>
+                <ul>
+                    <li><strong>Frontend (User Dashboard)</strong> - Built using HTML, CSS, JavaScript.</li>
+                    <li><strong>Backend (API Server)</strong> - Node.js and Express.js with MongoDB/PostgreSQL.</li>
+                    <li><strong>Portfolio Frontend</strong> - Angular-based professional profile display.</li>
+                    <li><strong>Dockerized Deployment</strong> - Containerized services using Docker.</li>
+                </ul>
+            </div>
+            <div>
+                <p class="fs-5 fw-bold pb-0 mb-0 pt-3">Installation Guide</p>
+                <div class="code-holder px-3">
+                    <code>
+                        git clone https://github.com/your-repo/backend.git<br/>
+                        cd backend<br/>
+                        npm install<br/>
+                        npm start<br/>
+                    </code>
+                </div>
+            </div>
+            <div>
+                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Docker Deployment</p>
+                <div class="code-holder px-3">
+                    <code>
+                       docker-compose up --build
+                    </code>
+                </div>
+                <p>If you prefer to develop the front-end bit of your Portfolio, please refer to the <a [routerLink]="['/docs/apis']">API Section</a> for the list of endpoints to use.</p>
+            </div>
+            <div>
+                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Security Measures</p>
+                <ul>
+                    <li>JWT Authentication</li>
+                    <li>Input Validation</li>
+                    <li>HTTPS Encryption</li>
+                </ul>
+            </div>
+            <div>
+                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Future Enhancements</p>
+                <ul>
+                    <li>AI-powered Resume Builder</li>
+                    <li>Custom Portfolio Themes</li>
+                    <li>Integration with LinkedIn</li>
+                </ul>
+            </div>
+            <div>
+                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Contact</p>
+                <p>For support or inquiries, reach out to <a href="mailto:'{{supportEmail}}'">{{supportEmail}}</a></p>
+            </div>
+        </div>
+    </div>
+</div>
