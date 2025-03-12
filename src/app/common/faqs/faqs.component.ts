@@ -4,6 +4,10 @@ import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
 import { Apollo, gql } from 'apollo-angular';
 import { FaqsData, FaqsItemModel } from '../../models/common/faqs-models';
 import { RouterLink } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { AlertComponent } from '../alert/alert.component';
+import { AlertModel } from '../../models/common/alert-models';
+import { AlertClassEnum, AlertIconEnum } from '../../enums/alert-enums';
 
 
 @Component({
@@ -11,8 +15,10 @@ import { RouterLink } from '@angular/router';
   imports: [
     MatExpansionModule,
     MatPaginatorModule,
-    RouterLink
-  ],
+    RouterLink,
+    MatProgressSpinnerModule,
+    AlertComponent
+    ],
   templateUrl: './faqs.component.html',
   styleUrl: './faqs.component.scss'
 })
@@ -24,6 +30,10 @@ export class FaqsComponent {
   faqs: FaqsItemModel[] = [];
   loading = true;
   error: any;
+  alertHeader = 'An error occurred!';
+  alertMessage = 'An error occurred why getting the data. Please try again later.';
+  alertIcon = AlertIconEnum.danger;
+  alertBg = AlertClassEnum.danger;
 
   constructor(private readonly apollo: Apollo) { }
 
@@ -63,13 +73,22 @@ export class FaqsComponent {
             totalCount
           }
         }
-        `,})
-      .valueChanges.subscribe((result: any) => {
-        this.loading = result.loading;
-        this.error = result.error;
-        let data = (<FaqsData>result.data);
-        this.length = data.faqs.totalCount;
-        this.faqs = data.faqs.items;
+      `})
+      .valueChanges.subscribe({
+        next: (data: any) => {
+          this.loading = (<boolean>data.loading);
+          let Data = (<FaqsData>data.data);
+          this.length = Data.faqs.totalCount;
+          this.faqs = Data.faqs.items;
+          if(this.faqs.length <= 0){
+            this.alertBg = AlertClassEnum.info;
+            this.alertIcon = AlertIconEnum.info;
+          }
+        },
+        error: (error: Error) => {
+          this.alertHeader = 'An error occurred!'
+          this.alertMessage = 'An error occurred while getting the data. Please try again later.'
+        }
       });
   }
 }
