@@ -12,10 +12,7 @@
                     <mat-spinner class="m-0 m-auto"></mat-spinner>
                 }@else if (error) {
                     <app-alert 
-                        heading="{{alertHeader}}" 
-                        message="{{alertMessage}}"
-                        [bg]="alertBg"
-                        [icon]="alertIcon" 
+                        [alertInputs]="alertInputs"
                     />
                 } @else if(faqs && faqs.length > 0){
                     <mat-accordion>
@@ -40,10 +37,7 @@
                     </mat-paginator>
                 } @else {
                     <app-alert 
-                        heading="No Data Found" 
-                        message="No FAQs data found at this moment. Please check back later"
-                        [bg]="alertBg"
-                        [icon]="alertIcon"
+                        [alertInputs]="alertInputs"
                     />
                 }
             </div>

@@ -30,10 +30,7 @@ export class FaqsComponent {
   faqs: FaqsItemModel[] = [];
   loading = true;
   error: any;
-  alertHeader = 'An error occurred!';
-  alertMessage = 'An error occurred why getting the data. Please try again later.';
-  alertIcon = AlertIconEnum.danger;
-  alertBg = AlertClassEnum.danger;
+  alertInputs = new AlertModel();
 
   constructor(private readonly apollo: Apollo) { }
 
@@ -81,13 +78,16 @@ export class FaqsComponent {
           this.length = Data.faqs.totalCount;
           this.faqs = Data.faqs.items;
           if(this.faqs.length <= 0){
-            this.alertBg = AlertClassEnum.info;
-            this.alertIcon = AlertIconEnum.info;
+            this.alertInputs.heading = 'An error occurred!'
+            this.alertInputs.message = 'An error occurred while getting the data. Please try again later.'
+            this.alertInputs.bg = AlertClassEnum.info;
+            this.alertInputs.icon = AlertIconEnum.info;
           }
         },
         error: (error: Error) => {
-          this.alertHeader = 'An error occurred!'
-          this.alertMessage = 'An error occurred while getting the data. Please try again later.'
+          this.alertInputs.heading = 'An error occurred!';
+          this.alertInputs.message = 'An error occurred why getting the data. Please try again later.'; 
+          this.loading = false;
         }
       });
   }

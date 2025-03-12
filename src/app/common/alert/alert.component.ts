@@ -12,8 +12,5 @@ import { AlertClassEnum, AlertIconEnum } from '../../enums/alert-enums';
   styleUrl: './alert.component.scss'
 })
 export class AlertComponent {
-  @Input() heading: string = '';
-  @Input() message: string = '';
-  @Input() icon: AlertIconEnum = AlertIconEnum.danger;
-  @Input() bg: AlertClassEnum = AlertClassEnum.danger;
+  @Input() alertInputs = new AlertModel();
 }
