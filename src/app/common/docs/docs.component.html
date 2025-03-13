@@ -3,69 +3,112 @@
         <div class="p-3">
             <p class="fs-3 fw-bold">Project Documentation</p>
             <div>
-                <p class="fs-5 pt-3 fw-bold pb-0 mb-0">Overview</p>
-                <p>The Professional Portfolio Web App allows professionals to create and manage their career profiles, including education, skills, work experience, certifications, projects, and location.</p>
+                <p class="fs-5 pt-3 fw-bold pb-0 mb-0">Introduction</p>
+                <p><app-app-name fileClass="dark" /> is a platform designed to help professionals showcase their skills and achievements effortlessly. With Pro-files, you can create a personalized portfolio website without writing a single line of code. Simply sign up, provide your professional details, generate an API key, and deploy the front-end using a Docker image. This ensures that your information is securely displayed on your portfolio site, making it easy to share with potential employers or clients.
+                </p>
             </div>
             <div>
-                <p class="fs-5 pt-3 fw-bold pb-0 mb-0">Features</p>
+                <p class="fs-5 pt-3 fw-bold pb-0 mb-0">Getting Started</p>
+                <ol>
+                    <li><a [routerLink]="['/account/register']">Sign Up</a> and verify your account.</li>
+                    <li>Complete your profile by providing:
+                        <ul>
+                            <li>Personal Information (Name, Contact, Bio, etc.)</li>
+                            <li>Education</li>
+                            <li>Work Experience</li>
+                            <li>Skills</li>
+                            <li>Projects</li>
+                            <li>Certifications (if any)</li>
+                             <li>Social Media Links</li>
+                        </ul>
+                    </li>
+                    <li>Save your details to ensure they are stored in your profile.</li>
+                </ol>
+            </div>
+            <div>
+                <p class="fs-5 mb-0 pb-0 pt-3 fw-bold">Generate an API Key</p>
+                <p class="mb-0 pb-0">Once your profile is complete, navigate to the API section in your dashboard:</p>
                 <ul>
-                    <li>User Authentication</li>
-                    <li>Profile Management</li>
-                    <li>Portfolio Generation</li>
-                    <li>Dashboard</li>
-                    <li>Responsive Design</li>
-                    <li>Dockerized Deployment</li>
+                    <li>Click on <strong>Generate API Key</strong></li>
+                    <li>Copy the API key securely, as it will be used to fetch your profile data when deploying your portfolio.</li>
                 </ul>
             </div>
             <div>
-                <p class="fs-5 mb-0 pb-0 pt-3 fw-bold">System Architecture</p>
-                <p class="mb-0 pb-0">The system follows a client-server architecture:</p>
-                <ul>
-                    <li><strong>Frontend (User Dashboard)</strong> - Built using HTML, CSS, JavaScript.</li>
-                    <li><strong>Backend (API Server)</strong> - Node.js and Express.js with MongoDB/PostgreSQL.</li>
-                    <li><strong>Portfolio Frontend</strong> - Angular-based professional profile display.</li>
-                    <li><strong>Dockerized Deployment</strong> - Containerized services using Docker.</li>
-                </ul>
+                <p class="fs-5 fw-bold pb-0 mb-0 pt-3">Deploying Your Portfolio</p>
+                <p><app-app-name fileClass="dark" /> provides a prebuilt front-end template that you can deploy as a Docker container. Follow the steps below to get your portfolio online:</p>
+                <ol>
+                    <li>Install Docker: <p>Ensure that you have Docker installed on your system. You can download it from <a href="https://www.docker.com/get-started" target="_blank">Docker's official website</a></p></li>
+                    <li>Pull the Pro-files Portfolio Docker Image
+                        <p>Run the following command in your terminal:</p>
+                        <div class="code-holder px-3">
+                            <code>
+                                docker pull pro-files/portfolio:tag-name
+                            </code>
+                        </div>
+                    </li>
+                    <li class="mt-3">Deploy the Docker Container
+                        <p>Use the following command to run the portfolio container:</p>
+                        <div class="code-holder px-3">
+                            <code>
+                                docker run -d -p 8080:80 -e API_KEY=your_api_key pro-files/portfolio:tag-name<br/>
+                                #Available tags: classic
+                            </code>
+                        </div>
+                        <p class="pt-1">Replace `your_api_key` with the API key you generated earlier. </p>
+                    </li>
+                    <li>Access Your Portfolio
+                        <p>Once the container is running, open your browser and go to:</p>
+                        <div class="code-holder px-3">
+                            <code>
+                                http://localhost:8080
+                            </code>
+                        </div>
+                        <p class="pt-1">If you are deploying on a cloud service or a remote server, replace `localhost` with the appropriate domain or IP address.</p>
+                    </li>
+                </ol>
             </div>
             <div>
-                <p class="fs-5 fw-bold pb-0 mb-0 pt-3">Installation Guide</p>
-                <div class="code-holder px-3">
-                    <code>
-                        git clone https://github.com/your-repo/backend.git<br/>
-                        cd backend<br/>
-                        npm install<br/>
-                        npm start<br/>
-                    </code>
-                </div>
-            </div>
-            <div>
-                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Docker Deployment</p>
-                <div class="code-holder px-3">
-                    <code>
-                       docker-compose up --build
-                    </code>
-                </div>
+                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Sharing Your Portfolio</p>
+                <p>After deploying your portfolio, you can share the link to your deployed container (e.g., <span class="bg-secondary text-white">http://yourserver.com:8080</span> ) with potential clients or employers.</p>
                 <p>If you prefer to develop the front-end bit of your Portfolio, please refer to the <a [routerLink]="['/docs/apis']">API Section</a> for the list of endpoints to use.</p>
             </div>
             <div>
-                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Security Measures</p>
-                <ul>
-                    <li>JWT Authentication</li>
-                    <li>Input Validation</li>
-                    <li>HTTPS Encryption</li>
-                </ul>
+                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Updating Your Profile</p>
+                <p>If you update any details in your Pro-files account, the changes will be reflected on your portfolio site automatically. Simply refresh your portfolio page to see the updated information.</p>
             </div>
             <div>
-                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Future Enhancements</p>
-                <ul>
-                    <li>AI-powered Resume Builder</li>
-                    <li>Custom Portfolio Themes</li>
-                    <li>Integration with LinkedIn</li>
-                </ul>
+                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Troubleshooting</p>
+                <ol>
+                    <li>API Key Not Working
+                        <ul>
+                            <li>Ensure that you copied the correct API key.</li>
+                            <li>Check that the API key is correctly set in the <span class="bg-secondary text-white">docker run</span> command.</li>
+                        </ul>
+                    </li>
+                    <li>Portfolio Not Loading
+                        <ul>
+                            <li>Verify that Docker is running.</li>
+                            <li>Check that the container is running using <span class="bg-secondary text-white">docker ps</span>.</li>
+                            <li>Ensure port <span class="bg-secondary text-white">8080</span> is not blocked or used by another service.</li>
+                        </ul>
+                    </li>
+                </ol>
             </div>
             <div>
-                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Contact</p>
-                <p>For support or inquiries, reach out to <a href="mailto:'{{supportEmail}}'">{{supportEmail}}</a></p>
+                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Updating to the Latest Version</p>
+                <p>To update your portfolio, pull the latest Docker image and restart the container:</p>
+                <div class="code-holder px-3">
+                    <code>
+                        docker pull pro-files/portfolio:tag-name<br/>
+                        docker stop $(docker ps -q --filter ancestor=pro-files/portfolio:tag-name)<br/>
+                        docker run -d -p 8080:80 -e API_KEY=your_api_key pro-files/portfolio:tag-name<br/>
+                    </code>
+                </div>
+            </div>
+            <div>
+                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Conclusion</p>
+                <p><app-app-name fileClass="dark" /> makes it easy for professionals to create a stunning portfolio without coding. By following the steps outlined above, you can have your personal portfolio live in minutes. If you need any assistance, visit our <a [routerLink]="['/support']"></a> or reach out to our team.</p>
+                <p>Happy showcasing!</p>
             </div>
         </div>
     </div>
