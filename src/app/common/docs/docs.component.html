@@ -10,7 +10,7 @@
             <div>
                 <p class="fs-5 pt-3 fw-bold pb-0 mb-0">Getting Started</p>
                 <ol>
-                    <li><a [routerLink]="['/account/register']">Sign Up</a> and verify your account.</li>
+                    <li>@if(isLoggedIn){ Sign Up } @else{ <a [routerLink]="['/account/register']">Sign Up</a> } and verify your account.</li>
                     <li>Complete your profile by providing:
                         <ul>
                             <li>Personal Information (Name, Contact, Bio, etc.)</li>
@@ -70,7 +70,10 @@
             <div>
                 <p class="pt-3 fs-5 fw-bolder m-0 p-0">Sharing Your Portfolio</p>
                 <p>After deploying your portfolio, you can share the link to your deployed container (e.g., <span class="bg-secondary text-white">http://yourserver.com:8080</span> ) with potential clients or employers.</p>
-                <p>If you prefer to develop the front-end bit of your Portfolio, please refer to the <a [routerLink]="['/docs/apis']">API Section</a> for the list of endpoints to use.</p>
+            </div>
+            <div>
+                <p class="pt-3 fs-5 fw-bolder m-0 p-0">Using the <app-app-name fileClass="dark" /> API</p>
+                <p>For those who wish to develop their own front-end instead of using our Docker image, <app-app-name fileClass="dark" /> provides a GraphQL API to fetch profile data securely. You must include your API key in the request headers to authenticate. Refer to the <a [routerLink]="['/docs/apis']">API Section</a> for a guide.</p>
             </div>
             <div>
                 <p class="pt-3 fs-5 fw-bolder m-0 p-0">Updating Your Profile</p>
@@ -107,7 +110,7 @@
             </div>
             <div>
                 <p class="pt-3 fs-5 fw-bolder m-0 p-0">Conclusion</p>
-                <p><app-app-name fileClass="dark" /> makes it easy for professionals to create a stunning portfolio without coding. By following the steps outlined above, you can have your personal portfolio live in minutes. If you need any assistance, visit our <a [routerLink]="['/support']"></a> or reach out to our team.</p>
+                <p><app-app-name fileClass="dark" /> makes it easy for professionals to create a stunning portfolio without coding. By following the steps outlined above, you can have your personal portfolio live in minutes. If you need any assistance, visit our <a [routerLink]="['/support']">support page</a> or reach out to our team on <a href="mailto:{{supportEmail}}">{{supportEmail}}</a>.</p>
                 <p>Happy showcasing!</p>
             </div>
         </div>

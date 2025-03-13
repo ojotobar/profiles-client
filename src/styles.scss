@@ -67,3 +67,29 @@ body { margin: 0; font-family: Arial, Roboto, "Helvetica Neue", sans-serif; }
 .carded:hover {
     transform: scale(1.05);
 }
+
+.code-holder{
+    background: #333;
+    color: #fff;
+    border-radius: 5px;
+    overflow-x: scroll;
+    min-height: 5rem;
+
+    code {
+        color: white;
+        white-space: pre;
+    }
+}
+
+.app-pre { 
+    background: #333; 
+    overflow-x: scroll;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.app-code { 
+    font-family: monospace; 
+    display: block; 
+    white-space: pre-wrap; 
+}

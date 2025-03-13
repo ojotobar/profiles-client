@@ -1,1 +1,40 @@
-<p>projects-api works!</p>
+<div class="container py-5">
+    <div class="card-container inset-box p-3">
+        <div>
+            <p class="fs-3 fw-bold">Fetch Project Details</p>
+            <app-api-key />
+            <div>
+                <p class="fs-5 fw-bold pt-3">Query</p>
+<pre class="mt-3 p-0 px-3 app-pre">
+<code class="app-code">
+query {{ '{' }}
+    profile {{ '{' }}
+        profile {{ '{' }}
+            firstName
+            lastName
+            gender
+            phoneNumber
+            photoUrl
+            cvUrl
+            skills
+            location {{ '{' }}
+                line1
+                line2
+                postalCode
+                city
+                state
+                country
+                latitude
+                longitude
+            {{ '}' }}
+        {{ '}' }}
+        message
+        successful
+    {{ '}' }}
+{{ '}' }}
+</code>
+</pre>
+            </div>
+        </div>
+    </div>
+</div>

@@ -84,12 +84,12 @@ export const routes: Routes = [
     {
         path: 'docs/v1',
         component: DocsComponent,
-        canActivate: [authGuard]
+        //canActivate: [authGuard]
     },
     {
         path: 'docs/apis',
         component: ApiHomeComponent,
-        canActivate: [authGuard]
+        //canActivate: [authGuard]
     },
     {
         path: 'terms-and-conditions',
