@@ -19,6 +19,7 @@ import { AccountConfirmationComponent } from './account/account-confirmation/acc
 import { ChangePasswordComponent } from './account/change-password/change-password.component';
 import { DocsComponent } from './common/docs/docs.component';
 import { ApiHomeComponent } from './apis/api-home/api-home.component';
+import { EducationManagementComponent } from './education/education-management/education-management.component';
 
 export const routes: Routes = [
     {
@@ -90,6 +91,11 @@ export const routes: Routes = [
         path: 'docs/apis',
         component: ApiHomeComponent,
         //canActivate: [authGuard]
+    },
+    {
+        path: 'education',
+        component: EducationManagementComponent,
+        canActivate: [authGuard]
     },
     {
         path: 'terms-and-conditions',

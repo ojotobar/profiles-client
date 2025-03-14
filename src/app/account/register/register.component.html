@@ -11,6 +11,7 @@
                             <mat-label>First Name</mat-label>
                             <mat-icon matSuffix>person</mat-icon>
                             <input matInput name="firstName" placeholder="John" formControlName="firstName">
+                            <mat-error appFieldErrors></mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-sm-12 col-md-6">
@@ -18,6 +19,7 @@
                             <mat-label>Last Name</mat-label>
                             <mat-icon matSuffix>person</mat-icon>
                             <input matInput name="lastName" placeholder="Doe" formControlName="lastName">
+                            <mat-error appFieldErrors></mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -34,6 +36,7 @@
                             <mat-label>Email Address</mat-label>
                             <mat-icon matSuffix>drafts</mat-icon>
                             <input matInput name="emailAddress" placeholder="example@email.com" formControlName="emailAddress">
+                            <mat-error appFieldErrors></mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -43,6 +46,7 @@
                             <mat-label>Enter Password</mat-label>
                             <input matInput name="password" [type]="isHidden ? 'password' : 'text'" formControlName="password"/>
                             <mat-icon matSuffix (click)="clickEvent($event)" class="point">{{isHidden ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-error appFieldErrors></mat-error>
                           </mat-form-field>
                     </div>
                     <div class="col-sm-12 col-md-6">
@@ -50,6 +54,7 @@
                             <mat-label>Enter Confirm Password</mat-label>
                             <input matInput name="confirmPassword" [type]="isHidden ? 'password' : 'text'" formControlName="confirmPassword"/>
                             <mat-icon matSuffix (click)="clickEvent($event)" class="point">{{isHidden ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            <mat-error appFieldErrors></mat-error>
                           </mat-form-field>
                     </div>
                 </div>
@@ -59,6 +64,7 @@
                             <mat-label>Phone Number</mat-label>
                             <mat-icon matSuffix>phone</mat-icon>
                             <input matInput name="phoneNumber" type="tel" formControlName="phoneNumber">
+                            <mat-error appFieldErrors></mat-error>
                         </mat-form-field>
                     </div>
                     <div class="col-sm-12 col-md-5">

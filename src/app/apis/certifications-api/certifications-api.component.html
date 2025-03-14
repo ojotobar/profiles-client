@@ -8,28 +8,12 @@
 <pre class="mt-3 p-0 px-3 app-pre">
 <code class="app-code">
 query {{ '{' }}
-    profile {{ '{' }}
-        profile {{ '{' }}
-            firstName
-            lastName
-            gender
-            phoneNumber
-            photoUrl
-            cvUrl
-            skills
-            location {{ '{' }}
-                line1
-                line2
-                postalCode
-                city
-                state
-                country
-                latitude
-                longitude
-            {{ '}' }}
-        {{ '}' }}
-        message
-        successful
+    certifications {{ '{' }}
+        id
+        name
+        institution
+        dateObtained
+        expires
     {{ '}' }}
 {{ '}' }}
 </code>

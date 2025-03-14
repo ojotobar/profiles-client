@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
 import { Apollo, gql } from 'apollo-angular';
@@ -8,6 +8,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AlertComponent } from '../alert/alert.component';
 import { AlertModel } from '../../models/common/alert-models';
 import { AlertClassEnum, AlertIconEnum } from '../../enums/alert-enums';
+import { AppService } from '../../services/app.service';
 
 
 @Component({
@@ -24,6 +25,7 @@ import { AlertClassEnum, AlertIconEnum } from '../../enums/alert-enums';
 })
 export class FaqsComponent {
   length: number = 0;
+  appService = inject(AppService)
   pageSize = 10;
   pageIndex = 0;
   pageSizeOptions = [10, 25, 50];
@@ -78,15 +80,17 @@ export class FaqsComponent {
           this.length = Data.faqs.totalCount;
           this.faqs = Data.faqs.items;
           if(this.faqs.length <= 0){
-            this.alertInputs.heading = 'An error occurred!'
-            this.alertInputs.message = 'An error occurred while getting the data. Please try again later.'
-            this.alertInputs.bg = AlertClassEnum.info;
-            this.alertInputs.icon = AlertIconEnum.info;
+            this.alertInputs = this.appService.mapAlertMessage(this.alertInputs,
+              'No record!', 'No FAQs record found. Please check back later', AlertIconEnum.info,
+              AlertClassEnum.info
+            )
           }
         },
         error: (error: Error) => {
-          this.alertInputs.heading = 'An error occurred!';
-          this.alertInputs.message = 'An error occurred why getting the data. Please try again later.'; 
+          this.alertInputs = this.appService.mapAlertMessage(this.alertInputs,
+            'An error occurred!', 'An error occurred why getting the data. Please try again later.', 
+            AlertIconEnum.danger, AlertClassEnum.danger
+          )
           this.loading = false;
         }
       });

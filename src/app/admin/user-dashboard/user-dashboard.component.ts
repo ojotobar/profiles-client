@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SectionsModel } from '../../models/common/sections-model';
 import { AppService } from '../../services/app.service';
 import { RouterLink } from '@angular/router';
@@ -12,9 +12,5 @@ import { RouterLink } from '@angular/router';
   styleUrl: './user-dashboard.component.scss'
 })
 export class UserDashboardComponent {
-  sections: SectionsModel[];
-
-  constructor(private appService: AppService){
-    this.sections = appService.getSections();
-  }
+  sections = inject(AppService).getSections();
 }

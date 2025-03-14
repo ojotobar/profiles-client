@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AppService } from '../../services/app.service';
 import { RegisterModel } from '../../models/account/register-model';
+import { FieldErrorsDirective } from '../../directives/field-errors.directive';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +29,8 @@ import { RegisterModel } from '../../models/account/register-model';
     MatOptionModule,
     MatSelectModule,
     RouterLink,
-    MatCheckboxModule
+    MatCheckboxModule,
+    FieldErrorsDirective
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'

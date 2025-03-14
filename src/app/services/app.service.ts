@@ -1,5 +1,4 @@
 import { inject, Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
@@ -12,6 +11,8 @@ import { SectionsModel } from '../models/common/sections-model';
 import { MessageSubjectModel } from '../models/common/message-subject-model';
 import { MessageSubjectEnum } from '../enums/message-subject-enum';
 import { ContactMessageModel } from '../models/common/contact-message-model';
+import { AlertModel } from '../models/common/alert-models';
+import { AlertClassEnum, AlertIconEnum } from '../enums/alert-enums';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class AppService {
   getIsSidebarOpened = this.isSidebarOpened.asObservable();
   getIsLoggedIn = this.isLoggedIn.asObservable();
 
-  constructor(private readonly dialog: MatDialog, private readonly location: Location) { }
+  constructor(private readonly location: Location) { }
 
   goBack(){
     this.location.back();
@@ -91,5 +92,14 @@ export class AppService {
 
   sendContactMessage(payload: ContactMessageModel){
     this.openSnackBar('Thanks for reaching out! We’ll get back to you soon.', SnackbarClassEnum.Success, SnackbarIconEnum.Success);
+  }
+
+  mapAlertMessage(message: AlertModel, heading: string, msg: string, 
+    icon: AlertIconEnum, style: AlertClassEnum): AlertModel {
+    message.heading = heading;
+    message.message = msg;
+    message.icon = icon;
+    message.bg = style;
+    return message;
   }
 }
