@@ -1,4 +1,3 @@
-
 export class SectionsModel{
     constructor(
        public name: string,

@@ -3,5 +3,5 @@ export interface EntityLocationModel{
     state: string,
     country: string,
     longitude: string | null,
-    latitud: string | null
+    latitude: string | null
 }

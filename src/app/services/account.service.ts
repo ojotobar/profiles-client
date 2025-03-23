@@ -39,6 +39,7 @@ export class AccountService {
       })
       .subscribe({
         next: (data: any) => {
+          console.log(data)
           let result = (<any>data).data.loginUser.loginResult
           if(result.successful && result.accessToken){
             localStorage.setItem('accessToken', result.accessToken);

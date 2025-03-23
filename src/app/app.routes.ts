@@ -20,6 +20,7 @@ import { ChangePasswordComponent } from './account/change-password/change-passwo
 import { DocsComponent } from './common/docs/docs.component';
 import { ApiHomeComponent } from './apis/api-home/api-home.component';
 import { EducationManagementComponent } from './education/education-management/education-management.component';
+import { AddEducationComponent } from './education/add-education/add-education.component';
 
 export const routes: Routes = [
     {
@@ -95,6 +96,10 @@ export const routes: Routes = [
     {
         path: 'education',
         component: EducationManagementComponent,
+        canActivate: [authGuard]
+    },{
+        path: 'education/add',
+        component: AddEducationComponent,
         canActivate: [authGuard]
     },
     {

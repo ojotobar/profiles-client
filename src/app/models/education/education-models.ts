@@ -15,3 +15,12 @@ export interface EducationResultModel{
     endDate: Date | null,
     location: EntityLocationModel
 }
+
+export interface EducationModel {
+    schoolName: string,
+    course: string,
+    startDate: Date,
+    endDate: Date | null,
+    level: EducationLevelEnum,
+    location: EntityLocationModel
+}

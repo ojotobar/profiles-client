@@ -6,7 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient } from '@angular/common/http';
 import { provideApollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
-import { ApolloLink, InMemoryCache } from '@apollo/client/core';
+import { ApolloLink, DefaultOptions, InMemoryCache } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 
 export const appConfig: ApplicationConfig = {
@@ -19,11 +19,16 @@ export const appConfig: ApplicationConfig = {
 provideApollo(() => {
   const httpLink = inject(HttpLink);
  
-  const basic = setContext((operation, context) => ({
-    headers: {
-      Accept: 'charset=utf-8',
+  const defaultOptions: DefaultOptions = {
+    watchQuery: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'ignore',
     },
-  }));
+    query: {
+      fetchPolicy: 'no-cache',
+      errorPolicy: 'all',
+    },
+  }
  
   const auth = setContext((operation, context) => {
     const token = localStorage.getItem('accessToken');
@@ -40,8 +45,9 @@ provideApollo(() => {
   });
  
   return {
-    link: ApolloLink.from([basic, auth, httpLink.create({ uri: 'https://localhost:7051/profilesql' })]),
+    link: ApolloLink.from([auth, httpLink.create({ uri: 'https://localhost:7051/profilesql' })]),
     cache: new InMemoryCache(),
+    defaultOptions: defaultOptions
   };
 })]
 };

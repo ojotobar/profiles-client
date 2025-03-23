@@ -13,6 +13,7 @@ import { MessageSubjectEnum } from '../enums/message-subject-enum';
 import { ContactMessageModel } from '../models/common/contact-message-model';
 import { AlertModel } from '../models/common/alert-models';
 import { AlertClassEnum, AlertIconEnum } from '../enums/alert-enums';
+import { EducationLevelEnum } from '../enums/education-level-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -88,6 +89,17 @@ export class AppService {
       new MessageSubjectModel('Business Inquiry', MessageSubjectEnum.BusinessInquiry),
       new MessageSubjectModel('Other', MessageSubjectEnum.Other)
     ]
+  }
+
+  getEducationLevelOptions() {
+    return [
+        { label: 'Others', value: EducationLevelEnum.Other },
+        { label: 'Diploma', value: EducationLevelEnum.OrdinaryDiploma },
+        { label: 'Higher Diploma', value: EducationLevelEnum.HigherDiploma },
+        { label: 'Bachelor', value: EducationLevelEnum.Bachelor },
+        { label: 'Masters', value: EducationLevelEnum.Masters },
+        { label: 'Doctorate', value: EducationLevelEnum.Doctorate }
+      ]
   }
 
   sendContactMessage(payload: ContactMessageModel){

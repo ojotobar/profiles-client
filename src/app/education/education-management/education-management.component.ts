@@ -10,6 +10,7 @@ import { AlertModel } from '../../models/common/alert-models';
 import { AlertClassEnum, AlertIconEnum } from '../../enums/alert-enums';
 import { AppService } from '../../services/app.service';
 import { MatSelectModule } from '@angular/material/select';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-education-management',
@@ -19,7 +20,8 @@ import { MatSelectModule } from '@angular/material/select';
     DatePipe,
     MatProgressSpinner,
     AlertComponent,
-    MatSelectModule
+    MatSelectModule,
+    RouterLink
   ],
   templateUrl: './education-management.component.html',
   styleUrl: './education-management.component.scss'
@@ -34,6 +36,10 @@ export class EducationManagementComponent {
 
   ngOnInit() {
     this.getEducations();
+  }
+
+  GoBack(){
+    this.appService.goBack()
   }
 
   getEducations(){
