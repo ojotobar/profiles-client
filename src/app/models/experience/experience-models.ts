@@ -15,3 +15,15 @@ export interface ExperienceResultModel {
     endDate: Date | null
     location: EntityLocationModel
 }
+
+export interface ExperienceModel {
+    organization: string,
+    title: string,
+    startDate: Date,
+    endDate: Date | null,
+    summaries: string[],
+    location: {
+        city: string,
+        country: string
+    }
+}

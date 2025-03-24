@@ -7,7 +7,6 @@ import { EducationModel } from '../models/education/education-models';
 import { Observable } from 'rxjs';
 import { OperationVariables } from '@apollo/client/core';
 import { GetEducationQuery } from './queries/education-queries';
-import { EducationLevelEnum } from '../enums/education-level-enum';
 
 @Injectable({
   providedIn: 'root'

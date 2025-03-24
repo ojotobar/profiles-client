@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
 import { AlertComponent } from '../../common/alert/alert.component';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-experience-management',
@@ -29,12 +30,13 @@ import { AlertComponent } from '../../common/alert/alert.component';
 })
 export class ExperienceManagementComponent {
   loading: boolean = false;
+
   experiences: ExperienceResultModel[] = [];
   alertModel = new AlertModel();
   error: Error | null = null;
   xpService = inject(ExperienceService);
-  appService = inject(AppService)
-
+  appService = inject(AppService);
+  
   ngOnInit() {
     this.getExperiences();
   }
@@ -56,8 +58,10 @@ export class ExperienceManagementComponent {
         },
         error: (error: Error) => {
           this.error = error;
+          this.loading = false;
           this.alertModel = this.appService.mapAlertMessage(this.alertModel, 'An error occurred', 
-            error.message, AlertIconEnum.info, AlertClassEnum.info)
+            'An error occurred while getting the record. Please try again. Contact support if issue persists', 
+            AlertIconEnum.danger, AlertClassEnum.danger)
         }
     })
   }

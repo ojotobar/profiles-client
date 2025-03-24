@@ -112,7 +112,8 @@ export class AddEducationComponent {
 
   onCheckboxChange(event: any) {
     this.endDateDisabled = event.checked;
-    this.addEducationForm.value.endDate = null;
+    this.addEducationForm.patchValue({ endDate: null });
+
   }
 
   onCountrySelectionChange(event: any) {
@@ -125,8 +126,9 @@ export class AddEducationComponent {
   onStateSelectionChange(event: any) {
     const selectedState = this.states.find(c => c.Name === event.value);
     if(selectedState){
-      this.addEducationForm.value.latitude = selectedState.Latitude;
-      this.addEducationForm.value.longitude = selectedState.Longitude;
+      //this.addEducationForm.value.latitude = selectedState.Latitude;
+      //this.addEducationForm.value.longitude = selectedState.Longitude;
+      this.addEducationForm.patchValue({ latitude: selectedState.Latitude, longitude: selectedState.Longitude });
     }
   }
 
