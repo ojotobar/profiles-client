@@ -22,6 +22,9 @@ import { ApiHomeComponent } from './apis/api-home/api-home.component';
 import { EducationManagementComponent } from './education/education-management/education-management.component';
 import { AddEducationComponent } from './education/add-education/add-education.component';
 import { EditEducationComponent } from './education/edit-education/edit-education.component';
+import { ExperienceManagementComponent } from './experience/experience-management/experience-management.component';
+import { AddExperienceComponent } from './experience/add-experience/add-experience.component';
+import { EditExperienceComponent } from './experience/edit-experience/edit-experience.component';
 
 export const routes: Routes = [
     {
@@ -107,6 +110,21 @@ export const routes: Routes = [
     {
         path: 'education/:id',
         component: EditEducationComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'experience',
+        component: ExperienceManagementComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'experience/add',
+        component: AddExperienceComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'experience/:id',
+        component: EditExperienceComponent,
         canActivate: [authGuard]
     },
     {

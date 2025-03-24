@@ -103,6 +103,8 @@ export class EditEducationComponent {
         level: form.level as EducationLevelEnum,
         location: location
       }
+
+      this.isSaving = true;
       this.educationService.updateEducationObservable(this.id, payload)
         .subscribe({
           next: (data: any) => {

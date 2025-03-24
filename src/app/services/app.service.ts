@@ -119,6 +119,24 @@ export class AppService {
     return message;
   }
 
+  currentTime(): Date {
+    return new Date()
+  }
+
+  getUserGreeting(): string {
+    let time = this.currentTime();
+    let hour = time.getHours();
+    if(hour >= 0 && hour < 12){
+      return 'Good morning';
+    } else if(hour >= 12 && hour < 16){
+      return 'Good afternoon';
+    } else if (hour > 16) {
+      return 'Good evening'
+    } else {
+      return 'Good day'
+    }
+  }
+
   @HostListener('window:resize', ['$event'])
     onWindowResize() {
       this.viewportHeight.next(window.innerHeight);
