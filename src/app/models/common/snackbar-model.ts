@@ -5,3 +5,9 @@ export class SnackbarModel{
     color: SnackbarClassEnum = SnackbarClassEnum.Success;
     icon: SnackbarIconEnum = SnackbarIconEnum.Success;
 }
+
+export interface MatDialogData{
+    id: string,
+    name: string,
+    refresh: boolean
+}

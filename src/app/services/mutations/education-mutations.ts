@@ -13,3 +13,25 @@ export const AddEducationMutations = gql`
         }
     }
 `;
+
+export const DeleteEducationMutation = gql`
+    mutation DeleteEducation($input: DeleteEducationInput!){
+        deleteEducation(input: $input){
+            educationResult{
+            message
+            success
+            }
+        }
+    }
+`;
+
+export const UpdateEducationMutation = gql`
+    mutation UpdateEducation($input: UpdateEducationInput!){
+        updateEducation(input: $input){
+            educationResult{
+            success
+            message
+            }
+        }
+    }
+`;

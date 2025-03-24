@@ -1,10 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { AppService } from './app.service';
 import { Router } from '@angular/router';
-import { Apollo } from 'apollo-angular';
-import { AddEducationMutations } from './mutations/education-mutations';
-import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
+import { Apollo, gql, QueryRef } from 'apollo-angular';
+import { AddEducationMutations, DeleteEducationMutation, UpdateEducationMutation } from './mutations/education-mutations';
 import { EducationModel } from '../models/education/education-models';
+import { Observable } from 'rxjs';
+import { OperationVariables } from '@apollo/client/core';
+import { GetEducationQuery } from './queries/education-queries';
+import { EducationLevelEnum } from '../enums/education-level-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +17,8 @@ export class EducationService {
   router = inject(Router);
   apollo = inject(Apollo)
 
-  addEducation(payload: EducationModel){
-    this.apollo
+  addEducation(payload: EducationModel): Observable<any> {
+    return this.apollo
       .mutate({
         mutation: AddEducationMutations,
         variables: {
@@ -30,21 +33,76 @@ export class EducationService {
             }
           }
         }
-      }).subscribe({
-        next: (data: any) => {
-          let result = data.data.addEducation.educationResult;
-          let success = (<boolean>result.success);
-          let message = (<string>result.message);
-          if(success){
-            this.appService.openSnackBar(message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
-            this.appService.goBack()
-          }else {
-            this.appService.openSnackBar(message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
-          }
-        },
-        error: (error: Error) => {
-          this.appService.openSnackBar(error.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+      });
+  }
+
+  deleteEducationObservable(id: string): Observable<any> {
+    return this.apollo.mutate({
+      mutation: DeleteEducationMutation,
+      variables: {
+        "input": {
+          "id": id
         }
+      }
+    });
+  }
+
+  getEducationByIdObservable(id: string): QueryRef<unknown, OperationVariables> {
+    return this.apollo.watchQuery({
+      query: GetEducationQuery,
+      variables: {
+        "id": id
+      } as OperationVariables
+    })
+  }
+
+  getEducationsObservable(): QueryRef<unknown, OperationVariables> {
+    return this.apollo
+      .watchQuery({
+        query: gql`
+          query{
+            educations{
+              id
+              institutionName
+              major
+              level
+              levelDescription
+              startDate
+              endDate
+              location{
+                city
+                state
+                country
+                longitude
+                latitude
+              }
+            }
+        }`
+    })
+  }
+
+  updateEducationObservable(id: string, payload: EducationModel): Observable<any> {
+    return this.apollo.mutate({
+      mutation: UpdateEducationMutation,
+      variables: {
+        "input": {
+          "id": id.toString(),
+          "input": {
+            "schoolName": payload.schoolName,
+            "course": payload.course,
+            "level": payload.level,
+            "startDate": payload.startDate,
+            "endDate": payload.endDate,
+            "location": {
+              "city": payload.location.city,
+              "state": payload.location.state,
+              "country": payload.location.country,
+              "latitude": payload.location.latitude,
+              "longitude": payload.location.longitude
+            }
+          }
+        }
+      }
     })
   }
 }

@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { HostListener, inject, Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { BehaviorSubject } from 'rxjs';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
@@ -21,6 +21,8 @@ import { EducationLevelEnum } from '../enums/education-level-enum';
 export class AppService {
   private isSidebarOpened = new BehaviorSubject(false);
   private isLoggedIn = new BehaviorSubject(localStorage.getItem('accessToken') !== null);
+  private viewportWidth = new BehaviorSubject(0);
+  private viewportHeight = new BehaviorSubject(0);
   private snackbarModel = new SnackbarModel();
   private _snackBar = inject(MatSnackBar);
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
@@ -28,6 +30,8 @@ export class AppService {
 
   getIsSidebarOpened = this.isSidebarOpened.asObservable();
   getIsLoggedIn = this.isLoggedIn.asObservable();
+  getViewportWidth = this.viewportWidth.asObservable();
+  getViewportHeight = this.viewportHeight.asObservable();
 
   constructor(private readonly location: Location) { }
 
@@ -113,5 +117,11 @@ export class AppService {
     message.icon = icon;
     message.bg = style;
     return message;
+  }
+
+  @HostListener('window:resize', ['$event'])
+    onWindowResize() {
+      this.viewportHeight.next(window.innerHeight);
+      this.viewportWidth.next(window.innerWidth)
   }
 }

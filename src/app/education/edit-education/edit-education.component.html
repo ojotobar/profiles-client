@@ -1,0 +1,115 @@
+<div class="container-fluid mb-5">
+    <div class="row mb-5">
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+        <div class="col-sm-12 col-md-10 col-lg-8 rounded border app-bg-rgb text-white" [style]="'min-height: 30vh;'">
+            <p class="h4 pt-2 pb-0 mb-0">Edit Education Details</p>
+            <hr class="mt-0 pt-0"/>
+            @if(loading){
+                <mat-spinner class="my-3 m-auto" mode="indeterminate" [diameter]="70"></mat-spinner>
+            } @else if(!loading && !education){
+                <app-alert 
+                    [alertInputs]="alertInputs"
+                />
+                <span class="linked text-white" (click)="goBack()">Back</span>
+            } @else{
+                <form [formGroup]="editEducationForm" (ngSubmit)="ProcessEditEducation()">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Institution Name</mat-label>
+                                <mat-icon matSuffix>school</mat-icon>
+                                <input matInput name="institutionName" placeholder="University of Nigeria" formControlName="institutionName">
+                                <mat-error appFieldErrors></mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Course of Study</mat-label>
+                                <mat-icon matSuffix>school</mat-icon>
+                                <input matInput name="major" formControlName="major">
+                                <mat-error appFieldErrors></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Start Date</mat-label>
+                                <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" name="startDate" formControlName="startDate">
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker startView="year" [startAt]="startDateTime"></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3">
+                            <mat-form-field class="w-100">
+                                <mat-label>End Date</mat-label>
+                                <input matInput [matDatepicker]="dpicker" placeholder="MM/DD/YYYY" name="endDate" formControlName="endDate" [hidden]="endDateDisabled">
+                                <mat-hint>
+                                    <mat-checkbox (change)="onCheckboxChange($event)" name="isEndDateNull" formControlName="isEndDateNull">
+                                        <span class="text-light">Still studying here?</span>
+                                    </mat-checkbox>
+                                </mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="dpicker" [disabled]="endDateDisabled"></mat-datepicker-toggle>
+                                <mat-datepicker #dpicker startView="year" [startAt]="startDateTime"></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <mat-form-field class="w-100">
+                                <mat-label>Level</mat-label>
+                                <mat-select name="level" formControlName="level">
+                                    @for (level of levelOptions; track level) {
+                                        <mat-option [value]="level.value">{{level.label}}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <mat-form-field class="w-100">
+                                <mat-label>City/Town</mat-label>
+                                <mat-icon matSuffix>room</mat-icon>
+                                <input matInput name="city" formControlName="city">
+                                <mat-error appFieldErrors></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Country</mat-label>
+                                <mat-select name="country" formControlName="country" (selectionChange)="onCountrySelectionChange($event)">
+                                    @for (country of countries; track $index) {
+                                        <mat-option [value]="country.Name">{{country.Name}}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>State/Province</mat-label>
+                                <mat-select name="state" formControlName="state" (selectionChange)="onStateSelectionChange($event)">
+                                    @if(editEducationForm.value.country){
+                                        @for (state of states; track $index) {
+                                            <mat-option [value]="state.Name">{{state.Name}}</mat-option>
+                                        }
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row mt-0 pt-0 mx-1 mb-3">
+                        <div class="col-sm-12 col-md-6 mb-1">
+                            <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{isSaving}}>Save</button>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-1">
+                            <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="goBack()" disabled={{isSaving}}>Back</button>
+                        </div>
+                    </div>
+                </form> 
+            }          
+        </div>
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+    </div>
+    <div class="my-2 py-2"></div>
+</div>

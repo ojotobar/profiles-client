@@ -33,14 +33,14 @@
                                         <td>{{education.institutionName}}</td>
                                         <td>{{education.levelDescription}}</td>
                                         <td>{{education.major}}</td>
-                                        <td>{{education.startDate | date: 'MMM d, y' }}</td>
-                                        <td>{{education.endDate | date: 'MMM d, y' }}</td>
+                                        <td>{{education.startDate | date: 'MMM, y' }}</td>
+                                        <td>{{education.endDate | date: 'MMM, y' }}</td>
                                         <td>
                                             <mat-select class="pr-2" placeholder="Actions">
-                                                <mat-option>
+                                                <mat-option [routerLink]="['/education', education.id]">
                                                     <mat-icon class="text-dark m-0 m-auto">edit</mat-icon>
                                                 </mat-option>
-                                                <mat-option>
+                                                <mat-option (click)="confirmDelete(education.id, education.institutionName)">
                                                     <mat-icon class="text-danger m-0 m-auto">delete</mat-icon>
                                                 </mat-option>
                                             </mat-select>
@@ -55,8 +55,7 @@
                         />
                     }
                 </div>
-
-                <span class="linked" (click)="GoBack()">Back</span>
+                <span class="linked" (click)="goBack()">Back</span>
             </div>
         </main>
     </div>

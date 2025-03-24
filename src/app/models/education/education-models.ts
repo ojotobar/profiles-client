@@ -24,3 +24,22 @@ export interface EducationModel {
     level: EducationLevelEnum,
     location: EntityLocationModel
 }
+
+export interface EducationResult{
+    success: boolean,
+    message: string
+}
+
+export interface EducationPatchModel{
+    institutionName: string,
+    major: string,
+    level: EducationLevelEnum,
+    startDate: Date,
+    endDate: Date | null,
+    city: string,
+    country: string,
+    state: string,
+    longitude: string | null,
+    latitude: string | null,
+    isEndDateNull: boolean
+}

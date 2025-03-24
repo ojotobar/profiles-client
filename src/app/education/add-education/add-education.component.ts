@@ -42,6 +42,7 @@ export class AddEducationComponent {
   readonly appService = inject(AppService);
   readonly apiService = inject(ApiService);
   readonly educationService = inject(EducationService)
+  loading: boolean = false;
   endDateDisabled: boolean = false;
   levelOptions = this.appService.getEducationLevelOptions();
   countries: CountryModel[] = [];
@@ -84,6 +85,24 @@ export class AddEducationComponent {
         location: location
       }
       this.educationService.addEducation(payload)
+        .subscribe({
+          next: (data: any) => {
+            this.loading = (<boolean>data.loading);
+            let result = data.data.addEducation.educationResult;
+            let success = (<boolean>result.success);
+            let message = (<string>result.message);
+            if(success){
+              this.appService.openSnackBar(message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
+              this.appService.goBack()
+            }else {
+              this.appService.openSnackBar(message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+            }
+          },
+          error: (error: Error) => {
+            this.loading = false;
+            this.appService.openSnackBar(error.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+          }
+        });
     }
   }
 

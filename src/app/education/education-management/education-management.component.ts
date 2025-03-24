@@ -11,6 +11,9 @@ import { AlertClassEnum, AlertIconEnum } from '../../enums/alert-enums';
 import { AppService } from '../../services/app.service';
 import { MatSelectModule } from '@angular/material/select';
 import { RouterLink } from '@angular/router';
+import { DialogService } from '../../services/dialog.service';
+import { MatDialogData } from '../../models/common/snackbar-model';
+import { EducationService } from '../../services/education.service';
 
 @Component({
   selector: 'app-education-management',
@@ -21,7 +24,8 @@ import { RouterLink } from '@angular/router';
     MatProgressSpinner,
     AlertComponent,
     MatSelectModule,
-    RouterLink
+    RouterLink,
+    MatProgressSpinner,
   ],
   templateUrl: './education-management.component.html',
   styleUrl: './education-management.component.scss'
@@ -30,6 +34,8 @@ export class EducationManagementComponent {
   loading = true;
   apollo = inject(Apollo);
   appService = inject(AppService);
+  dialogService = inject(DialogService);
+  educationService = inject(EducationService);
   error: any;
   data: EducationResultModel[] = [];
   alertInputs = new AlertModel();
@@ -38,32 +44,13 @@ export class EducationManagementComponent {
     this.getEducations();
   }
 
-  GoBack(){
+  goBack(){
     this.appService.goBack()
   }
 
   getEducations(){
-    this.apollo
-      .watchQuery({
-        query: gql`
-          query{
-            educations{
-              id
-              institutionName
-              major
-              level
-              levelDescription
-              startDate
-              endDate
-              location{
-                city
-                state
-                country
-                longitude
-                latitude
-              }
-            }
-          }`}).valueChanges.subscribe({
+    this.educationService.getEducationsObservable()
+      .valueChanges.subscribe({
         next: (data: any) => {
           this.loading = (<boolean>data.loading);
           this.data = (<EducationsResultModel>data.data).educations || [];
@@ -83,5 +70,15 @@ export class EducationManagementComponent {
           )
         }
       });
+  }
+
+  confirmDelete(id: string, name: string){
+    let dialogRef = this.dialogService.openDeleteEducationDialog(id, name);
+    dialogRef.afterClosed().subscribe(result => {
+      let response = (<MatDialogData>result);
+      if(response.refresh){
+        this.getEducations();
+      }
+    });
   }
 }
