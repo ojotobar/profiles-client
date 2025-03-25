@@ -12,6 +12,8 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
 import { AlertComponent } from '../../common/alert/alert.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogData } from '../../models/common/snackbar-model';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'app-experience-management',
@@ -36,6 +38,7 @@ export class ExperienceManagementComponent {
   error: Error | null = null;
   xpService = inject(ExperienceService);
   appService = inject(AppService);
+  dialogService = inject(DialogService)
   
   ngOnInit() {
     this.getExperiences();
@@ -71,6 +74,12 @@ export class ExperienceManagementComponent {
   }
 
   confirmDelete(id: string, name: string) {
-
+    let dialogRef = this.dialogService.openDeleteExperienceDialog(id, name);
+        dialogRef.afterClosed().subscribe(result => {
+          let response = (<MatDialogData>result);
+          if(response.refresh){
+            this.getExperiences();
+          }
+    });
   }
 }

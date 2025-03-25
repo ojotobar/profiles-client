@@ -20,3 +20,23 @@ export const GetEducationQuery = gql`
         }
     }
 `;
+
+export const GetEducationsQuery = gql`
+    query {
+        educations{
+            id
+            institutionName
+            major
+            level
+            levelDescription
+            startDate
+            endDate
+            location{
+            city
+            state
+            country
+            longitude
+            latitude
+        }
+    }
+}`;

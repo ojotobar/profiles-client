@@ -30,7 +30,6 @@ export class DeleteEducationComponent {
           next: (data: any) => {
             this.loading = (<boolean>data.loading);
             let result = (<EducationResult>data.data.deleteEducation.educationResult);
-            console.log(result, this.loading)
             if(result.success){
               this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
               this.data.refresh = true;

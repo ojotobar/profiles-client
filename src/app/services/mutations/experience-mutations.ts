@@ -11,22 +11,45 @@ export const AddExperienceMutation = gql`
     }
 `;
 
-// {
-//     "input": {
-//       "inputs": [
-//         {
-//           "organization": "",
-//           "title": "",
-//           "startDate": "",
-//           "endDate": "",
-//           "summaries": [
-  
-//           ],
-//           "location": {
-//             "city": "",
-//             "country": ""
-//           }
-//         }
-//       ]
-//     }
-//   }
+export const DeleteExperienceMutation = gql`
+    mutation DeleteExperience($input: DeleteExperienceInput!){
+        deleteExperience(input: $input){
+            experiencePayload{
+            success
+            message
+            }
+        }
+    }
+`;
+
+export const UpdateExperienceMutation = gql`
+    mutation UpdateExperience($input: UpdateExperienceInput!){
+        updateExperience(input: $input){
+            experiencePayload{
+            success
+            message
+            }
+        }
+    }
+`;
+
+// Types declarations
+type Location = {
+    city: string;
+    country: string;
+};
+
+type InputData = {
+    organization: string;
+    title: string;
+    startDate: string;
+    endDate: string;
+    location: Location;
+};
+
+type ResponseData = {
+    input: {
+        id: string;
+        input: InputData;
+    };
+};

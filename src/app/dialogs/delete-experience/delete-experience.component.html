@@ -1,1 +1,25 @@
-<p>delete-experience works!</p>
+<div class="container py-3">
+    <div>
+        <div mat-dialog-content>
+            <p class="fs-4 pb-0 mb-0 text-danger">
+                <mat-icon class="my-0 py-0">warning</mat-icon>
+                <span> Delete Record</span>
+            </p>
+            <hr class="pt-0 mt-0"/>
+            <p class="text-danger pb-0 mb-0">
+                You're about to delete your employment history with <strong>{{data.name}}</strong>. This action is irreversible!!!
+            </p>
+            <hr class="pt-0 mt-0"/>
+        </div>
+        <div mat-dialog-actions>
+            <div class="row mt-0 pt-0 mx-1 mb-3">
+                <div class="col-sm-12 col-md-6 mb-1">
+                    <button mat-raised-button class="bg-danger text-light w-100" (click)="deleteRecord()" disabled={{loading}}>Confirm</button>
+                </div>
+                <div class="col-sm-12 col-md-6 mb-1">
+                    <button mat-raised-button class="bg-secondary text-light w-100" (click)="closeDialog()" disabled={{loading}}>Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
