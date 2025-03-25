@@ -16,9 +16,9 @@ export const GetEducationQuery = gql`
             country
             latitude
             longitude
-            }
         }
     }
+}
 `;
 
 export const GetEducationsQuery = gql`

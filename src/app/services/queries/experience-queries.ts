@@ -21,3 +21,20 @@ export const GetExperiencesQuery = gql`
         }
     }
 `;
+
+export const GetExperienceByIdQuery = gql`
+    query GetExperienceById($id: UUID!){
+        experience(id: $id){
+            id
+            organization
+            jobTitle
+            startDate
+            endDate
+            accomplishments
+            location{
+            city
+            country
+        }
+    }
+}
+`;

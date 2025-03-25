@@ -121,7 +121,6 @@ export class EditEducationComponent {
           },
           error: (error: Error) => {
             this.isSaving = false;
-            console.log(error)
             this.appService.openSnackBar(error.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger);
           }
         })
@@ -190,7 +189,7 @@ export class EditEducationComponent {
 
   onCheckboxChange(event: any) {
     this.endDateDisabled = event.checked;
-    this.editEducationForm.value.endDate = null;
+    this.editEducationForm.patchValue({ endDate: null });
   }
 
   onCountrySelectionChange(event: any) {
