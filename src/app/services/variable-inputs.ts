@@ -1,3 +1,4 @@
+import { CertificationModel } from "../models/certifications/certifications-models";
 import { EducationModel } from "../models/education/education-models";
 import { ExperienceModel } from "../models/experience/experience-models";
 
@@ -68,6 +69,29 @@ export function getUpdateEducationInput(id: string, payload: EducationModel){
               latitude: payload.location.latitude,
               longitude: payload.location.longitude
             }
+          }
+        }
+    }
+}
+
+export const getAddCertificationsInput = function(data: CertificationModel[]) {
+    return {
+        input: {
+          inputs: data
+        }
+    }
+}
+
+export const getUpdateCertificationInput = function(id: string, data: CertificationModel){
+    return {
+        input: {
+          id: id,
+          input: {
+            name: data.name,
+            institutionName: data.institutionName,
+            date: data.date,
+            yearsOfValidity: data.yearsOfValidity,
+            link: data.link
           }
         }
     }

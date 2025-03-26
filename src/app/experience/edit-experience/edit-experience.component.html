@@ -58,7 +58,7 @@
                         <div class="col-sm-12 col-md-6">
                             <mat-form-field class="w-100">
                                 <mat-label>City/Town</mat-label>
-                                <mat-icon matSuffix>room</mat-icon>
+                                <mat-icon matSuffix>location_city</mat-icon>
                                 <input matInput name="city" formControlName="city">
                                 <mat-error appFieldErrors></mat-error>
                             </mat-form-field>
@@ -101,7 +101,7 @@
                     </div>
                     <div class="row mt-0 pt-0 mx-1 mb-3">
                         <div class="col-sm-12 col-md-6 mb-1">
-                            <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{loading}}>Save</button>
+                            <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{loading}}>Update</button>
                         </div>
                         <div class="col-sm-12 col-md-6 mb-1">
                             <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="goBack()" disabled={{loading}}>Back</button>

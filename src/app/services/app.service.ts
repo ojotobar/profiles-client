@@ -77,8 +77,8 @@ export class AppService {
 
   getSections(): SectionsModel[] {
     return [
-      new SectionsModel('experience', 'Experience', '/experience'),
-      new SectionsModel('education', 'Education', '/education'),
+      new SectionsModel('experiences', 'Experience', '/experiences'),
+      new SectionsModel('educations', 'Education', '/educations'),
       new SectionsModel('skills', 'Skills', '/skills'),
       new SectionsModel('certifications', 'Certifications', '/certifications'),
       new SectionsModel('projects', 'Projects', '/projects'),

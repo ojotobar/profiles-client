@@ -23,8 +23,8 @@ export class DeleteEducationComponent {
     private readonly appService: AppService) {}
 
   deleteRecord(){
-    this.loading = true;
     if(this.data.id){
+      this.loading = true;
       this.educationService.deleteEducationObservable(this.data.id)
         .subscribe({
           next: (data: any) => {

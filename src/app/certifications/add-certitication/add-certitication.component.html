@@ -1,0 +1,65 @@
+<div class="container-fluid mb-5">
+    <div class="row mb-5">
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+        <div class="col-sm-12 col-md-10 col-lg-8 rounded border app-bg-rgb text-white" [style]="'min-height: 30vh;'">
+            <p class="h4 pt-2 pb-0 mb-0">Add Certification</p>
+            <hr class="mt-0 pt-0"/>
+            <form [formGroup]="certificationForm" (ngSubmit)="ProcessAddCertification()">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <mat-form-field class="w-100">
+                            <mat-label>Certification Name</mat-label>
+                            <input matInput name="name" formControlName="name">
+                            <mat-error appFieldErrors></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <mat-form-field class="w-100">
+                            <mat-label>Issuing Institution</mat-label>
+                            <mat-icon matSuffix>domain</mat-icon>
+                            <input matInput name="institutionName" formControlName="institutionName">
+                            <mat-error appFieldErrors></mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+                        <mat-form-field class="w-100">
+                            <mat-label>Issue Date</mat-label>
+                            <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" name="date" formControlName="date">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker startView="year" [startAt]="startDateTime"></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-4 mb-3">
+                        <mat-form-field class="w-100">
+                            <mat-label>Years Of Validity</mat-label>
+                            <input matInput type="number" placeholder="Number of Years" name="yearsOfValidity" formControlName="yearsOfValidity">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-8">
+                        <mat-form-field class="w-100">
+                            <mat-label>Certification Link</mat-label>
+                            <mat-icon matSuffix>link</mat-icon>
+                            <input matInput name="link" formControlName="link">
+                            <mat-error appFieldErrors></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-4"></div>
+                </div>
+                <div class="row mt-0 pt-0 mx-1 mb-3">
+                    <div class="col-sm-12 col-md-6 mb-1">
+                        <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{loading}}>Save</button>
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-1">
+                        <button mat-raised-button class="bg-secondary text-light w-100" (click)="goBack()" disabled={{loading}}>Back</button>
+                    </div>
+                </div>
+            </form>           
+        </div>
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+    </div>
+    <div class="my-2 py-2"></div>
+</div>

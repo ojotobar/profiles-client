@@ -25,6 +25,9 @@ import { EditEducationComponent } from './education/edit-education/edit-educatio
 import { ExperienceManagementComponent } from './experience/experience-management/experience-management.component';
 import { AddExperienceComponent } from './experience/add-experience/add-experience.component';
 import { EditExperienceComponent } from './experience/edit-experience/edit-experience.component';
+import { CertiticationManagementComponent } from './certifications/certitication-management/certitication-management.component';
+import { AddCertiticationComponent } from './certifications/add-certitication/add-certitication.component';
+import { EditCertiticationComponent } from './certifications/edit-certitication/edit-certitication.component';
 
 export const routes: Routes = [
     {
@@ -98,7 +101,7 @@ export const routes: Routes = [
         //canActivate: [authGuard]
     },
     {
-        path: 'education',
+        path: 'educations',
         component: EducationManagementComponent,
         canActivate: [authGuard]
     },
@@ -113,7 +116,7 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
-        path: 'experience',
+        path: 'experiences',
         component: ExperienceManagementComponent,
         canActivate: [authGuard]
     },
@@ -125,6 +128,21 @@ export const routes: Routes = [
     {
         path: 'experience/:id',
         component: EditExperienceComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'certification/add',
+        component: AddCertiticationComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'certification/:id',
+        component: EditCertiticationComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'certifications',
+        component: CertiticationManagementComponent,
         canActivate: [authGuard]
     },
     {
