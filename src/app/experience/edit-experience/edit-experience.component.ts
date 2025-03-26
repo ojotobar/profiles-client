@@ -6,7 +6,7 @@ import { AlertModel } from '../../models/common/alert-models';
 import { ApiService } from '../../services/api.service';
 import { ExperienceService } from '../../services/experience.service';
 import { AppService } from '../../services/app.service';
-import { ExperienceResultModel } from '../../models/experience/experience-models';
+import { ExperienceResultModel, getEducationPayload } from '../../models/experience/experience-models';
 import { ActivatedRoute } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AlertClassEnum, AlertIconEnum } from '../../enums/alert-enums';
@@ -20,6 +20,7 @@ import { CountryModel } from '../../models/location/country-models';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../../enums/snackbar-enum';
+import { ResponseModel } from '../../models/common/common-models';
 
 @Component({
   selector: 'app-edit-experience',
@@ -82,7 +83,29 @@ export class EditExperienceComponent {
   }
 
   ProcessUpdateExperience() {
+    if(this.experienceForm.valid && this.id){
+      let payload = getEducationPayload(this.experienceForm.value);
 
+      this.isSaving = true;
+      this.xpService.updateExperienceObservable(this.id, payload)
+        .subscribe({
+          next: (data: any) => {
+            this.isSaving = (<boolean>data.loading);
+            let result = <ResponseModel>data.data.updateExperience.experiencePayload;
+            if(result.success){
+              this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success)
+              this.appService.goBack()
+            } else {
+              this.appService.openSnackBar(result.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+            }
+          },
+          error: (error: Error) => {
+            this.isSaving = false;
+            this.appService.openSnackBar('An error occurred while updating the record. Please try again', 
+              SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+          }
+        })
+    }
   }
 
   getExperienceById(id: string | null){
@@ -156,9 +179,10 @@ export class EditExperienceComponent {
         data.accomplishments;
       
         accArray.forEach((acc) => {
-        accomplishmentsArray.push(this.fb.control(acc));
+          accomplishmentsArray.push(this.fb.control(acc));
+        });
+
         this.numberOfAllowedAcc -= accArray.length;
-      });
     }
   }
 

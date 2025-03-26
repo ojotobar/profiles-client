@@ -26,6 +26,7 @@ export function getUpdateExperienceInput(id: string, payload: ExperienceModel) {
                 title: payload.title,
                 startDate: payload.startDate,
                 endDate: payload.endDate,
+                summaries: payload.summaries,
                 location: {
                     city: payload.location.city,
                     country: payload.location.country

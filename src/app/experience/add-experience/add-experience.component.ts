@@ -4,7 +4,7 @@ import { AppService } from '../../services/app.service';
 import { ExperienceService } from '../../services/experience.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule, provideNativeDateAdapter } from '@angular/material/core';
-import { CountryModel, StateModel } from '../../models/location/country-models';
+import { CountryModel } from '../../models/location/country-models';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,7 +14,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ApiService } from '../../services/api.service';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../../enums/snackbar-enum';
-import { ExperienceModel } from '../../models/experience/experience-models';
+import { ExperienceModel, getEducationPayload } from '../../models/experience/experience-models';
 
 @Component({
   selector: 'app-add-experience',
@@ -78,19 +78,7 @@ export class AddExperienceComponent {
   ProcessAddExperience() {
     if(this.experienceForm.valid){
       let payloads: ExperienceModel[] = [];
-
-      let form = this.experienceForm.value;
-      let singlePayoad: ExperienceModel = {
-        organization: form.organizationName as string,
-        title: form.jobTitle as string,
-        startDate: new Date(form.startDate),
-        endDate: form.endDate ? new Date(form.endDate) : null,
-        summaries: form.accomplishments,
-        location: {
-          city: form.city as string,
-          country: form.country as string
-        }
-      }
+      let singlePayoad = getEducationPayload(this.experienceForm.value);
 
       payloads.push(singlePayoad)
       this.loading = true;
@@ -110,7 +98,8 @@ export class AddExperienceComponent {
           },
           error: (error: Error) => {
             this.loading = false;
-            this.appService.openSnackBar(error.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+            this.appService.openSnackBar('An error occurred while saving the record. Please try again', 
+              SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
           }
         })
     }
