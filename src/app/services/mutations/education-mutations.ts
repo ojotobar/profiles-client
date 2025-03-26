@@ -18,8 +18,8 @@ export const DeleteEducationMutation = gql`
     mutation DeleteEducation($input: DeleteEducationInput!){
         deleteEducation(input: $input){
             educationResult{
-            message
-            success
+                message
+                success
             }
         }
     }

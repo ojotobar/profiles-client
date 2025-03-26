@@ -48,7 +48,7 @@
                                                 <mat-option [routerLink]="['/certification', certification.id]">
                                                     <mat-icon class="text-dark m-0 m-auto">edit</mat-icon>
                                                 </mat-option>
-                                                <mat-option (click)="confirmDelete(certification.id, certification.institution)">
+                                                <mat-option (click)="confirmDelete(certification.id, certification.name)">
                                                     <mat-icon class="text-danger m-0 m-auto">delete</mat-icon>
                                                 </mat-option>
                                             </mat-select>

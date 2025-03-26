@@ -13,6 +13,8 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../../enums/snackbar-enum';
 import { AlertClassEnum, AlertIconEnum } from '../../enums/alert-enums';
+import { DialogService } from '../../services/dialog.service';
+import { MatDialogData } from '../../models/common/snackbar-model';
 
 @Component({
   selector: 'app-certitication-management',
@@ -37,6 +39,7 @@ export class CertiticationManagementComponent {
     'Something went wrong we couldn\'t get your data. Please try again')
   certService = inject(CertificationsService);
   appService = inject(AppService);
+  dialogService = inject(DialogService);
 
   ngOnInit() {
     this.getCertifications();
@@ -71,6 +74,12 @@ export class CertiticationManagementComponent {
   }
 
   confirmDelete(id: string, name: string){
-
+    let ref = this.dialogService.openDeleteCertificationDialog(id, name);
+    ref.afterClosed().subscribe(result => {
+      let response = (<MatDialogData>result);
+      if(response.refresh){
+        this.getCertifications();
+      }
+    })
   }
 }

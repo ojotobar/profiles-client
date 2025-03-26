@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
 import { CertificationModel } from '../models/certifications/certifications-models';
 import { Observable } from 'rxjs';
-import { AddCertificationsMutation, UpdateCertificationMutation } from './mutations/certifications-mutations';
+import { AddCertificationsMutation, DeleteCertificationMutation, UpdateCertificationMutation } from './mutations/certifications-mutations';
 import { getAddCertificationsInput, getIdInput, getUpdateCertificationInput } from './variable-inputs';
 import { DeleteEducationMutation } from './mutations/education-mutations';
 import { OperationVariables } from '@apollo/client/core';
@@ -31,7 +31,7 @@ export class CertificationsService {
 
   deleteCertificationObservable(id: string): Observable<any> {
     return this.apollo.mutate({
-      mutation: DeleteEducationMutation,
+      mutation: DeleteCertificationMutation,
       variables: getIdInput(id)
     })
   }
