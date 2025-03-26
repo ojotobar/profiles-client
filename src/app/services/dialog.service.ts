@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DeleteEducationComponent } from '../dialogs/delete-education/delete-education.component';
 import { AppService } from './app.service';
-import { DeleteExperienceComponent } from '../dialogs/delete-experience/delete-experience.component';
-import { DeleteCertificationComponent } from '../dialogs/delete-certification/delete-certification.component';
+import { DeleteCertificationComponent } from '../components/dialogs/delete-certification/delete-certification.component';
+import { DeleteEducationComponent } from '../components/dialogs/delete-education/delete-education.component';
+import { DeleteExperienceComponent } from '../components/dialogs/delete-experience/delete-experience.component';
 
 @Injectable({
   providedIn: 'root'

@@ -4,7 +4,6 @@ import { BehaviorSubject } from 'rxjs';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
 import { UserClaimsModel } from '../models/account/user-claims-model';
 import { SnackbarModel } from '../models/common/snackbar-model';
-import { SnackbarAnnotatedComponent } from '../utilities/snackbar-annotated/snackbar-annotated.component';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { SectionsModel } from '../models/common/sections-model';
@@ -14,6 +13,7 @@ import { ContactMessageModel } from '../models/common/contact-message-model';
 import { AlertModel } from '../models/common/alert-models';
 import { AlertClassEnum, AlertIconEnum } from '../enums/alert-enums';
 import { EducationLevelEnum } from '../enums/education-level-enum';
+import { SnackbarAnnotatedComponent } from '../components/utilities/snackbar-annotated/snackbar-annotated.component';
 
 @Injectable({
   providedIn: 'root'

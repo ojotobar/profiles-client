@@ -1,9 +1,9 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { SideNavComponent } from "./side-nav/side-nav.component";
-import { ToolBarComponent } from "./tool-bar/tool-bar.component";
 import { CommonModule } from '@angular/common';
 import { AppService } from './services/app.service';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
 
 @Component({
   selector: 'app-root',

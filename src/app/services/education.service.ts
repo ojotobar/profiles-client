@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AppService } from './app.service';
 import { Router } from '@angular/router';
-import { Apollo, gql, QueryRef } from 'apollo-angular';
+import { Apollo, QueryRef } from 'apollo-angular';
 import { AddEducationMutations, DeleteEducationMutation, UpdateEducationMutation } from './mutations/education-mutations';
 import { EducationModel } from '../models/education/education-models';
 import { Observable } from 'rxjs';

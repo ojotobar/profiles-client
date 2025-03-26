@@ -2,9 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { timeout, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { CountryDataModel, StateModel } from '../models/location/country-models';
 import { AppService } from './app.service';
-import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
 
 @Injectable({
   providedIn: 'root'
