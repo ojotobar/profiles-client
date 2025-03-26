@@ -28,6 +28,9 @@ import { EditExperienceComponent } from './experience/edit-experience/edit-exper
 import { CertiticationManagementComponent } from './certifications/certitication-management/certitication-management.component';
 import { AddCertiticationComponent } from './certifications/add-certitication/add-certitication.component';
 import { EditCertiticationComponent } from './certifications/edit-certitication/edit-certitication.component';
+import { ProjectManagementComponent } from './components/projects/project-management/project-management.component';
+import { EditProjectComponent } from './components/projects/edit-project/edit-project.component';
+import { AddProjectComponent } from './components/projects/add-project/add-project.component';
 
 export const routes: Routes = [
     {
@@ -143,6 +146,21 @@ export const routes: Routes = [
     {
         path: 'certifications',
         component: CertiticationManagementComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'project/add',
+        component: AddProjectComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'project/:id',
+        component: EditProjectComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'projects',
+        component: ProjectManagementComponent,
         canActivate: [authGuard]
     },
     {
