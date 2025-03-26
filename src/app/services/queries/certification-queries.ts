@@ -22,6 +22,7 @@ export const GetCertificationByIdQuery = gql`
             link
             dateObtained
             expires
+            yearsOfValidity
         }
     }
 `;
