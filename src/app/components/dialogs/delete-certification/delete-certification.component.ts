@@ -19,8 +19,8 @@ export class DeleteCertificationComponent {
   loading: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: MatDialogData,
-      private dialogRef: MatDialogRef<DeleteCertificationComponent>,
-      private readonly appService: AppService,
+      public dialogRef: MatDialogRef<DeleteCertificationComponent>,
+      public readonly appService: AppService,
       private readonly certService: CertificationsService){}
 
   deleteRecord() {
@@ -34,7 +34,7 @@ export class DeleteCertificationComponent {
             if(result.success){
               this.data.refresh = true;
               this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
-              this.closeDialog();
+              this.appService.closeDialog(this.dialogRef, this.data);
             }
           },
           error: (error: Error) => {
@@ -45,9 +45,5 @@ export class DeleteCertificationComponent {
           }
         })
     }
-  }
-
-  closeDialog(){
-    this.dialogRef.close(this.data)
   }
 }

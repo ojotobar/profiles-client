@@ -3,7 +3,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { BehaviorSubject } from 'rxjs';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
 import { UserClaimsModel } from '../models/account/user-claims-model';
-import { SnackbarModel } from '../models/common/snackbar-model';
+import { MatDialogData, SnackbarModel } from '../models/common/snackbar-model';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { SectionsModel } from '../models/common/sections-model';
@@ -14,6 +14,8 @@ import { AlertModel } from '../models/common/alert-models';
 import { AlertClassEnum, AlertIconEnum } from '../enums/alert-enums';
 import { EducationLevelEnum } from '../enums/education-level-enum';
 import { SnackbarAnnotatedComponent } from '../components/utilities/snackbar-annotated/snackbar-annotated.component';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root'
@@ -135,6 +137,22 @@ export class AppService {
     } else {
       return 'Good day'
     }
+  }
+
+  getForms(form: FormGroup<any>, ctrName: string) {
+    return form.get(ctrName) as FormArray;
+  }
+  
+  removeForm(techIndex: number, form: FormGroup<any>, ctrName: string){
+    this.getForms(form, ctrName).removeAt(techIndex);
+  }
+
+  addForm(form: FormGroup<any>, fb: FormBuilder, ctrName: string) {
+    this.getForms(form, ctrName).push(fb.control('', Validators.required));
+  }
+
+  closeDialog(ref: MatDialogRef<any>, data: MatDialogData){
+    ref.close(data);
   }
 
   @HostListener('window:resize', ['$event'])

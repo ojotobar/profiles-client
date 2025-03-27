@@ -31,6 +31,9 @@ import { ProfileComponent } from './components/profile/profile/profile.component
 import { adminGuard } from './guards/admin.guard';
 import { authGuard } from './guards/auth.guard';
 import { unauthGuard } from './guards/unauth.guard';
+import { CareerSummaryComponent } from './components/career-summary/career-summary/career-summary.component';
+import { AddCareerSummaryComponent } from './components/career-summary/add-career-summary/add-career-summary.component';
+import { EditCareerSummaryComponent } from './components/career-summary/edit-career-summary/edit-career-summary.component';
 
 export const routes: Routes = [
     {
@@ -161,6 +164,21 @@ export const routes: Routes = [
     {
         path: 'projects',
         component: ProjectManagementComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'career-summary',
+        component: CareerSummaryComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'career-summary/add',
+        component: AddCareerSummaryComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'career-summary/:id',
+        component: EditCareerSummaryComponent,
         canActivate: [authGuard]
     },
     {

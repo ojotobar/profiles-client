@@ -1,1 +1,83 @@
-<p>edit-project works!</p>
+<div class="container-fluid mb-5">
+    <div class="row mb-5">
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+        <div class="col-sm-12 col-md-10 col-lg-8 rounded border app-bg-rgb text-white" [style]="'min-height: 30vh;'">
+            <p class="h4 pt-2 pb-0 mb-0">Edit Project</p>
+            <hr class="mt-0 pt-0"/>
+            @if(loading){
+                <mat-spinner 
+                    class="m-0 m-auto"
+                    mode="indeterminate"
+                    [diameter]="70"
+                />
+            } @else if(!loading && !project){
+                <app-alert></app-alert>
+            } @else {
+                <form [formGroup]="editForm" (ngSubmit)="ProcessEditProject()">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Project Name</mat-label>
+                                <input matInput name="name" formControlName="name">
+                                <mat-error appFieldErrors></mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Project Link</mat-label>
+                                <mat-icon matSuffix>link</mat-icon>
+                                <input matInput name="link" formControlName="link">
+                                <mat-error appFieldErrors></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="w-100 mb-0 pb-0">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput placeholder="Describe Your Project"
+                                    cdkTextareaAutosize
+                                    #autosize="cdkTextareaAutosize"
+                                    cdkAutosizeMinRows="2"
+                                    cdkAutosizeMaxRows="4"
+                                    name="description"
+                                    formControlName="description"
+                                ></textarea>
+                                <mat-error appFieldErrors></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div formArrayName="technologies" class="mb-3">
+                            @for(technology of appService.getForms(editForm, 'technologies').controls; track $index){
+                                <div class="d-flex">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Technology</mat-label>
+                                        <input 
+                                            matInput 
+                                            name={{$index}}
+                                            [formControlName]="$index"
+                                        >
+                                        <mat-error appFieldErrors></mat-error>
+                                    </mat-form-field>
+                                    <mat-icon class="text-danger point" (click)="appService.removeForm($index, editForm, 'technologies')">delete_outline</mat-icon>
+                                </div>  
+                            }
+                            <span class="linked text-white" (click)="appService.addForm(editForm, fb, 'technologies')">Add Technology</span> 
+                        </div>
+                    </div>
+                    <div class="row mt-0 pt-0 mx-1 mb-3">
+                        <div class="col-sm-12 col-md-6 mb-1">
+                            <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{isSaving}}>Update</button>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-1">
+                            <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="appService.goBack()" disabled={{isSaving}}>Back</button>
+                        </div>
+                    </div>
+                </form>
+            }         
+        </div>
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+    </div>
+    <div class="my-2 py-2"></div>
+</div>

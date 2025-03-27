@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { DeleteCertificationComponent } from '../components/dialogs/delete-certification/delete-certification.component';
 import { DeleteEducationComponent } from '../components/dialogs/delete-education/delete-education.component';
 import { DeleteExperienceComponent } from '../components/dialogs/delete-experience/delete-experience.component';
+import { DeleteProjectComponent } from '../components/dialogs/delete-project/delete-project.component';
+import { DeleteCareerSummaryComponent } from '../components/dialogs/delete-career-summary/delete-career-summary.component';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,22 @@ export class DialogService {
 
   openDeleteCertificationDialog(id: string, name: string): MatDialogRef<DeleteCertificationComponent, any> {
     return this.dialog.open(DeleteCertificationComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openDeleteProjectDialog(id: string, name: string): MatDialogRef<DeleteProjectComponent, any>{
+    return this.dialog.open(DeleteProjectComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openDeleteSummaryDialog(id: string, name: string): MatDialogRef<DeleteCareerSummaryComponent, any> {
+    return this.dialog.open(DeleteCareerSummaryComponent, {
       position: { top: '12vh' },
       disableClose: true,
       data: { id: id, name: name }

@@ -18,9 +18,9 @@ export class DeleteEducationComponent {
   loading: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: MatDialogData, 
-    private dialogRef: MatDialogRef<DeleteEducationComponent>,
+    public dialogRef: MatDialogRef<DeleteEducationComponent>,
     private readonly educationService: EducationService,
-    private readonly appService: AppService) {}
+    public readonly appService: AppService) {}
 
   deleteRecord(){
     if(this.data.id){
@@ -33,7 +33,7 @@ export class DeleteEducationComponent {
             if(result.success){
               this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
               this.data.refresh = true;
-              this.closeDialog();
+              this.appService.closeDialog(this.dialogRef, this.data);
             } else{
               this.appService.openSnackBar(result.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger);
             }
@@ -44,9 +44,5 @@ export class DeleteEducationComponent {
           }
         })
     }
-  }
-
-  closeDialog() {
-    this.dialogRef.close(this.data);
   }
 }

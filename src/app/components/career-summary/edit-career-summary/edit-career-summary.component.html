@@ -1,0 +1,49 @@
+<div class="container-fluid mb-5">
+    <div class="row mb-5">
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+        <div class="col-sm-12 col-md-10 col-lg-8 rounded border app-bg-rgb text-white" [style]="'min-height: 30vh;'">
+            <p class="h4 pt-2 pb-0 mb-0">Update Professional Summary</p>
+            <hr class="mt-0 pt-0"/>
+            @if(loading){
+                <mat-spinner 
+                    class="my-3 m-0 m-auto"
+                    [diameter]="70"
+                    mode="indeterminate"
+                />
+            } @else if(!loading && careerSummary){
+                <form [formGroup]="editForm" (ngSubmit)="ProcessEditSummary()">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field class="w-100 mb-0 pb-0">
+                                <mat-label>Your Professional Summary</mat-label>
+                                <textarea matInput placeholder="Write something..."
+                                    cdkTextareaAutosize
+                                    #autosize="cdkTextareaAutosize"
+                                    cdkAutosizeMinRows="3"
+                                    cdkAutosizeMaxRows="7"
+                                    name="summary"
+                                    formControlName="summary"
+                                ></textarea>
+                                <mat-error appFieldErrors></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row mt-0 pt-0 mx-1 mb-3">
+                        <div class="col-sm-12 col-md-6 mb-1">
+                            <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{isBusy}}>Update</button>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-1">
+                            <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="appService.goBack()" disabled={{isBusy}}>Back</button>
+                        </div>
+                    </div>
+                </form>
+            } @else {
+                <app-alert 
+                    [alertInputs]="alertInputs"
+                />
+            }        
+        </div>
+        <div class="col-sm-0 col-md-1 col-lg-2"></div>
+    </div>
+    <div class="my-2 py-2"></div>
+</div>

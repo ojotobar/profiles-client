@@ -1,1 +1,68 @@
-<p>project-management works!</p>
+<div class="container mb-5">
+    <div class="card-container inset-box">
+        <main class="content">
+            <div class="p-3">
+                <p class="fs-3 fw-bolder pb-0 mb-0">Manage Your Projects</p>
+                <hr class="pt-0 mt-0"/>
+                <button mat-button class="app-bg text-white text-center mb-2" [routerLink]="['/project/add']">
+                    <mat-icon class="px-0 m-0 m-auto">add_box</mat-icon>
+                </button>
+                <div class="table-responsive">
+                    @if(loading){
+                        <mat-spinner 
+                            class="my-3 m-auto" 
+                            mode="indeterminate" 
+                            [diameter]="70"
+                        />
+                    } @else if(error){
+                        <app-alert 
+                            [alertInputs]="alerInputs"
+                        />
+                    } @else if(projects && projects.length > 0) {
+                        <table class="table table-striped table-hover caption-top mt-3">
+                            <caption>Projects</caption>
+                            <thead class="table-dark">
+                                <tr>
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Description</th>
+                                  <th scope="col">Technologies Used</th>
+                                  <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                @for (project of projects; track $index) {
+                                    <tr>
+                                        @if(project.link){
+                                            <td>
+                                                <a href="{{project.link}}" target="_blank">{{project.name}}</a>
+                                            </td>
+                                        } @else {
+                                            <td>{{project.name}}</td>
+                                        }
+                                        <td>{{project.description | truncate:50 }}</td>
+                                        <td>{{project.technologies | stringify:', ' | truncate:50 | valueornull}}</td>
+                                        <td>
+                                            <mat-select class="pr-2" placeholder="Actions">
+                                                <mat-option [routerLink]="['/project', project.id]">
+                                                    <mat-icon class="text-dark m-0 m-auto">edit</mat-icon>
+                                                </mat-option>
+                                                <mat-option (click)="confirmDelete(project.id, project.name)">
+                                                    <mat-icon class="text-danger m-0 m-auto">delete</mat-icon>
+                                                </mat-option>
+                                            </mat-select>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    } @else {
+                        <app-alert 
+                            [alertInputs]="alerInputs"
+                        />
+                    }
+                </div>
+                <span class="linked" (click)="goBack()">Back</span>
+            </div>
+        </main>
+    </div>
+</div>

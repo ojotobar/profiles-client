@@ -10,7 +10,7 @@
                <app-alert 
                     [alertInputs]="alertInputs" 
                />
-               <span class="linked text-white" (click)="goBack()">Back</span>
+               <span class="linked text-white" (click)="appService.goBack()">Back</span>
             } @else if(true){
                 <form [formGroup]="experienceForm" (ngSubmit)="ProcessUpdateExperience()">
                     <div class="row">
@@ -76,7 +76,7 @@
                     </div>
                     <div class="row">
                         <div formArrayName="accomplishments" class="mb-3">
-                            @for(accomplishment of getAccomplishments().controls; track $index){
+                            @for(accomplishment of appService.getForms(experienceForm, 'accomplishments').controls; track $index){
                                 <div class="d-flex">
                                     <mat-form-field class="w-100 mb-0 pb-0">
                                         <mat-label>Accomplishment</mat-label>
@@ -104,7 +104,7 @@
                             <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{loading}}>Update</button>
                         </div>
                         <div class="col-sm-12 col-md-6 mb-1">
-                            <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="goBack()" disabled={{loading}}>Back</button>
+                            <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="appService.goBack()" disabled={{loading}}>Back</button>
                         </div>
                     </div>
                 </form>   

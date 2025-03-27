@@ -14,13 +14,14 @@ import { FieldErrorsDirective } from "../../../directives/field-errors.directive
 import { AlertIconEnum, AlertClassEnum } from "../../../enums/alert-enums";
 import { SnackbarClassEnum, SnackbarIconEnum } from "../../../enums/snackbar-enum";
 import { AlertModel } from "../../../models/common/alert-models";
-import { ResponseModel } from "../../../models/common/common-models";
+import { getGenericErrorMessage, ResponseModel } from "../../../models/common/common-models";
 import { ExperienceResultModel, getEducationPayload } from "../../../models/experience/experience-models";
 import { CountryModel } from "../../../models/location/country-models";
 import { ApiService } from "../../../services/api.service";
 import { AppService } from "../../../services/app.service";
 import { ExperienceService } from "../../../services/experience.service";
 import { AlertComponent } from "../../common/alert/alert.component";
+import { OperationTypeEnum } from "../../../enums/operation-type-enum";
 
 @Component({
   selector: 'app-edit-experience',
@@ -129,28 +130,20 @@ export class EditExperienceComponent {
           error: (error: Error) => {
             this.loading = false;
             this.alertInputs = this.appService.mapAlertMessage(this.alertInputs, 'An error occurred',
-                error.message, AlertIconEnum.danger, AlertClassEnum.danger)
+                getGenericErrorMessage(OperationTypeEnum.get), AlertIconEnum.danger, AlertClassEnum.danger)
           }
         })
     }
-  }
-
-  goBack() {
-    this.appService.goBack()
   }
 
   onCheckboxChange($event: any){
     this.endDateDisabled = $event.checked;
     this.experienceForm.patchValue({ endDate: null });
   }
-  
-  getAccomplishments(): FormArray {
-    return this.experienceForm.get('accomplishments') as FormArray;
-  }
 
   addAccomplishment(): void {
     if(this.numberOfAllowedAcc > 0){
-      this.getAccomplishments().push(this.fb.control('', Validators.required));
+      this.appService.getForms(this.experienceForm, 'accomplishments');
       this.numberOfAllowedAcc -= 1;
     } else{
       this.isMaxAccReached = this.numberOfAllowedAcc <= 0;
@@ -158,7 +151,7 @@ export class EditExperienceComponent {
   }
   
   removeAccomplishment(accIndex: number): void {
-    this.getAccomplishments().removeAt(accIndex);
+    this.appService.getForms(this.experienceForm, 'accomplishments').removeAt(accIndex);
     this.numberOfAllowedAcc += 1;
     this.isMaxAccReached = this.numberOfAllowedAcc <= 0;
   }

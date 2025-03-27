@@ -34,7 +34,7 @@
                                         <td>{{education.levelDescription}}</td>
                                         <td>{{education.major}}</td>
                                         <td>{{education.startDate | date: 'MMM, y' }}</td>
-                                        <td>{{education.endDate | date: 'MMM, y' }}</td>
+                                        <td>{{education.endDate | date: 'MMM, y' | valueornull:'Still Studying'}}</td>
                                         <td>
                                             <mat-select class="pr-2" placeholder="Actions">
                                                 <mat-option [routerLink]="['/education', education.id]">

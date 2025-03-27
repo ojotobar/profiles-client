@@ -15,6 +15,7 @@ import { MatDialogData } from '../../../models/common/snackbar-model';
 import { AppService } from '../../../services/app.service';
 import { CertificationsService } from '../../../services/certifications.service';
 import { DialogService } from '../../../services/dialog.service';
+import { ValueornullPipe } from '../../../pipes/valueornull.pipe';
 
 @Component({
   selector: 'app-certitication-management',
@@ -26,7 +27,8 @@ import { DialogService } from '../../../services/dialog.service';
     MatOptionModule,
     MatSelectModule,
     MatProgressSpinner,
-    MatButtonModule
+    MatButtonModule,
+    ValueornullPipe
   ],
   templateUrl: './certitication-management.component.html',
   styleUrl: './certitication-management.component.scss'

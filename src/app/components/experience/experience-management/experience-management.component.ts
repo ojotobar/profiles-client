@@ -13,6 +13,7 @@ import { AppService } from "../../../services/app.service";
 import { DialogService } from "../../../services/dialog.service";
 import { ExperienceService } from "../../../services/experience.service";
 import { AlertComponent } from "../../common/alert/alert.component";
+import { ValueornullPipe } from "../../../pipes/valueornull.pipe";
 
 @Component({
   selector: 'app-experience-management',
@@ -24,7 +25,8 @@ import { AlertComponent } from "../../common/alert/alert.component";
     AlertComponent,
     MatSelectModule,
     RouterLink,
-    MatProgressSpinner
+    MatProgressSpinner,
+    ValueornullPipe
   ],
   templateUrl: './experience-management.component.html',
   styleUrl: './experience-management.component.scss'

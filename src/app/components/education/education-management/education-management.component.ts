@@ -14,6 +14,7 @@ import { AppService } from "../../../services/app.service";
 import { DialogService } from "../../../services/dialog.service";
 import { EducationService } from "../../../services/education.service";
 import { AlertComponent } from "../../common/alert/alert.component";
+import { ValueornullPipe } from "../../../pipes/valueornull.pipe";
 
 @Component({
   selector: 'app-education-management',
@@ -26,6 +27,7 @@ import { AlertComponent } from "../../common/alert/alert.component";
     MatSelectModule,
     RouterLink,
     MatProgressSpinner,
+    ValueornullPipe
   ],
   templateUrl: './education-management.component.html',
   styleUrl: './education-management.component.scss'

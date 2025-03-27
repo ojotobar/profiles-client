@@ -38,11 +38,7 @@
                                         }
                                         <td>{{certification.institution}}</td>
                                         <td>{{certification.dateObtained | date: 'MMM, y' }}</td>
-                                        @if(certification.expires){
-                                            <td>{{certification.expires | date: 'MMM, y' }}</td>
-                                        } @else {
-                                            <td>N/A</td>
-                                        }
+                                        <td>{{certification.expires | date: 'MMM, y' | valueornull }}</td>
                                         <td>
                                             <mat-select class="pr-2" placeholder="Actions">
                                                 <mat-option [routerLink]="['/certification', certification.id]">

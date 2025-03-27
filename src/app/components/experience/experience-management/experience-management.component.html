@@ -33,7 +33,7 @@
                                         <td>{{experience.organization}}</td>
                                         <td>{{experience.jobTitle}}</td>
                                         <td>{{experience.startDate | date: 'MMM, y' }}</td>
-                                        <td>{{experience.endDate | date: 'MMM, y' }}</td>
+                                        <td>{{experience.endDate | date: 'MMM, y' | valueornull:'Present' }}</td>
                                         <td>{{experience.location.city}}, {{experience.location.country}}</td>
                                         <td>
                                             <mat-select class="pr-2" placeholder="Actions">

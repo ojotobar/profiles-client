@@ -1,11 +1,12 @@
 import { CertificationModel } from "../models/certifications/certifications-models";
 import { EducationModel } from "../models/education/education-models";
 import { ExperienceModel } from "../models/experience/experience-models";
+import { ProjectModel } from "../models/project/project-models";
 
 export function getIdInput(id: string){
     return {
         input: {
-          "id": id
+          id: id
         }
     }
 }
@@ -92,6 +93,49 @@ export const getUpdateCertificationInput = function(id: string, data: Certificat
             date: data.date,
             yearsOfValidity: data.yearsOfValidity,
             link: data.link
+          }
+        }
+    }
+}
+
+export const getAddProjectInput = function(payloads: ProjectModel[]){
+    return {
+        input: {
+          inputs: payloads
+        }
+    }
+}
+
+export const getUpdateProjectInput = function(id: string, payload: ProjectModel){
+    return {
+        input: {
+          id: id,
+          input: {
+            projectName: payload.projectName,
+            summary: payload.summary,
+            link: payload.link,
+            technologies: payload.technologies
+          }
+        }
+    }
+}
+
+export const getUpdateCareerSummaryInput = function(id: string, summary: string){
+    return {
+        input: {
+          id: id,
+          input: {
+            summary: summary
+          }
+        }
+    }
+}
+
+export const getAddCareerSummaryInput = function(summary: string){
+    return {
+        input: {
+          input: {
+            summary: summary
           }
         }
     }

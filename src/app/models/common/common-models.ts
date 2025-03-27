@@ -5,6 +5,10 @@ export interface ResponseModel{
     message: string
 }
 
+export interface GenericResponseModel {
+    payload: ResponseModel
+}
+
 export const genericErrorMessage = 'Something went wront';
 
 export function getGenericErrorMessage(type: OperationTypeEnum): string {

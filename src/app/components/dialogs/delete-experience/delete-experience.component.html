@@ -17,7 +17,7 @@
                     <button mat-raised-button class="bg-danger text-light w-100" (click)="deleteRecord()" disabled={{loading}}>Confirm</button>
                 </div>
                 <div class="col-sm-12 col-md-6 mb-1">
-                    <button mat-raised-button class="bg-secondary text-light w-100" (click)="closeDialog()" disabled={{loading}}>Cancel</button>
+                    <button mat-raised-button class="bg-secondary text-light w-100" (click)="appService.closeDialog(dialogRef, data)" disabled={{loading}}>Cancel</button>
                 </div>
             </div>
         </div>

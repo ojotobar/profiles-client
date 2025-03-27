@@ -73,12 +73,12 @@
                                 <mat-form-field class="w-100 mb-0 pb-0">
                                     <mat-label>Accomplishment</mat-label>
                                     <textarea matInput placeholder="What you accomplished"
-                                    cdkTextareaAutosize
-                                    #autosize="cdkTextareaAutosize"
-                                    cdkAutosizeMinRows="1"
-                                    cdkAutosizeMaxRows="2"
-                                    name={{$index}}
-                                    [formControlName]="$index"
+                                        cdkTextareaAutosize
+                                        #autosize="cdkTextareaAutosize"
+                                        cdkAutosizeMinRows="1"
+                                        cdkAutosizeMaxRows="2"
+                                        name={{$index}}
+                                        [formControlName]="$index"
                                     ></textarea>
                                 </mat-form-field>
                                 <mat-icon class="text-danger point" (click)="removeAccomplishment($index)">delete_outline</mat-icon>

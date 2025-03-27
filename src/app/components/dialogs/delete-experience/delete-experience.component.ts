@@ -18,9 +18,9 @@ export class DeleteExperienceComponent {
   loading: boolean = false;
   
     constructor(@Inject(MAT_DIALOG_DATA) public data: MatDialogData, 
-      private dialogRef: MatDialogRef<DeleteExperienceComponent>,
+      public dialogRef: MatDialogRef<DeleteExperienceComponent>,
       private readonly xpService: ExperienceService,
-      private readonly appService: AppService) {}
+      public readonly appService: AppService) {}
   
     deleteRecord(){
       this.loading = true;
@@ -33,7 +33,7 @@ export class DeleteExperienceComponent {
               if(result.success){
                 this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
                 this.data.refresh = true;
-                this.closeDialog();
+                this.appService.closeDialog(this.dialogRef, this.data);
               } else{
                 this.appService.openSnackBar(result.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger);
               }
@@ -44,9 +44,5 @@ export class DeleteExperienceComponent {
             }
           })
       }
-    }
-  
-    closeDialog() {
-      this.dialogRef.close(this.data);
     }
 }
