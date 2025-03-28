@@ -2,6 +2,7 @@ import { CertificationModel } from "../models/certifications/certifications-mode
 import { EducationModel } from "../models/education/education-models";
 import { ExperienceModel } from "../models/experience/experience-models";
 import { ProjectModel } from "../models/project/project-models";
+import { SkillModel } from "../models/skills/skills-models";
 
 export function getIdInput(id: string){
     return {
@@ -139,4 +140,26 @@ export const getAddCareerSummaryInput = function(summary: string){
           }
         }
     }
+}
+
+export const getAddSkillsInput = function(payloads: SkillModel[]){
+  return {
+    inputs: {
+      inputs: payloads
+    }
+  }
+}
+
+export const getUpdateSkillsInput = function(id: string, payload: SkillModel){
+  return {
+    input: {
+      id: id,
+      input: {
+        name: payload.name,
+        level: payload.level,
+        years: payload.years,
+        isCertified: payload.isCertified
+      }
+    }
+  }
 }

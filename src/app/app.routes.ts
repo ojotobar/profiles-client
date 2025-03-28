@@ -34,6 +34,9 @@ import { unauthGuard } from './guards/unauth.guard';
 import { CareerSummaryComponent } from './components/career-summary/career-summary/career-summary.component';
 import { AddCareerSummaryComponent } from './components/career-summary/add-career-summary/add-career-summary.component';
 import { EditCareerSummaryComponent } from './components/career-summary/edit-career-summary/edit-career-summary.component';
+import { SkillComponent } from './components/skill/skill/skill.component';
+import { AddSkillComponent } from './components/skill/add-skill/add-skill.component';
+import { EditSkillComponent } from './components/skill/edit-skill/edit-skill.component';
 
 export const routes: Routes = [
     {
@@ -179,6 +182,21 @@ export const routes: Routes = [
     {
         path: 'career-summary/:id',
         component: EditCareerSummaryComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'skills',
+        component: SkillComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'skill/add',
+        component: AddSkillComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'skill/:id',
+        component: EditSkillComponent,
         canActivate: [authGuard]
     },
     {
