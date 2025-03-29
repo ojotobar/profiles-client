@@ -1,5 +1,5 @@
 export enum SkillLevelEnum {
-    FundamentalAwareness = 'FUNDAMENTAL_AWARENESS',
+    Beginner = 'BEGINNER',
     Novice = 'NOVICE',
     Intermediate = 'INTERMEDIATE',
     Advanced = 'ADVANCED',

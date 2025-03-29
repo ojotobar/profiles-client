@@ -1,1 +1,68 @@
-<p>skill works!</p>
+<div class="container mb-5">
+    <div class="card-container inset-box">
+        <main class="content">
+            <div class="p-3">
+                <p class="fs-3 fw-bolder pb-0 mb-0">Most Relevant Skills</p>
+                <hr class="pt-0 mt-0"/>
+                @if(numberOfSkills < allowedNumbers){
+                    <button mat-button class="app-bg text-white text-center mb-2" [routerLink]="['/skill/add']">
+                        <mat-icon class="px-0 m-0 m-auto">add_box</mat-icon>
+                    </button>
+                }
+                <div class="table-responsive">
+                    @if(loading){
+                        <mat-spinner 
+                            class="my-3 m-auto" 
+                            mode="indeterminate" 
+                            [diameter]="70"
+                        />
+                    } @else if(error){
+                        <app-alert 
+                            [alertInputs]="alert"
+                        />
+                    } @else if(skills && skills.length > 0) {
+                        <table class="table table-striped table-hover caption-top mt-3">
+                            <caption><strong>{{numberOfSkills}}</strong> of <strong>{{allowedNumbers}}</strong>  skills added</caption>
+                            <thead class="table-dark">
+                                <tr>
+                                  <th scope="col" style="width: 10%;">Certified</th>
+                                  <th scope="col" style="width: 50%;">Skill Name</th>
+                                  <th scope="col" style="width: 20%;">Level</th>
+                                  <th scope="col" style="width: 10%;">Years</th>
+                                  <th scope="col" style="width: 10%;"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                @for(skill of skills; track $index){
+                                    <tr>
+                                        <td style="width: 10%;">
+                                            <mat-checkbox [checked]="skill.certified" disabled></mat-checkbox>
+                                        </td>
+                                        <td style="width: 50%;">{{skill.name}}</td>
+                                        <td style="width: 20%;">{{skill.level | titlecase }}</td>
+                                        <td style="width: 10%;">{{skill.yearsOfExperience}}</td>
+                                        <td style="width: 10%;">
+                                            <mat-select class="pr-2" placeholder="Actions">
+                                                <mat-option [routerLink]="['/skill', skill.id]">
+                                                    <mat-icon class="text-dark m-0 m-auto">edit</mat-icon>
+                                                </mat-option>
+                                                <mat-option (click)="confirmDelete(skill.id, skill.name)">
+                                                    <mat-icon class="text-danger m-0 m-auto">delete</mat-icon>
+                                                </mat-option>
+                                            </mat-select>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    } @else {
+                        <app-alert 
+                            [alertInputs]="alert"
+                        />
+                    }
+                </div>
+                <app-inline-back />
+            </div>
+        </main>
+    </div>
+</div>

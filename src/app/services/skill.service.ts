@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Apollo, QueryRef } from 'apollo-angular';
+import { Apollo, gql, QueryRef } from 'apollo-angular';
 import { SkillModel } from '../models/skills/skills-models';
 import { Observable } from 'rxjs';
 import { OperationVariables } from '@apollo/client/core';
@@ -48,6 +48,16 @@ export class SkillService {
       variables: {
         id: id
       } as OperationVariables
+    })
+  }
+
+  getSkillCount(): QueryRef<any, OperationVariables> {
+    return this.apollo.watchQuery({
+      query: gql`
+        query{
+          skillsCount
+        }
+      `
     })
   }
 }
