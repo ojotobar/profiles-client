@@ -89,11 +89,11 @@
                                             [formControlName]="$index"
                                         ></textarea>
                                     </mat-form-field>
-                                    <mat-icon class="text-danger point" (click)="removeAccomplishment($index)">delete_outline</mat-icon>
+                                    <mat-icon class="text-danger point" (click)="removeAccomplishment($index)">remove_circle</mat-icon>
                                 </div>
                             }
-                            <span class="linked text-white" (click)="addAccomplishment()">Add Accomplishments</span> 
-                            <small class="px-1 text-warning">({{numberOfAllowedAcc}} left)</small>
+                            <mat-icon class="text-white point" (click)="addAccomplishment()">add_circle</mat-icon>
+                            <small class="px-1 text-warning">Add accomplishments ({{numberOfAllowedAcc}} left)</small>
                             @if(isMaxAccReached){
                                 <br /><small class="text-danger">You can add a maximum of 5 accomplishments!</small>
                             }
@@ -101,10 +101,16 @@
                     </div>
                     <div class="row mt-0 pt-0 mx-1 mb-3">
                         <div class="col-sm-12 col-md-6 mb-1">
-                            <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{loading}}>Update</button>
+                            <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{isSaving}}>
+                                @if(isSaving){
+                                    <mat-spinner class="my-3 m-auto" [diameter]="30"/>
+                                } @else {
+                                    Update
+                                }
+                            </button>
                         </div>
                         <div class="col-sm-12 col-md-6 mb-1">
-                            <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="appService.goBack()" disabled={{loading}}>Back</button>
+                            <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="appService.goBack()" disabled={{isSaving}}>Back</button>
                         </div>
                     </div>
                 </form>   

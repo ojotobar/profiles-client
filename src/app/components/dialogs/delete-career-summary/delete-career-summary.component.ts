@@ -8,12 +8,14 @@ import { MatDialogData } from '../../../models/common/snackbar-model';
 import { GenericResponseModel, getGenericErrorMessage } from '../../../models/common/common-models';
 import { OperationTypeEnum } from '../../../enums/operation-type-enum';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../../../enums/snackbar-enum';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-delete-career-summary',
   imports: [
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './delete-career-summary.component.html',
   styleUrl: './delete-career-summary.component.scss'

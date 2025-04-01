@@ -41,14 +41,14 @@
                                     <mat-checkbox name="isCertified" formControlName="isCertified">
                                         <span class="text-light">Certified</span>
                                     </mat-checkbox>
-                                    <span class="text-danger point" (click)="removeSkill($index)">Remove</span>
+                                    <mat-icon class="text-danger point" (click)="removeSkill($index)">remove_circle</mat-icon>
                                 </div>  
                             </div>
                             <hr  class="mt-0 pt-0"/>
                         }
                         <div class="mt-2">
-                            <span class="linked text-white" (click)="addSkill()">Add Skill</span>
-                            <small class="px-1 text-warning">({{allowedSkillsToAdd}} left)</small>
+                            <mat-icon class="text-white point" (click)="addSkill()">add_circle</mat-icon>
+                            <small class="px-1 text-warning pb-2">({{allowedSkillsToAdd}} left)</small>
                             @if(isMaxAccReached){
                                 <br /><small class="text-danger">You can add a maximum of 20 skills in total!</small>
                             }

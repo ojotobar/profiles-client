@@ -9,7 +9,11 @@
             <div class="col-sm-0 col-md-1 col-lg-2"></div>
             <div class="col-sm-12 col-md-10 col-lg-8">
                 @if(loading){
-                    <mat-spinner class="m-0 m-auto"></mat-spinner>
+                    <mat-spinner 
+                        class="m-0 m-auto"
+                        [diameter]="70"
+                        mode="indeterminate"
+                    />
                 }@else if (error) {
                     <app-alert 
                         [alertInputs]="alertInputs"

@@ -11,6 +11,7 @@ import { getAddProjectPayloads, ProjectModel } from '../../../models/project/pro
 import { getGenericErrorMessage, ResponseModel } from '../../../models/common/common-models';
 import { OperationTypeEnum } from '../../../enums/operation-type-enum';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../../../enums/snackbar-enum';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-add-project',
@@ -21,7 +22,8 @@ import { SnackbarClassEnum, SnackbarIconEnum } from '../../../enums/snackbar-enu
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    FieldErrorsDirective
+    FieldErrorsDirective,
+    MatProgressSpinnerModule
   ],
   templateUrl: './add-project.component.html',
   styleUrl: './add-project.component.scss'

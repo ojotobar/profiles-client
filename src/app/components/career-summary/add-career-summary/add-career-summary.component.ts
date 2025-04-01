@@ -9,6 +9,7 @@ import { FieldErrorsDirective } from '../../../directives/field-errors.directive
 import { GenericResponseModel, getGenericErrorMessage } from '../../../models/common/common-models';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../../../enums/snackbar-enum';
 import { OperationTypeEnum } from '../../../enums/operation-type-enum';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-add-career-summary',
@@ -17,7 +18,8 @@ import { OperationTypeEnum } from '../../../enums/operation-type-enum';
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
-    FieldErrorsDirective
+    FieldErrorsDirective,
+    MatProgressSpinnerModule
   ],
   templateUrl: './add-career-summary.component.html',
   styleUrl: './add-career-summary.component.scss'

@@ -1,0 +1,39 @@
+.profile-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .profile-pic {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        transition: 0.3s ease-in-out;
+
+        &.male-theme {
+            border: 4px solid rgb(26, 26, 88);
+        }
+
+        &.female-theme {
+            border: 4px solid rgb(238, 178, 188);
+        }
+    }
+    
+    .profile-container:hover .profile-pic {
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
+
+.progress-bar {
+    width: 100%;
+    background: rgba(58, 47, 47, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.progress {
+    width: var(--progress-width);
+    height: 10px;
+    background: var(--progress-color);
+}

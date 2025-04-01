@@ -11,6 +11,7 @@ import { CertificationModel } from '../../../models/certifications/certification
 import { ResponseModel } from '../../../models/common/common-models';
 import { AppService } from '../../../services/app.service';
 import { CertificationsService } from '../../../services/certifications.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-add-certitication',
@@ -22,7 +23,8 @@ import { CertificationsService } from '../../../services/certifications.service'
     ReactiveFormsModule,
     FormsModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './add-certitication.component.html',
   styleUrl: './add-certitication.component.scss'

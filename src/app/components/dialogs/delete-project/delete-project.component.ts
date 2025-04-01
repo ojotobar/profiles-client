@@ -8,12 +8,14 @@ import { AppService } from '../../../services/app.service';
 import { getGenericErrorMessage, ResponseModel } from '../../../models/common/common-models';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../../../enums/snackbar-enum';
 import { OperationTypeEnum } from '../../../enums/operation-type-enum';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-delete-project',
   imports: [
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './delete-project.component.html',
   styleUrl: './delete-project.component.scss'

@@ -29,3 +29,19 @@ export interface ProfileLocationModel extends EntityLocationModel {
     line2: string | null,
     postalCode: string
 }
+
+export interface ProfileSummaryResponseModel {
+    userSummary: {
+      education: number,
+      experience: number,
+      skills: number,
+      projects: number,
+      certifications: number,
+      hasCareerSummary: boolean
+      progress: number,
+      canGenerateApiKey: boolean,
+      apiKey: string
+    }
+}
+
+export const apiKeyTooltip = 'Your API key will be generated once you complete your profile, including skills, education, experience, and location. After generation, navigate to the \'API\' section in your account settings to view your key and explore available endpoints.';

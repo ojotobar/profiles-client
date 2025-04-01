@@ -7,10 +7,11 @@ import { MatDialogData } from "../../../models/common/snackbar-model";
 import { EducationResult } from "../../../models/education/education-models";
 import { AppService } from "../../../services/app.service";
 import { EducationService } from "../../../services/education.service";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-delete-education',
-  imports: [MatIconModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './delete-education.component.html',
   styleUrl: './delete-education.component.scss'
 })

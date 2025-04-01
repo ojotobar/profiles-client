@@ -92,7 +92,13 @@
                 </div>
                 <div class="row mt-0 pt-0 mx-1 mb-3">
                     <div class="col-sm-12 col-md-6 mb-1">
-                        <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{loading}}>Save</button>
+                        <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{loading}}>
+                            @if(loading){
+                                <mat-spinner class="my-3 m-auto" [diameter]="30"/>
+                            } @else {
+                                Save
+                            }
+                        </button>
                     </div>
                     <div class="col-sm-12 col-md-6 mb-1">
                         <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="goBack()" disabled={{loading}}>Back</button>

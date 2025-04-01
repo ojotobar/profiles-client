@@ -13,7 +13,7 @@ import { AlertModel } from '../../../models/common/alert-models';
 import { OperationTypeEnum } from '../../../enums/operation-type-enum';
 import { AlertIconEnum, AlertClassEnum } from '../../../enums/alert-enums';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../../../enums/snackbar-enum';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AlertComponent } from '../../common/alert/alert.component';
 
 @Component({
@@ -26,7 +26,8 @@ import { AlertComponent } from '../../common/alert/alert.component';
     MatButtonModule,
     ReactiveFormsModule,
     MatProgressSpinner,
-    AlertComponent
+    AlertComponent,
+    MatProgressSpinnerModule
   ],
   templateUrl: './edit-project.component.html',
   styleUrl: './edit-project.component.scss'

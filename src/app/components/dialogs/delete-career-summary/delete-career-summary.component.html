@@ -14,7 +14,13 @@
         <div mat-dialog-actions>
             <div class="row mt-0 pt-0 mx-1 mb-3">
                 <div class="col-sm-12 col-md-6 mb-1">
-                    <button mat-raised-button class="bg-danger text-light w-100" (click)="deleteRecord()" disabled={{loading}}>Confirm</button>
+                    <button mat-raised-button class="bg-danger text-light w-100" (click)="deleteRecord()" disabled={{loading}}>
+                        @if(loading){
+                            <mat-spinner class="my-3 m-auto" [diameter]="30"/>
+                        } @else {
+                            Confirm
+                        }
+                    </button>
                 </div>
                 <div class="col-sm-12 col-md-6 mb-1">
                     <button mat-raised-button class="bg-secondary text-light w-100" (click)="appService.closeDialog(dialogRef, data)" disabled={{loading}}>Cancel</button>

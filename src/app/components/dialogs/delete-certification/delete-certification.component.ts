@@ -8,10 +8,11 @@ import { ResponseModel, getGenericErrorMessage } from "../../../models/common/co
 import { MatDialogData } from "../../../models/common/snackbar-model";
 import { AppService } from "../../../services/app.service";
 import { CertificationsService } from "../../../services/certifications.service";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-delete-certification',
-  imports: [MatIconModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './delete-certification.component.html',
   styleUrl: './delete-certification.component.scss'
 })

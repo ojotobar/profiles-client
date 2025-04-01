@@ -17,6 +17,7 @@ import { CountryModel, StateModel, CountryDataModel } from "../../../models/loca
 import { ApiService } from "../../../services/api.service";
 import { AppService } from "../../../services/app.service";
 import { EducationService } from "../../../services/education.service";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-add-education',
@@ -32,7 +33,8 @@ import { EducationService } from "../../../services/education.service";
     MatSelectModule,
     FieldErrorsDirective,
     MatDatepickerModule,
-    MatCheckbox
+    MatCheckbox,
+    MatProgressSpinnerModule
   ],
   templateUrl: './add-education.component.html',
   styleUrl: './add-education.component.scss'

@@ -63,7 +63,13 @@
                     </div>
                     <div class="row mt-0 pt-0 mx-1 mb-3">
                         <div class="col-sm-12 col-md-6 mb-1">
-                            <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{isSaving}}>Update</button>
+                            <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{isSaving}}>
+                                @if(isSaving){
+                                    <mat-spinner class="my-3 m-auto" [diameter]="30"/>
+                                } @else {
+                                    Update
+                                }
+                            </button>
                         </div>
                         <div class="col-sm-12 col-md-6 mb-1">
                             <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="goBack()" disabled={{isSaving}}>Back</button>

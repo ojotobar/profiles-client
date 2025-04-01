@@ -141,13 +141,26 @@ export class EditExperienceComponent {
     this.experienceForm.patchValue({ endDate: null });
   }
 
+  // addAccomplishment(): void {
+  //   if(this.numberOfAllowedAcc > 0){
+  //     this.appService.getForms(this.experienceForm, 'accomplishments');
+  //     this.numberOfAllowedAcc -= 1;
+  //   } else{
+  //     this.isMaxAccReached = this.numberOfAllowedAcc <= 0;
+  //   }
+  // }
+
   addAccomplishment(): void {
     if(this.numberOfAllowedAcc > 0){
-      this.appService.getForms(this.experienceForm, 'accomplishments');
+      this.getAccomplishments().push(this.fb.control('', Validators.required));
       this.numberOfAllowedAcc -= 1;
     } else{
       this.isMaxAccReached = this.numberOfAllowedAcc <= 0;
     }
+  }
+
+  getAccomplishments(): FormArray {
+    return this.experienceForm.get('accomplishments') as FormArray;
   }
   
   removeAccomplishment(accIndex: number): void {

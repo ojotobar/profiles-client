@@ -7,10 +7,11 @@ import { ResponseModel } from "../../../models/common/common-models";
 import { MatDialogData } from "../../../models/common/snackbar-model";
 import { AppService } from "../../../services/app.service";
 import { ExperienceService } from "../../../services/experience.service";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-delete-experience',
-  imports: [MatIconModule, MatButtonModule],
+  imports: [MatIconModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './delete-experience.component.html',
   styleUrl: './delete-experience.component.scss'
 })

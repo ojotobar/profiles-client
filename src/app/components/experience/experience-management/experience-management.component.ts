@@ -52,10 +52,8 @@ export class ExperienceManagementComponent {
       .subscribe({
         next: (data: any) => {
           this.loading = (<boolean>data.loading);
-          let result = (<ExperiencesResultModel>data.data);
-          if(result && result.experiences.length > 0){
-            this.experiences = result.experiences;
-          } else {
+          this.experiences = (<ExperienceResultModel[]>data.data.experiences);
+          if(this.experiences && this.experiences.length <= 0){
             this.alertModel = this.appService.mapAlertMessage(this.alertModel, 'No record found', 
               'No experience record found. Please add some.', AlertIconEnum.info, AlertClassEnum.info)
           }

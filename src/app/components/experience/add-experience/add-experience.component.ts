@@ -15,6 +15,7 @@ import { CountryModel } from '../../../models/location/country-models';
 import { ApiService } from '../../../services/api.service';
 import { AppService } from '../../../services/app.service';
 import { ExperienceService } from '../../../services/experience.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-add-experience',
@@ -30,7 +31,8 @@ import { ExperienceService } from '../../../services/experience.service';
     FieldErrorsDirective,
     MatSelectModule,
     MatDatepickerModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './add-experience.component.html',
   styleUrl: './add-experience.component.scss'

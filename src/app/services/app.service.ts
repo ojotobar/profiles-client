@@ -16,6 +16,7 @@ import { EducationLevelEnum } from '../enums/education-level-enum';
 import { SnackbarAnnotatedComponent } from '../components/utilities/snackbar-annotated/snackbar-annotated.component';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,10 @@ export class AppService {
   private viewportWidth = new BehaviorSubject(0);
   private viewportHeight = new BehaviorSubject(0);
   private snackbarModel = new SnackbarModel();
-  private _snackBar = inject(MatSnackBar);
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+  private _snackBar = inject(MatSnackBar);
+  private _clipboard = inject(Clipboard);
 
   getIsSidebarOpened = this.isSidebarOpened.asObservable();
   getIsLoggedIn = this.isLoggedIn.asObservable();
@@ -36,6 +38,12 @@ export class AppService {
   getViewportHeight = this.viewportHeight.asObservable();
 
   constructor(private readonly location: Location) { }
+
+  copyText(text: string): boolean {
+    if (!text) return false;
+    const copied = this._clipboard.copy(text);
+    return copied;
+  }
 
   goBack(){
     this.location.back();
@@ -54,13 +62,13 @@ export class AppService {
     this.isLoggedIn.next(isLoggedIn);
   }
 
-  openSnackBar(message: string, color: SnackbarClassEnum, icon: SnackbarIconEnum){
+  openSnackBar(message: string, color: SnackbarClassEnum, icon: SnackbarIconEnum, duration: number = 7000){
     this.snackbarModel.message = message;
     this.snackbarModel.icon = icon;
     this.snackbarModel.color = color;
 
     this._snackBar.openFromComponent(SnackbarAnnotatedComponent, {
-      duration:  7000,
+      duration:  duration,
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       data: this.snackbarModel
