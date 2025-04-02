@@ -1,6 +1,6 @@
 import { HostListener, inject, Injectable } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
 import { UserClaimsModel } from '../models/account/user-claims-model';
 import { MatDialogData, SnackbarModel } from '../models/common/snackbar-model';
@@ -17,6 +17,8 @@ import { SnackbarAnnotatedComponent } from '../components/utilities/snackbar-ann
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { Apollo, TypedDocumentNode } from 'apollo-angular';
+import { MatDialogFileUploadData } from '../models/common/common-models';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,7 @@ export class AppService {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   private _snackBar = inject(MatSnackBar);
   private _clipboard = inject(Clipboard);
+  private _apollo = inject(Apollo);
 
   getIsSidebarOpened = this.isSidebarOpened.asObservable();
   getIsLoggedIn = this.isLoggedIn.asObservable();
@@ -44,6 +47,17 @@ export class AppService {
     const copied = this._clipboard.copy(text);
     return copied;
   }
+
+  uploadFileObservable(file: File, mutation: TypedDocumentNode<unknown, unknown>): Observable<any> {
+    return this._apollo.mutate({
+      mutation: mutation,
+      variables: {
+        input: { file }
+      },
+      context: {
+        useMultipart: true
+    }})
+  };
 
   goBack(){
     this.location.back();
@@ -160,6 +174,10 @@ export class AppService {
   }
 
   closeDialog(ref: MatDialogRef<any>, data: MatDialogData){
+    ref.close(data);
+  }
+
+  closeFileDialog(ref: MatDialogRef<any>, data: MatDialogFileUploadData){
     ref.close(data);
   }
 

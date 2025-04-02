@@ -163,3 +163,11 @@ export const getUpdateSkillsInput = function(id: string, payload: SkillModel){
     }
   }
 }
+
+export const getUploadFileInput = function(file: any){
+  return {
+    input: {
+      file: file
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="app-bg-rgb text-white">
+            <p class="h4 py-3 pb-0 my-3 border-bottom border-2">Upload {{data.type}}</p>
+            <div mat-dialog-content>
+                <mat-form-field class="w-100 m-0">
+                    <mat-label>Upload {{data.type}}</mat-label>
+                    <input type="file" accept="{{acceptedFileTypes}}" (change)="onFileSelected($event)" #fileInput hidden />
+                    <input matInput [value]="fileName" placeholder="Choose a file" readonly />
+                    <button mat-icon-button matSuffix (click)="fileInput.click()">
+                      <mat-icon>attach_file</mat-icon>
+                    </button>
+                  </mat-form-field>
+            </div>
+            <div mat-dialog-actions>
+                <div class="row mt-0 pt-0 mx-1 mb-3">
+                    <div class="col-sm-12 col-md-6 mb-1">
+                        <button mat-raised-button class="app-bg text-light w-100" (click)="onUpload()" disabled={{loading}}>
+                            @if(loading){
+                                <mat-spinner class="my-3 m-auto" [diameter]="30"/>
+                            } @else {
+                                Upload
+                            }
+                        </button>
+                    </div>
+                    <div class="col-sm-12 col-md-6 mb-1">
+                        <button mat-raised-button class="bg-secondary text-light w-100" (click)="appService.closeFileDialog(dialogRef, data)" disabled={{loading}}>Cancel</button>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+</div>

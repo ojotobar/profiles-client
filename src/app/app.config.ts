@@ -8,6 +8,7 @@ import { provideApollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { ApolloLink, DefaultOptions, InMemoryCache } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,38 +17,82 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(), 
     provideHttpClient(), 
     
-provideApollo(() => {
-  const httpLink = inject(HttpLink);
- 
-  const defaultOptions: DefaultOptions = {
-    watchQuery: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'ignore',
-    },
-    query: {
-      fetchPolicy: 'no-cache',
-      errorPolicy: 'all',
-    },
-  }
- 
-  const auth = setContext((operation, context) => {
-    const token = localStorage.getItem('accessToken');
- 
-    if (token === null) {
-      return {};
-    } else {
-      return {
-        headers: {
-          Authorization: `Bearer ${token}`,
+    provideApollo(() => {
+      const url = 'https://localhost:7051/profilesql';
+      const httpLink = inject(HttpLink);
+    
+      const defaultOptions: DefaultOptions = {
+        watchQuery: {
+          fetchPolicy: 'no-cache',
+          errorPolicy: 'ignore',
         },
+        query: {
+          fetchPolicy: 'no-cache',
+          errorPolicy: 'all',
+        },
+      }
+    
+      // const headers = setContext((operation, context) => {
+      //   const token = localStorage.getItem('accessToken');
+    
+      //   if (token === null) {
+      //     return {};
+      //   } else {
+      //     return {
+      //       headers: {
+      //         Authorization: `Bearer ${token}`,
+      //         'GraphQL-Preflight': 1       
+      //       },
+      //     };
+      //   }
+      // });
+
+      const authLink = setContext((operation, context) => {
+        const token = localStorage.getItem('accessToken');
+
+        return {
+          headers: {
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            'GraphQL-Preflight': 1,
+          },
+        };
+      });
+
+      const uploadLink = createUploadLink({
+        uri: url,
+      });
+
+      const link = ApolloLink.split(
+        (operation) => {
+          const { variables } = operation;
+          return containsFile(variables);
+        },
+        uploadLink,
+        httpLink.create({ uri: url })
+      );
+
+      return {
+        link: ApolloLink.from([authLink, link]), // Combine links
+        cache: new InMemoryCache(),
+        defaultOptions: defaultOptions,
       };
-    }
-  });
- 
-  return {
-    link: ApolloLink.from([auth, httpLink.create({ uri: 'https://localhost:7051/profilesql' })]),
-    cache: new InMemoryCache(),
-    defaultOptions: defaultOptions
-  };
-})]
+    
+      // return {
+      //   link: ApolloLink.from([headers, httpLink.create({ uri: 'https://localhost:7051/profilesql' })]),
+      //   cache: new InMemoryCache(),
+      //   defaultOptions: defaultOptions
+      // };
+    })
+  ]
 };
+
+function containsFile(variables: any): boolean {
+  if (!variables || typeof variables !== 'object') return false;
+
+  return Object.values(variables).some((value) => {
+    if (value instanceof File || value instanceof Blob) return true;
+    if (Array.isArray(value)) return value.some((v) => v instanceof File || v instanceof Blob);
+    if (typeof value === 'object') return containsFile(value); // Recursively check nested objects
+    return false;
+  });
+}

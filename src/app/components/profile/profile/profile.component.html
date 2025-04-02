@@ -19,7 +19,7 @@
                         <div>
                             <div class="profile-container">
                                 <img src="{{profile.photoUrl | imageUrl }}" alt="Profile Picture" class="profile-pic {{isMale ? 'male-theme' : 'female-theme'}}" [className]="">
-                                <mat-icon class="fs-5 p-1 point text-primary" style="padding: -30px;">
+                                <mat-icon class="fs-5 p-1 point text-primary" style="padding: -30px;" (click)="openPhotoUploadDialog()">
                                     {{profile.photoUrl ? 'edit' : 'add_a_photo' }}
                                 </mat-icon>
                             </div>
@@ -157,13 +157,13 @@
                                 </p>
                                 <p class="mb-0 pb-0 d-flex justify-content-between">
                                     <span class="py-1"> 
-                                        CV/Resume: @if(!profile.cvUrl){
+                                        CV/Resume: @if(profile.cvUrl){
                                             <a href="{{profile.cvUrl}}">{{profile.firstName}} CV</a>
                                         } @else {
                                             <span class="text-muted">No file</span>
                                         }
                                     </span>
-                                   <span class="linked">{{profile.cvUrl ? 'Update' : 'Upload' }}</span>
+                                   <span class="linked" (click)="openCvUploadDialog()">{{profile.cvUrl ? 'Update' : 'Upload' }}</span>
                                 </p>
                             </div>
                         </div>

@@ -7,6 +7,8 @@ import { DeleteExperienceComponent } from '../components/dialogs/delete-experien
 import { DeleteProjectComponent } from '../components/dialogs/delete-project/delete-project.component';
 import { DeleteCareerSummaryComponent } from '../components/dialogs/delete-career-summary/delete-career-summary.component';
 import { DeleteSkillComponent } from '../components/dialogs/delete-skill/delete-skill.component';
+import { UploadFilesComponent } from '../components/dialogs/upload-files/upload-files.component';
+import { MatDialogFileUploadData } from '../models/common/common-models';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +63,14 @@ export class DialogService {
       position: { top: '12vh' },
       disableClose: true,
       data: { id: id, name: name }
+    })
+  }
+
+  openFileUploadDialog(data: MatDialogFileUploadData): MatDialogRef<UploadFilesComponent, any> {
+    return this.dialog.open(UploadFilesComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: data
     })
   }
 }

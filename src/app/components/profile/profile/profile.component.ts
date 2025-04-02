@@ -7,16 +7,19 @@ import { ProfileService } from '../../../services/profile.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AlertModel } from '../../../models/common/alert-models';
 import { AlertComponent } from '../../common/alert/alert.component';
-import { getGenericErrorMessage } from '../../../models/common/common-models';
+import { getGenericErrorMessage, MatDialogFileUploadData } from '../../../models/common/common-models';
 import { OperationTypeEnum } from '../../../enums/operation-type-enum';
 import { AlertClassEnum, AlertIconEnum } from '../../../enums/alert-enums';
 import { InitialsPipe } from '../../../pipes/initials.pipe';
 import { ImageUrlPipe } from '../../../pipes/image-url.pipe';
 import { GenderEnum } from '../../../enums/gender-enum';
 import { DatePipe } from '@angular/common';
-import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
-import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule} from '@angular/material/tooltip';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../../../enums/snackbar-enum';
+import { MatButtonModule } from '@angular/material/button';
+import { DialogService } from '../../../services/dialog.service';
+import { MatDialogData } from '../../../models/common/snackbar-model';
+import { UploadFileTypes, UploadTypeEnum } from '../../../enums/upload-types-enums';
 
 @Component({
   selector: 'app-profile',
@@ -47,6 +50,7 @@ export class ProfileComponent {
   error!: Error;
   appService = inject(AppService);
   profileService = inject(ProfileService);
+  dialogService = inject(DialogService)
 
   ngOnInit(){
     this.getProfile();
@@ -163,5 +167,39 @@ export class ProfileComponent {
     }
     
     return tasks.join(', ') + record + plural + 'required to generate API Key';
+  }
+
+  openPhotoUploadDialog() {
+    let data: MatDialogFileUploadData = {
+      id: this.profile.id,
+      type: UploadTypeEnum.ProfilePhoto,
+      accept: UploadFileTypes.Images,
+      refreshAfterClose: false
+    }
+
+    let ref = this.dialogService.openFileUploadDialog(data);
+    ref.afterClosed().subscribe(result => {
+      let res = (<MatDialogFileUploadData>result);
+      if(res.refreshAfterClose){
+        this.getProfile();
+      }
+    })
+  }
+
+  openCvUploadDialog() {
+    let data: MatDialogFileUploadData = {
+      id: this.profile.id,
+      type: UploadTypeEnum.Resume,
+      accept: UploadFileTypes.Documents,
+      refreshAfterClose: false
+    }
+
+    let ref = this.dialogService.openFileUploadDialog(data);
+    ref.afterClosed().subscribe(result => {
+      let res = (<MatDialogFileUploadData>result);
+      if(res.refreshAfterClose){
+        this.getProfile();
+      }
+    })
   }
 }

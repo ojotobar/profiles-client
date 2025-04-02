@@ -4,4 +4,6 @@ export enum OperationTypeEnum {
     add,
     update,
     delete,
+    upload,
+    uploadMany
 }
