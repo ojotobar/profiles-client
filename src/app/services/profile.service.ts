@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { OperationVariables } from '@apollo/client/core';
 import { Apollo, QueryRef } from 'apollo-angular';
-import { GetProfileQuery, GetProfileSummaryQuery } from './queries/profile-queries';
+import { GenerateApiKeyQuery, GetProfileQuery, GetProfileSummaryQuery } from './queries/profile-queries';
 import { ProfileLocationModel } from '../models/profile/profile-models';
 import { AddOrUpdateUserLocationMutation } from './mutations/profile-mutations';
 import { getLocationInput } from './variable-inputs';
@@ -31,6 +31,12 @@ export class ProfileService {
     return this.apollo.mutate({
       mutation: AddOrUpdateUserLocationMutation,
       variables: getLocationInput(location)
+    })
+  }
+
+  generateApiKeyObservable(): QueryRef<any, OperationVariables> {
+    return this.apollo.watchQuery({
+      query: GenerateApiKeyQuery,
     })
   }
 }

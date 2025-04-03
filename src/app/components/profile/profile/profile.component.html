@@ -25,7 +25,7 @@
                             </div>
                             <p class="text-center mb-0 pb-0">
                                 <span class="fs-3">{{profile.otherName | initials:profile.firstName:profile.lastName }}</span>
-                                <mat-icon class="fs-5 p-1 point text-secondary" [routerLink]="['/profile/edit-name', profile.id]">edit</mat-icon>
+                                <mat-icon class="fs-5 p-1 point text-secondary" (click)="openProfileDetailsUpdateDialog()">edit</mat-icon>
                             </p>
                             @if(profile.location){
                                 <p class="text-center pt-0 mt-0 text-muted">
@@ -119,10 +119,14 @@
                                             } @else {
                                                 <span class="text-danger py-1">xxxxxxxxxxxxxxx</span>
                                             }
-                                            @if(profileSummary.userSummary.canGenerateApiKey){
+                                            @if(profileSummary.userSummary.canGenerateApiKey && apiKey){
                                                 <span (click)="copy()"
                                                 >
-                                                    <mat-icon class="text-white point py-1">filter_none</mat-icon>
+                                                    @if(showCopyMessage){
+                                                        <span class="text-light py-2 px-2 copy-message">Copied!</span>
+                                                    } @else {
+                                                        <mat-icon class="text-white point py-1">filter_none</mat-icon>
+                                                    }
                                                 </span>
                                             } @else {
                                                 <span>
@@ -132,11 +136,23 @@
                                         </span>
                                     </div>
                                     <div class="col-sm-12 col-md-6 my-1 d-flex justify-content-center">
-                                        <button class="text-center" mat-raised-button disabled={{!profileSummary.userSummary.canGenerateApiKey}}>
-                                            @if(profileSummary.userSummary.apiKey){
-                                                Regenerate API Key
+                                        <button 
+                                            class="text-center" 
+                                            mat-raised-button 
+                                            disabled={{!profileSummary.userSummary.canGenerateApiKey}} 
+                                            (click)="generateApiKey()">
+                                            @if(keyGenerating){
+                                                <mat-spinner 
+                                                    class="mx-0"
+                                                    [diameter]="30"
+                                                    mode="indeterminate"
+                                                />
                                             } @else {
-                                                Generate API Key
+                                                @if(profileSummary.userSummary.apiKey){
+                                                    Regenerate API Key
+                                                } @else {
+                                                    Generate API Key
+                                                }
                                             }
                                         </button>
                                     </div>
@@ -149,7 +165,7 @@
                             <div class="row">
                                 <p class="mb-0 pb-0 d-flex justify-content-between">
                                     <span class="py-1">Password: ********</span>
-                                   <span class="linked">Change</span>
+                                   <span class="linked" (click)="openChangePasswordDialog()">Change</span>
                                 </p>
                                 <p class="mb-0 pb-0 d-flex justify-content-between">
                                     <span class="py-1">Location: {{profile.location | address }}</span>

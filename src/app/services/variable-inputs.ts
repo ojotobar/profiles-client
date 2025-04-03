@@ -1,3 +1,6 @@
+import { ChangePasswordModel } from "../models/account/accounts-models";
+import { LoginModel } from "../models/account/login-model";
+import { RegisterModel } from "../models/account/register-model";
 import { CertificationModel } from "../models/certifications/certifications-models";
 import { EducationModel } from "../models/education/education-models";
 import { ExperienceModel } from "../models/experience/experience-models";
@@ -177,6 +180,56 @@ export const getLocationInput = function(model: ProfileLocationModel){
   return {
     input: {
       input: model
+    }
+  }
+}
+
+export const getChangePasswordInput = function(payload: ChangePasswordModel){
+  return {
+    input: payload
+  }
+}
+
+export const getResendCodeInput = function(email: string | null) {
+  return {
+    "input": {
+      "email": email,
+      "codeType": "VERIFICATION"
+    }
+  }
+}
+
+export const getConfirmAccountInput = function(otp: string, email: string) {
+  return {
+    input: {
+      otp: otp.toString(),
+      email: email
+    }
+  }
+}
+
+export const getRegisterInput = function(payload: RegisterModel){
+  return {
+    input: {
+      firstName: payload.firstName,
+      lastName: payload.lastName,
+      middleName: payload.middleName,
+      emailAddress: payload.emailAddress,
+      password: payload.password,
+      confirmPassword: payload.confirmPassword,
+      phoneNumber: payload.phoneNumber,
+      gender: payload.gender
+    }
+  }
+}
+
+export const getLoginInput = function(payload: LoginModel){
+  return {
+    input: {
+      input: {
+        email: payload.email,
+        password: payload.password
+      }
     }
   }
 }

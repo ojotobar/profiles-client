@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { BehaviorSubject } from 'rxjs';
-import { AccountConfirmationMutation, LoginMutation, RegisterMutation, ResendConfirmationCodeMutation } from './mutations/account-mutations';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { AccountConfirmationMutation, ChangePasswordMutation, LoginMutation, RegisterMutation, ResendConfirmationCodeMutation } from './mutations/account-mutations';
 import { LoginModel } from '../models/account/login-model';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
 import { Router } from '@angular/router';
@@ -10,6 +10,8 @@ import { UserClaimsEnum } from '../enums/user-claims-enum';
 import { AppService } from './app.service';
 import { RegisterModel } from '../models/account/register-model';
 import { AccountVerificationModel } from '../models/account/account-verification-model';
+import { ChangePasswordModel } from '../models/account/accounts-models';
+import { getChangePasswordInput, getConfirmAccountInput, getLoginInput, getRegisterInput, getResendCodeInput } from './variable-inputs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,14 +30,7 @@ export class AccountService {
     this.apollo
       .mutate({
         mutation: LoginMutation,
-        variables: {
-          "input": {
-            "input": {
-              "email": loginPayload.email,
-              "password": loginPayload.password
-            }
-          }
-        },
+        variables: getLoginInput(loginPayload)
       })
       .subscribe({
         next: (data: any) => {
@@ -62,18 +57,7 @@ export class AccountService {
     this.apollo
       .mutate({
         mutation: RegisterMutation,
-        variables: {
-          "input": {
-            "firstName": payload.firstName,
-            "lastName": payload.lastName,
-            "middleName": payload.middleName,
-            "emailAddress": payload.emailAddress,
-            "password": payload.password,
-            "confirmPassword": payload.confirmPassword,
-            "phoneNumber": payload.phoneNumber,
-            "gender": payload.gender
-          }
-        }
+        variables: getRegisterInput(payload)
       }).subscribe({
         next: (data: any) => {
           let result = (<any>data).data.registerUser.accountResult;
@@ -96,12 +80,7 @@ export class AccountService {
     this.apollo
       .mutate({
         mutation: AccountConfirmationMutation,
-        variables: {
-          "input": {
-            "otp": payload.otp.toString(),
-            "email": payload.email
-          }
-        }
+        variables: getConfirmAccountInput(payload.otp, payload.email)
       }).subscribe({
         next: (data: any) => {
           let result = (<any>data).data.verifyAccount.accountResult;
@@ -123,12 +102,7 @@ export class AccountService {
     this.apollo
       .mutate({
         mutation: ResendConfirmationCodeMutation,
-        variables: {
-          "input": {
-            "email": email,
-            "codeType": "VERIFICATION"
-          }
-        }
+        variables: getResendCodeInput(email)
       }).subscribe({
         next: (data: any) => {
           let result = (<any>data).data.resendCode.accountResult;
@@ -150,6 +124,13 @@ export class AccountService {
     if(!this.safePages.includes(this.router.url)){
       this.router.navigate(['/']);
     }
+  }
+
+  changePasswordObservable(payload: ChangePasswordModel): Observable<any> {
+    return this.apollo.mutate({
+      mutation: ChangePasswordMutation,
+      variables: getChangePasswordInput(payload)
+    })
   }
 
   hide = this.isHidden.asObservable();

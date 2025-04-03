@@ -48,3 +48,13 @@ export const GetProfileSummaryQuery = gql`
         }
     }
 `;
+
+export const GenerateApiKeyQuery = gql`
+    query {
+        apiKey{
+            apiKey
+            message
+            success
+        }
+    }
+`;

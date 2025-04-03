@@ -3,7 +3,6 @@ import { ProjectManagementComponent } from './components/projects/project-manage
 import { EditProjectComponent } from './components/projects/edit-project/edit-project.component';
 import { AddProjectComponent } from './components/projects/add-project/add-project.component';
 import { AccountConfirmationComponent } from './components/account/account-confirmation/account-confirmation.component';
-import { ChangePasswordComponent } from './components/account/change-password/change-password.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
 import { ResetPasswordComponent } from './components/account/reset-password/reset-password.component';
@@ -93,11 +92,6 @@ export const routes: Routes = [
         path: 'account/confirm',
         component: AccountConfirmationComponent,
         canActivate: [unauthGuard]
-    },
-    {
-        path: 'account/change-password',
-        component: ChangePasswordComponent,
-        canActivate: [authGuard]
     },
     {
         path: 'docs/v1',

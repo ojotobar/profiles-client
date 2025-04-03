@@ -10,6 +10,8 @@ import { DeleteSkillComponent } from '../components/dialogs/delete-skill/delete-
 import { UploadFilesComponent } from '../components/dialogs/upload-files/upload-files.component';
 import { MatDialogFileUploadData } from '../models/common/common-models';
 import { LocationComponent } from '../components/dialogs/location/location.component';
+import { UpdateProfileDetailsComponent } from '../components/dialogs/update-profile-details/update-profile-details.component';
+import { ChangePasswordComponent } from '../components/dialogs/change-password/change-password.component';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +74,22 @@ export class DialogService {
       position: { top: '5vh' },
       disableClose: true,
       data: { id: id, name: name, new: isNew }
+    })
+  }
+
+  openChangePasswordDialog(): MatDialogRef<ChangePasswordComponent, any> {
+    return this.dialog.open(ChangePasswordComponent, {
+      position: { top: '5vh' },
+      disableClose: true,
+      data: { refresh: false }
+    })
+  }
+
+  openUpdateProfileDetailsDialog(): MatDialogRef<UpdateProfileDetailsComponent, any> {
+    return this.dialog.open(UpdateProfileDetailsComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { refresh: false }
     })
   }
 

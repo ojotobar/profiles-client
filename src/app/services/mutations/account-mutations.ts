@@ -75,10 +75,9 @@ export const ChangeForgottenPasswordMutation = gql`
 export const ChangePasswordMutation = gql`
   mutation ChangePassword($input: ChangePasswordInput!){
     changePassword(input: $input){
-      accountResult{
-        email
-        successful
+      payload{
         message
+        success   
       }
     }
   }

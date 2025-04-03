@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
-import { apiKeyTooltip, ProfileModel, ProfileResultModel, ProfileSummaryResponseModel } from '../../../models/profile/profile-models';
+import { Router, RouterLink } from '@angular/router';
+import { ApiKeyResponseModel, apiKeyTooltip, ProfileModel, ProfileResultModel, ProfileSummaryResponseModel } from '../../../models/profile/profile-models';
 import { AppService } from '../../../services/app.service';
 import { ProfileService } from '../../../services/profile.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -21,6 +21,7 @@ import { DialogService } from '../../../services/dialog.service';
 import { MatDialogData } from '../../../models/common/snackbar-model';
 import { UploadFileTypes, UploadTypeEnum } from '../../../enums/upload-types-enums';
 import { AddressPipe } from '../../../pipes/address.pipe';
+import { AccountService } from '../../../services/account.service';
 
 @Component({
   selector: 'app-profile',
@@ -43,16 +44,20 @@ export class ProfileComponent {
   barWidth: string = '';
   barColor: string = '';
   apiKey: string = '';
+  showCopyMessage: boolean = false;
   tips: string = apiKeyTooltip;
   loading: boolean = false;
   isMale: boolean = true;
+  keyGenerating: boolean = false;
   profile!: ProfileModel;
   profileSummary!: ProfileSummaryResponseModel;
   alert = new AlertModel();
   error!: Error;
   appService = inject(AppService);
   profileService = inject(ProfileService);
-  dialogService = inject(DialogService)
+  dialogService = inject(DialogService);
+  accountService = inject(AccountService);
+  router = inject(Router);
 
   ngOnInit(){
     this.getProfile();
@@ -61,7 +66,11 @@ export class ProfileComponent {
 
   copy(){
     if (this.appService.copyText(this.apiKey)) {
-      this.appService.openSnackBar('API Key copied to your clipboard', SnackbarClassEnum.Info, SnackbarIconEnum.Info, 2000)
+      this.showCopyMessage = true;
+
+      setTimeout(() => {
+        this.showCopyMessage = false;
+      }, 2000);
     }
   }
 
@@ -215,5 +224,50 @@ export class ProfileComponent {
         this.getProfile()
       }
     })
+  }
+
+  openChangePasswordDialog(){
+    let ref = this.dialogService.openChangePasswordDialog()
+    ref.afterClosed().subscribe(result => {
+      let res = (<MatDialogData>result);
+      if(res.refresh){
+        this.accountService.logout();
+        this.router.navigate(['/account/login'])
+      }
+    })
+  }
+
+  openProfileDetailsUpdateDialog() {
+    let ref = this.dialogService.openUpdateProfileDetailsDialog()
+    ref.afterClosed().subscribe(result => {
+      let res = (<MatDialogData>result);
+      if(res.refresh){
+        this.getProfile();
+      }
+    })
+  }
+
+  generateApiKey() {
+    this.keyGenerating = true;
+    this.profileService.generateApiKeyObservable()
+      .valueChanges
+      .subscribe({
+        next: (data: any) => {
+          this.keyGenerating = (<boolean>data.loading);
+          let response = (<ApiKeyResponseModel>data.data.apiKey);
+          if(response.success){
+            this.apiKey = response.apiKey;
+            this.profileSummary.userSummary.apiKey = response.apiKey;
+            this.appService.openSnackBar(response.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success)
+          } else {
+            this.appService.openSnackBar(response.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success)
+          }
+        },
+        error: (_: Error) => {
+          this.keyGenerating = false;
+          let ops = this.profileSummary.userSummary.apiKey ? OperationTypeEnum.reGenerate : OperationTypeEnum.generate;
+          this.appService.openSnackBar(getGenericErrorMessage(ops), SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+        }
+      })
   }
 }

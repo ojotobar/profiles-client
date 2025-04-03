@@ -50,10 +50,19 @@ export function getGenericErrorMessage(type: OperationTypeEnum): string {
             isFile = true;
             plural = true;
             break;
+        case OperationTypeEnum.generate:
+            operation = 'generating';
+            break;
+        case OperationTypeEnum.reGenerate:
+            operation = 're-generating';
+            break;
         default:
             break;
     }
 
     let noun = plural ? isFile ? 'files' : 'records' : isFile ? 'file' : 'record' 
+    if(type === OperationTypeEnum.generate || type === OperationTypeEnum.reGenerate){
+        noun = 'key'
+    }
     return `Something went wrong while ${operation} the ${noun}. Please try again. Contact Support if issue persists.`;
 }

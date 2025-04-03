@@ -44,4 +44,10 @@ export interface ProfileSummaryResponseModel {
     }
 }
 
+export interface ApiKeyResponseModel {
+    apiKey: string,
+    message: string,
+    success: boolean
+}
+
 export const apiKeyTooltip = 'Your API key will be generated once you complete your profile, including skills, education, experience, and location. After generation, navigate to the \'API\' section in your account settings to view your key and explore available endpoints.';
