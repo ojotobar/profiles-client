@@ -27,10 +27,9 @@ export const RegisterMutation = gql`
 export const AccountConfirmationMutation = gql`
   mutation VerifyAccount($input: VerifyAccountInput!){
     verifyAccount(input: $input){
-      accountResult{
-          email
+      payload{
           message
-          successful
+          success
       }
     }
   }
@@ -48,36 +47,34 @@ export const ResendConfirmationCodeMutation = gql`
   }
 `;
 
-export const ResetPasswordMutation = gql`
-  mutation ResetPassword($input: ResetPasswordInput!){
-    resetPassword(input: $input){
-      accountResult{
-        email
-        successful
-        message
-      }
-    }
-  }
-`;
-
-export const ChangeForgottenPasswordMutation = gql`
-  mutation ChangeForgotPassword($input: ChangeForgottenPasswordInput!){
-    changeForgottenPassword(input: $input){
-      accountResult{
-        email
-        successful
-        message
-      }
-    }
-  }
-`;
-
 export const ChangePasswordMutation = gql`
   mutation ChangePassword($input: ChangePasswordInput!){
     changePassword(input: $input){
       payload{
         message
         success   
+      }
+    }
+  }
+`;
+
+export const ResetPasswordMutation = gql`
+  mutation ResetPassword($input: ResetPasswordInput!){
+    resetPassword(input: $input){
+      payload{
+        message
+        success
+      }
+    }
+  }
+`;
+
+export const ChangeForgottenPasswordMutation = gql`
+  mutation ChangeForgottenPassword($input: ChangeForgottenPasswordInput!){
+    changeForgottenPassword(input: $input){
+      payload{
+        success
+        message
       }
     }
   }

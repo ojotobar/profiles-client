@@ -17,7 +17,17 @@
                 </span>
                 <div class="row mt-0 pt-0 mx-1 mb-3 mt-2">
                     <div class="col-sm-12 col-md-6 mb-1">
-                        <button mat-raised-button type="submit" class="app-bg text-white w-100">Verify</button>
+                        <button mat-raised-button type="submit" class="app-bg text-white w-100">
+                            @if(loading){
+                                <mat-spinner 
+                                    class="m-0 m-auto"
+                                    [diameter]="30"
+                                    mode="indeterminate"
+                                />
+                            }@else {
+                                Verify
+                            }
+                        </button>
                     </div>
                     <div class="col-sm-12 col-md-6 mb-1">
                         <button mat-raised-button class="bg-secondary text-light w-100" [routerLink]="['/']">Home</button>

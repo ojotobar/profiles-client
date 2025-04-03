@@ -3,3 +3,8 @@ export enum UserRoleEnum{
     readOnly = 'ReadOnly',
     admin = 'Admin'
 }
+
+export enum AccountCodeTypeEnum{
+    Verification = 'VERIFICATION',
+    PasswordReset = 'PASSWORDRESET'
+}

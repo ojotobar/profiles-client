@@ -36,6 +36,7 @@ import { EditCareerSummaryComponent } from './components/career-summary/edit-car
 import { SkillComponent } from './components/skill/skill/skill.component';
 import { AddSkillComponent } from './components/skill/add-skill/add-skill.component';
 import { EditSkillComponent } from './components/skill/edit-skill/edit-skill.component';
+import { ForgotPasswordComponent } from './components/account/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
     {
@@ -91,6 +92,11 @@ export const routes: Routes = [
     {
         path: 'account/confirm',
         component: AccountConfirmationComponent,
+        canActivate: [unauthGuard]
+    },
+    {
+        path: 'account/change-reset-password/:email',
+        component: ForgotPasswordComponent,
         canActivate: [unauthGuard]
     },
     {

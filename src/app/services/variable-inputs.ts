@@ -1,4 +1,5 @@
-import { ChangePasswordModel } from "../models/account/accounts-models";
+import { AccountCodeTypeEnum } from "../enums/user-role-enum";
+import { ChangeForgottenPasswordModel, ChangePasswordModel } from "../models/account/accounts-models";
 import { LoginModel } from "../models/account/login-model";
 import { RegisterModel } from "../models/account/register-model";
 import { CertificationModel } from "../models/certifications/certifications-models";
@@ -198,11 +199,11 @@ export const getChangePasswordInput = function(payload: ChangePasswordModel){
   }
 }
 
-export const getResendCodeInput = function(email: string | null) {
+export const getResendCodeInput = function(email: string | null, code: AccountCodeTypeEnum) {
   return {
     input: {
       email: email,
-      codeType: "VERIFICATION"
+      codeType: code
     }
   }
 }
@@ -237,6 +238,24 @@ export const getLoginInput = function(payload: LoginModel){
       input: {
         email: payload.email,
         password: payload.password
+      }
+    }
+  }
+}
+
+export const getChangeForgottenPassInput = function(payload: ChangeForgottenPasswordModel){
+  return {
+    input: {
+      input: payload
+    }
+  }
+}
+
+export const getEmailInput = function(email: string){
+  return {
+    input: {
+      input: {
+        email: email
       }
     }
   }

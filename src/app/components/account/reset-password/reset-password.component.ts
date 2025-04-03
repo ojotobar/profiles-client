@@ -6,6 +6,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PasswordResetModel } from '../../../models/account/password-reset-model';
 import { AppService } from '../../../services/app.service';
+import { FieldErrorsDirective } from '../../../directives/field-errors.directive';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Router } from '@angular/router';
+import { AccountService } from '../../../services/account.service';
+import { SnackbarClassEnum, SnackbarIconEnum } from '../../../enums/snackbar-enum';
+import { GenericResponseModel } from '../../../models/common/common-models';
 
 @Component({
   selector: 'app-reset-password',
@@ -18,37 +24,50 @@ import { AppService } from '../../../services/app.service';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule 
+    MatInputModule,
+    MatProgressSpinnerModule,
+    FieldErrorsDirective
   ],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss'
 })
 export class ResetPasswordComponent {
-  errorMessage = signal('');
-  resetForm = new FormGroup({
-    emailAddress: new FormControl('', Validators.compose([Validators.required, Validators.email])),
-  })
+  loading: boolean = false;
+  resetForm!: FormGroup;
 
-  constructor(private appService: AppService){
-    
-  }
-
-
-  updateErrorMessage() {
-    
+  constructor(public readonly appService: AppService,
+    private readonly router: Router,
+    private readonly accountService: AccountService){
+    this.resetForm = new FormGroup({
+      emailAddress: new FormControl('', Validators.compose([Validators.required, Validators.email])),
+    })
   }
   
   ProcessPasswordReset() {
     if(this.resetForm.valid){
-      let resetPayload: PasswordResetModel = {
-        emailAddress: this.resetForm.value.emailAddress as string,
-      }
-      console.log(resetPayload)
+      let email = this.resetForm.value.emailAddress as string;
+      this.loading = true;
+      this.accountService.resetPasswordObservable(email)
+        .subscribe({
+          next: (data: any) => {
+              this.loading = (<boolean>data.loading);
+              let result = (<GenericResponseModel>data.data.resetPassword).payload;
+              if(result.success){
+                this.appService.openSnackBar(result.message, 
+                  SnackbarClassEnum.Success, SnackbarIconEnum.Success);
+                  this.router.navigate(['account/change-reset-password', email]);
+              }else {
+                this.appService.openSnackBar(result.message, 
+                  SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+              }
+          },
+          error: (error: Error) => {
+            this.loading = false;
+            this.appService.openSnackBar('Password reset failed. Please try again', 
+              SnackbarClassEnum.Danger, SnackbarIconEnum.Danger);
+          }
+        })
     }
-  }
-
-  GoBack(){
-    this.appService.goBack()
   }
 }
 

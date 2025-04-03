@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AccountConfirmationMutation, ChangePasswordMutation, LoginMutation, RegisterMutation, ResendConfirmationCodeMutation } from './mutations/account-mutations';
+import { AccountConfirmationMutation, ChangeForgottenPasswordMutation, ChangePasswordMutation, LoginMutation, RegisterMutation, ResendConfirmationCodeMutation, ResetPasswordMutation } from './mutations/account-mutations';
 import { LoginModel } from '../models/account/login-model';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
 import { Router } from '@angular/router';
@@ -10,8 +10,9 @@ import { UserClaimsEnum } from '../enums/user-claims-enum';
 import { AppService } from './app.service';
 import { RegisterModel } from '../models/account/register-model';
 import { AccountVerificationModel } from '../models/account/account-verification-model';
-import { ChangePasswordModel } from '../models/account/accounts-models';
-import { getChangePasswordInput, getConfirmAccountInput, getLoginInput, getRegisterInput, getResendCodeInput } from './variable-inputs';
+import { ChangeForgottenPasswordModel, ChangePasswordModel } from '../models/account/accounts-models';
+import { getChangeForgottenPassInput, getChangePasswordInput, getConfirmAccountInput, getEmailInput, getLoginInput, getRegisterInput, getResendCodeInput } from './variable-inputs';
+import { AccountCodeTypeEnum } from '../enums/user-role-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -76,46 +77,32 @@ export class AccountService {
       })
   }
 
-  confirmAccount(payload: AccountVerificationModel) {
-    this.apollo
-      .mutate({
+  confirmAccountObservable(payload: AccountVerificationModel): Observable<any> {
+    return this.apollo.mutate({
         mutation: AccountConfirmationMutation,
         variables: getConfirmAccountInput(payload.otp, payload.email)
-      }).subscribe({
-        next: (data: any) => {
-          let result = (<any>data).data.verifyAccount.accountResult;
-          if(result.successful){
-            this.router.navigate(['/account/login']);
-            this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
-          }
-          else{
-            this.appService.openSnackBar(result.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger); 
-          }
-        },
-        error: (e: Error) => {
-          this.appService.openSnackBar(e.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger);
-        }
-      })
+    })
   }
 
-  resendConfirmationCode(email: string | null){
-    this.apollo
-      .mutate({
-        mutation: ResendConfirmationCodeMutation,
-        variables: getResendCodeInput(email)
-      }).subscribe({
-        next: (data: any) => {
-          let result = (<any>data).data.resendCode.accountResult;
-          if(result.successful){
-            this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
-          }else{
-            this.appService.openSnackBar(result.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger);
-          }
-        },
-        error: (e: Error) => {
-          this.appService.openSnackBar(e.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger);
-        }
-      })
+  resendConfirmationCodeObservable(email: string | null, code: AccountCodeTypeEnum): Observable<any>{
+    return this.apollo.mutate({
+      mutation: ResendConfirmationCodeMutation,
+      variables: getResendCodeInput(email, code)
+    })
+  }
+
+  resetPasswordObservable(email: string): Observable<any> {
+    return this.apollo.mutate({
+      mutation: ResetPasswordMutation,
+      variables: getEmailInput(email)
+    })
+  }
+
+  changeForgottenPasswordObservable(payload: ChangeForgottenPasswordModel): Observable<any> {
+    return this.apollo.mutate({
+      mutation: ChangeForgottenPasswordMutation,
+      variables: getChangeForgottenPassInput(payload)
+    });
   }
 
   logout(){
