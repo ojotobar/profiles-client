@@ -1,0 +1,99 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="app-bg-rgb text-white" [style]="'min-height: 30vh;'">
+            <p class="h4 pt-3 pb-0 mb-0">{{data.name}} Location Details</p>
+            <hr class="mt-0 pt-0"/>
+            @if(loading && !data.new){
+                <mat-spinner
+                    class="m-0 m-auto"
+                    [diameter]="70"
+                    mode="indeterminate"
+                />
+            } @else if(!loading && !data.new && (!profile || error)){
+                <app-alert
+                    [alertInputs]="alert"
+                />
+            } @else {
+                <form [formGroup]="locationForm" (ngSubmit)="AddOrUpdateLocation()">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <mat-form-field class="w-100">
+                                <mat-label>Address Line 1</mat-label>
+                                <mat-icon matSuffix>room</mat-icon>
+                                <input matInput name="line1" formControlName="line1">
+                                <mat-error appFieldErrors></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <mat-form-field class="w-100">
+                                <mat-label>Address Line 2</mat-label>
+                                <input matInput name="line2" formControlName="line2">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-7">
+                            <mat-form-field class="w-100">
+                                <mat-label>City/Town</mat-label>
+                                <mat-icon matSuffix>location_city</mat-icon>
+                                <input matInput name="city" formControlName="city">
+                                <mat-error appFieldErrors></mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-5">
+                            <mat-form-field class="w-100">
+                                <mat-label>Zip/Postal Code</mat-label>
+                                <input matInput name="postalCode" formControlName="postalCode">
+                                <mat-error appFieldErrors></mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>Country</mat-label>
+                                <mat-select name="country" formControlName="country" (selectionChange)="onCountrySelectionChange($event)">
+                                    @for (country of countries; track $index) {
+                                        <mat-option [value]="country.Name">{{country.Name}}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <mat-form-field class="w-100">
+                                <mat-label>State/Province</mat-label>
+                                <mat-select name="state" formControlName="state" (selectionChange)="onStateSelectionChange($event)">
+                                    @if(locationForm.value.country){
+                                        @for (state of states; track $index) {
+                                            <mat-option [value]="state.Name">{{state.Name}}</mat-option>
+                                        }
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row mt-0 pt-0 mx-1 mb-3">
+                        <div class="col-sm-12 col-md-6 mb-1">
+                            <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{isBusy}}>
+                                @if(isBusy){
+                                    <mat-spinner class="my-3 m-auto" [diameter]="30"/>
+                                } @else {
+                                    @if(data.new){
+                                        Save
+                                    } @else {
+                                        Update
+                                    }
+                                }
+                            </button>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-1">
+                            <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="appService.closeDialog(dialogRef, data)" disabled={{isBusy}}>Back</button>
+                        </div>
+                    </div>
+                </form> 
+            }        
+        </div>
+    </div>
+</div>

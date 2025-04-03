@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditNameComponent } from './edit-name.component';
+import { LocationComponent } from './location.component';
 
-describe('EditNameComponent', () => {
-  let component: EditNameComponent;
-  let fixture: ComponentFixture<EditNameComponent>;
+describe('LocationComponent', () => {
+  let component: LocationComponent;
+  let fixture: ComponentFixture<LocationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditNameComponent]
+      imports: [LocationComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EditNameComponent);
+    fixture = TestBed.createComponent(LocationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

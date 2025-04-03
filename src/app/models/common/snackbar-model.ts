@@ -9,6 +9,6 @@ export class SnackbarModel{
 export interface MatDialogData{
     id: string,
     name: string,
-    record: string,
+    new: boolean,
     refresh: boolean
 }

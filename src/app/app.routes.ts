@@ -37,7 +37,6 @@ import { EditCareerSummaryComponent } from './components/career-summary/edit-car
 import { SkillComponent } from './components/skill/skill/skill.component';
 import { AddSkillComponent } from './components/skill/add-skill/add-skill.component';
 import { EditSkillComponent } from './components/skill/edit-skill/edit-skill.component';
-import { EditNameComponent } from './components/profile/edit-name/edit-name.component';
 
 export const routes: Routes = [
     {
@@ -73,11 +72,6 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: ProfileComponent,
-        canActivate: [authGuard]
-    },
-    {
-        path: 'profile/edit-name/:id',
-        component: EditNameComponent,
         canActivate: [authGuard]
     },
     {

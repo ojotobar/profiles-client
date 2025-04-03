@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { DialogService } from '../../../services/dialog.service';
 import { MatDialogData } from '../../../models/common/snackbar-model';
 import { UploadFileTypes, UploadTypeEnum } from '../../../enums/upload-types-enums';
+import { AddressPipe } from '../../../pipes/address.pipe';
 
 @Component({
   selector: 'app-profile',
@@ -32,7 +33,8 @@ import { UploadFileTypes, UploadTypeEnum } from '../../../enums/upload-types-enu
     ImageUrlPipe,
     DatePipe,
     MatTooltipModule,
-    MatButtonModule
+    MatButtonModule,
+    AddressPipe
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -199,6 +201,18 @@ export class ProfileComponent {
       let res = (<MatDialogFileUploadData>result);
       if(res.refreshAfterClose){
         this.getProfile();
+      }
+    })
+  }
+
+  openLocationDialog() {
+    let isNew = this.profile.location === null;
+    let text = isNew ? 'Add' : 'Update';
+    let ref  = this.dialogService.openLocationDialog(this.profile.id, text, isNew)
+    ref.afterClosed().subscribe(result => {
+      let res = (<MatDialogData>result);
+      if(res.refresh){
+        this.getProfile()
       }
     })
   }

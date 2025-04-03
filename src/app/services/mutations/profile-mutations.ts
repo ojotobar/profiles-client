@@ -21,3 +21,14 @@ export const UploadProfilePhotoMutation = gql`
         }
     }
 `;
+
+export const AddOrUpdateUserLocationMutation = gql`
+    mutation AddOrUpdateLocation($input: AddOrUpdateUserLocationInput!){
+        addOrUpdateUserLocation(input: $input){
+            payload{
+                message
+                success
+            }
+        }
+    }
+`;

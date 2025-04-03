@@ -1,6 +1,7 @@
 import { CertificationModel } from "../models/certifications/certifications-models";
 import { EducationModel } from "../models/education/education-models";
 import { ExperienceModel } from "../models/experience/experience-models";
+import { ProfileLocationModel } from "../models/profile/profile-models";
 import { ProjectModel } from "../models/project/project-models";
 import { SkillModel } from "../models/skills/skills-models";
 
@@ -168,6 +169,14 @@ export const getUploadFileInput = function(file: any){
   return {
     input: {
       file: file
+    }
+  }
+}
+
+export const getLocationInput = function(model: ProfileLocationModel){
+  return {
+    input: {
+      input: model
     }
   }
 }

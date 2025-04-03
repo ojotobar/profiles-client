@@ -9,6 +9,7 @@ import { DeleteCareerSummaryComponent } from '../components/dialogs/delete-caree
 import { DeleteSkillComponent } from '../components/dialogs/delete-skill/delete-skill.component';
 import { UploadFilesComponent } from '../components/dialogs/upload-files/upload-files.component';
 import { MatDialogFileUploadData } from '../models/common/common-models';
+import { LocationComponent } from '../components/dialogs/location/location.component';
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +64,14 @@ export class DialogService {
       position: { top: '12vh' },
       disableClose: true,
       data: { id: id, name: name }
+    })
+  }
+
+  openLocationDialog(id: string, name: string, isNew: boolean): MatDialogRef<LocationComponent, any> {
+    return this.dialog.open(LocationComponent, {
+      position: { top: '5vh' },
+      disableClose: true,
+      data: { id: id, name: name, new: isNew }
     })
   }
 

@@ -152,8 +152,8 @@
                                    <span class="linked">Change</span>
                                 </p>
                                 <p class="mb-0 pb-0 d-flex justify-content-between">
-                                    <span class="py-1">Location: </span>
-                                   <span class="linked">{{profile.location ? 'Update' : 'Add' }}</span>
+                                    <span class="py-1">Location: {{profile.location | address }}</span>
+                                   <span class="linked" (click)="openLocationDialog()">{{profile.location ? 'Update' : 'Add' }}</span>
                                 </p>
                                 <p class="mb-0 pb-0 d-flex justify-content-between">
                                     <span class="py-1"> 

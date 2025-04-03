@@ -18,6 +18,8 @@ import { ApiService } from "../../../services/api.service";
 import { AppService } from "../../../services/app.service";
 import { EducationService } from "../../../services/education.service";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { getGenericErrorMessage } from "../../../models/common/common-models";
+import { OperationTypeEnum } from "../../../enums/operation-type-enum";
 
 @Component({
   selector: 'app-add-education',
@@ -115,7 +117,6 @@ export class AddEducationComponent {
   onCheckboxChange(event: any) {
     this.endDateDisabled = event.checked;
     this.addEducationForm.patchValue({ endDate: null });
-
   }
 
   onCountrySelectionChange(event: any) {
@@ -128,8 +129,6 @@ export class AddEducationComponent {
   onStateSelectionChange(event: any) {
     const selectedState = this.states.find(c => c.Name === event.value);
     if(selectedState){
-      //this.addEducationForm.value.latitude = selectedState.Latitude;
-      //this.addEducationForm.value.longitude = selectedState.Longitude;
       this.addEducationForm.patchValue({ latitude: selectedState.Latitude, longitude: selectedState.Longitude });
     }
   }
@@ -140,7 +139,7 @@ export class AddEducationComponent {
         this.countries = data.Data;
       },
       error: (error: Error) => {
-        this.appService.openSnackBar(error.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+        this.appService.openSnackBar(getGenericErrorMessage(OperationTypeEnum.getMany), SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
       }
     });
   }
@@ -151,7 +150,7 @@ export class AddEducationComponent {
         this.states = data;
       },
       error: (error: Error) => {
-        this.appService.openSnackBar(error.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+        this.appService.openSnackBar(getGenericErrorMessage(OperationTypeEnum.getMany), SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
       }
     });
   }
