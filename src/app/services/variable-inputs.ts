@@ -4,7 +4,7 @@ import { RegisterModel } from "../models/account/register-model";
 import { CertificationModel } from "../models/certifications/certifications-models";
 import { EducationModel } from "../models/education/education-models";
 import { ExperienceModel } from "../models/experience/experience-models";
-import { ProfileLocationModel } from "../models/profile/profile-models";
+import { ProfileLocationModel, ProfileUpdateModel } from "../models/profile/profile-models";
 import { ProjectModel } from "../models/project/project-models";
 import { SkillModel } from "../models/skills/skills-models";
 
@@ -184,6 +184,14 @@ export const getLocationInput = function(model: ProfileLocationModel){
   }
 }
 
+export const getProfileDetailsInput = function(payload: ProfileUpdateModel){
+  return {
+    input: {
+      input: payload
+    }
+  }
+}
+
 export const getChangePasswordInput = function(payload: ChangePasswordModel){
   return {
     input: payload
@@ -192,9 +200,9 @@ export const getChangePasswordInput = function(payload: ChangePasswordModel){
 
 export const getResendCodeInput = function(email: string | null) {
   return {
-    "input": {
-      "email": email,
-      "codeType": "VERIFICATION"
+    input: {
+      email: email,
+      codeType: "VERIFICATION"
     }
   }
 }

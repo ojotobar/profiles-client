@@ -47,7 +47,7 @@ export class ProfileComponent {
   showCopyMessage: boolean = false;
   tips: string = apiKeyTooltip;
   loading: boolean = false;
-  isMale: boolean = true;
+  genderColor: string = 'not-specified-theme';
   keyGenerating: boolean = false;
   profile!: ProfileModel;
   profileSummary!: ProfileSummaryResponseModel;
@@ -87,7 +87,7 @@ export class ProfileComponent {
               AlertIconEnum.danger, AlertClassEnum.danger
           )
           } else {
-            this.isMale = this.profile.gender == GenderEnum.Male;
+            this.genderColor = this.getGenderColor(this.profile.gender);
             this.getProfileSummary()
           }
           this.loading = (<boolean>data.loading);
@@ -241,7 +241,7 @@ export class ProfileComponent {
     let ref = this.dialogService.openUpdateProfileDetailsDialog()
     ref.afterClosed().subscribe(result => {
       let res = (<MatDialogData>result);
-      if(res.refresh){
+      if(res && res.refresh){
         this.getProfile();
       }
     })
@@ -269,5 +269,16 @@ export class ProfileComponent {
           this.appService.openSnackBar(getGenericErrorMessage(ops), SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
         }
       })
+  }
+
+  getGenderColor(gender: GenderEnum): string {
+    switch(gender){
+      case GenderEnum.Female:
+        return 'female-theme';
+      case GenderEnum.Male:
+        return 'male-theme';
+      case GenderEnum.NotSpecified:
+        return 'not-specified-theme';
+    }
   }
 }

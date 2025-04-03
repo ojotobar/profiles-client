@@ -18,6 +18,10 @@
         &.female-theme {
             border: 4px solid rgb(238, 178, 188);
         }
+
+        &.not-specified-theme {
+            border: 4px solid rgb(121, 117, 117)
+        }
     }
     
     .profile-container:hover .profile-pic {

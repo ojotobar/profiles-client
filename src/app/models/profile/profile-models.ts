@@ -50,4 +50,12 @@ export interface ApiKeyResponseModel {
     success: boolean
 }
 
+export interface ProfileUpdateModel{
+    firstName: string,
+    lastName: string,
+    otherName: string | null,
+    phone: string,
+    gender: GenderEnum
+}
+
 export const apiKeyTooltip = 'Your API key will be generated once you complete your profile, including skills, education, experience, and location. After generation, navigate to the \'API\' section in your account settings to view your key and explore available endpoints.';

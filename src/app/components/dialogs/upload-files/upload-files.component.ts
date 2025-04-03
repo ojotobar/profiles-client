@@ -66,6 +66,7 @@ export class UploadFilesComponent {
   //#region Upload Methods
   uploadProfilePhoto(){
     if(this.selectedFile){
+      this.loading = true;
       this.appService.uploadFileObservable(this.selectedFile, UploadProfilePhotoMutation)
         .subscribe({
           next: (data: any) => {
@@ -82,7 +83,6 @@ export class UploadFilesComponent {
             }
           },
           error: (_: Error) => {
-            console.log(_)
             this.loading = false;
             this.appService.openSnackBar(getGenericErrorMessage(OperationTypeEnum.upload),
                 SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
@@ -93,6 +93,7 @@ export class UploadFilesComponent {
 
   uploadResume(){
     if(this.selectedFile){
+      this.loading = true;
       this.appService.uploadFileObservable(this.selectedFile, UploadResumeMutation)
         .subscribe({
           next: (data: any) => {
@@ -109,7 +110,6 @@ export class UploadFilesComponent {
             }
           },
           error: (_: Error) => {
-            console.log(_)
             this.loading = false;
             this.appService.openSnackBar(getGenericErrorMessage(OperationTypeEnum.upload),
                 SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)

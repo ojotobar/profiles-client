@@ -32,3 +32,14 @@ export const AddOrUpdateUserLocationMutation = gql`
         }
     }
 `;
+
+export const UpdateProfileDetailsMutation = gql`
+    mutation UpdateProfileDetails($input: UpdateProfileDetailsInput!){
+        updateProfileDetails(input: $input){
+            payload{
+                success
+                message
+            }
+        }
+    }
+`;
