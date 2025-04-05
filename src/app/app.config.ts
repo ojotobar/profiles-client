@@ -8,12 +8,10 @@ import { HttpLink } from 'apollo-angular/http';
 import { ApolloLink, DefaultOptions, InMemoryCache } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
-import { QuillModule } from 'ngx-quill';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    importProvidersFrom(QuillModule.forRoot()),
     provideRouter(routes), 
     provideAnimationsAsync(), 
     provideHttpClient(),
