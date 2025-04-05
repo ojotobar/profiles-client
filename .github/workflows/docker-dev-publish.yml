@@ -3,7 +3,7 @@ name: Build And Push Pro-files Client Docker Image To Docker Hub
 on:
   pull_request:
     branches:
-      - master
+      - development
     types:
       - closed
 
