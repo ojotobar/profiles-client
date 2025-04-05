@@ -1,4 +1,3 @@
-import { LegalDocumentsEnum } from "../enums/rich-text-ops-enums";
 import { AccountCodeTypeEnum } from "../enums/user-role-enum";
 import { ChangeForgottenPasswordModel, ChangePasswordModel } from "../models/account/accounts-models";
 import { LoginModel } from "../models/account/login-model";
@@ -257,17 +256,6 @@ export const getEmailInput = function(email: string){
     input: {
       input: {
         email: email
-      }
-    }
-  }
-}
-
-export const getLegalDocumentInput = function(doc: string, type: LegalDocumentsEnum){
-  return {
-    input: {
-      input: {
-        document: doc,
-        type: type
       }
     }
   }

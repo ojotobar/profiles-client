@@ -17,13 +17,8 @@ import { SnackbarAnnotatedComponent } from '../components/utilities/snackbar-ann
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { Apollo, QueryRef, TypedDocumentNode } from 'apollo-angular';
+import { Apollo, TypedDocumentNode } from 'apollo-angular';
 import { MatDialogFileUploadData } from '../models/common/common-models';
-import { LegalDocumentsEnum } from '../enums/rich-text-ops-enums';
-import { AddOrUpdateLegalDocumentMutation } from './mutations/legal-documents-mutation';
-import { getLegalDocumentInput } from './variable-inputs';
-import { OperationVariables } from '@apollo/client/core';
-import { GetLegalDocumentQuery } from './queries/legal-document-queries';
 import {formatDate} from '@angular/common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -67,22 +62,6 @@ export class AppService {
         useMultipart: true
     }})
   };
-
-  addOrUpdateLegalDocumentObservable(document: string, type: LegalDocumentsEnum): Observable<any>{
-    return this._apollo.mutate({
-      mutation: AddOrUpdateLegalDocumentMutation,
-      variables: getLegalDocumentInput(document, type)
-    })
-  }
-
-  getLegalDocumentObservable(type: LegalDocumentsEnum): QueryRef<any, OperationVariables> {
-    return this._apollo.watchQuery({
-      query: GetLegalDocumentQuery,
-      variables: {
-        "type": type
-      } as OperationVariables
-    })
-  }
 
   goBack(){
     this.location.back();

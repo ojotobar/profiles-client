@@ -1,5 +1,4 @@
 import { OperationTypeEnum } from "../../enums/operation-type-enum";
-import { LegalDocumentsEnum } from "../../enums/rich-text-ops-enums";
 import { UploadFileTypes, UploadTypeEnum } from "../../enums/upload-types-enums";
 
 export interface ResponseModel{
@@ -16,14 +15,6 @@ export interface MatDialogFileUploadData{
 
 export interface GenericResponseModel {
     payload: ResponseModel
-}
-
-export interface LegalDocumentModel {
-    id: string,
-    document: string,
-    type: LegalDocumentsEnum,
-    typeDescription: string,
-    updatedOn: Date
 }
 
 export const genericErrorMessage = 'Something went wrong';
