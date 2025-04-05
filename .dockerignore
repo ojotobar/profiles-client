@@ -1,0 +1,21 @@
+# Ignore node_modules (will be rebuilt inside the container)
+node_modules
+
+# Ignore Angular build output
+dist
+
+# Ignore environment files (optional—depends on your setup)
+*.env
+.env*
+
+# OS and IDE junk
+.DS_Store
+Thumbs.db
+
+# Git & config files
+.git
+.gitignore
+docker-compose.yml
+Dockerfile
+nginx.conf
+README.md
