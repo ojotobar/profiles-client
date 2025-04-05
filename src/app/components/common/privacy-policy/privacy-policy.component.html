@@ -1,14 +1,14 @@
 <div class="shadow mb-3">
     <div class="d-flex justify-content-between px-5 pt-3">
         <app-inline-back></app-inline-back>
-        <button mat-raised-button (click)="appService.downloadPDF(elementId, baseAddress, docName)">
+        <button mat-raised-button (click)="appService.downloadPDF(elementId, dns, docName)">
             <mat-icon class="m-0 m-auto">print</mat-icon>
         </button>
     </div>
     <div class="pt-2 pb-5">
-        <app-terms-template />
+        <app-policy-template />
     </div>
 </div>
-<div id="pdf-content" class="" style="width: 8.5in;min-height:11in" [hidden]="true">
-    <app-terms-template />
+<div id="pdf-content" class="" style="width: 8.5in;" [hidden]="true">
+    <app-policy-template />
 </div>

@@ -37,6 +37,7 @@ import { SkillComponent } from './components/skill/skill/skill.component';
 import { AddSkillComponent } from './components/skill/add-skill/add-skill.component';
 import { EditSkillComponent } from './components/skill/edit-skill/edit-skill.component';
 import { ForgotPasswordComponent } from './components/account/forgot-password/forgot-password.component';
+import { PrivacyPolicyComponent } from './components/common/privacy-policy/privacy-policy.component';
 
 export const routes: Routes = [
     {
@@ -202,6 +203,10 @@ export const routes: Routes = [
     {
         path: 'terms-and-conditions',
         component: TermsAndConditionsComponent
+    },
+    {
+        path: 'privacy-policy',
+        component: PrivacyPolicyComponent
     },
     {
         path: '**', 

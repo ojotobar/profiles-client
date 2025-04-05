@@ -8,7 +8,7 @@ import { ToolBarComponent } from './components/tool-bar/tool-bar.component';
 @Component({
   selector: 'app-root',
   imports: [
-	RouterOutlet, 
+	RouterOutlet,
 	SideNavComponent, 
 	ToolBarComponent, 
 	CommonModule

@@ -1,4 +1,4 @@
-import { HostListener, inject, Injectable } from '@angular/core';
+import { HostListener, Inject, inject, Injectable, LOCALE_ID } from '@angular/core';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
@@ -17,8 +17,16 @@ import { SnackbarAnnotatedComponent } from '../components/utilities/snackbar-ann
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { Apollo, TypedDocumentNode } from 'apollo-angular';
+import { Apollo, QueryRef, TypedDocumentNode } from 'apollo-angular';
 import { MatDialogFileUploadData } from '../models/common/common-models';
+import { LegalDocumentsEnum } from '../enums/rich-text-ops-enums';
+import { AddOrUpdateLegalDocumentMutation } from './mutations/legal-documents-mutation';
+import { getLegalDocumentInput } from './variable-inputs';
+import { OperationVariables } from '@apollo/client/core';
+import { GetLegalDocumentQuery } from './queries/legal-document-queries';
+import {formatDate} from '@angular/common';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +48,8 @@ export class AppService {
   getViewportWidth = this.viewportWidth.asObservable();
   getViewportHeight = this.viewportHeight.asObservable();
 
-  constructor(private readonly location: Location) { }
+  constructor(@Inject(LOCALE_ID) private locale: string, 
+    private readonly location: Location) { }
 
   copyText(text: string): boolean {
     if (!text) return false;
@@ -59,8 +68,112 @@ export class AppService {
     }})
   };
 
+  addOrUpdateLegalDocumentObservable(document: string, type: LegalDocumentsEnum): Observable<any>{
+    return this._apollo.mutate({
+      mutation: AddOrUpdateLegalDocumentMutation,
+      variables: getLegalDocumentInput(document, type)
+    })
+  }
+
+  getLegalDocumentObservable(type: LegalDocumentsEnum): QueryRef<any, OperationVariables> {
+    return this._apollo.watchQuery({
+      query: GetLegalDocumentQuery,
+      variables: {
+        "type": type
+      } as OperationVariables
+    })
+  }
+
   goBack(){
     this.location.back();
+  }
+
+  downloadPDF(elementId: string, appDns: string, docName: string) {
+    const pdfElement = document.getElementById(elementId);
+    if (!pdfElement) return;
+    pdfElement.hidden = false;
+  
+    setTimeout(() => {
+      html2canvas(pdfElement, { scale: 2 }).then((canvas) => {
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+  
+        const marginTop = 10; // mm
+        const marginBottom = 10; // mm
+        const footerText = `© Pro-files ${new Date().getFullYear()} | ${appDns}`;
+  
+        const pxPerMm = 3.78;
+        const scale = 2;
+        const effectivePxPerMm = pxPerMm * scale;
+  
+        const usablePageHeightMm = pageHeight - marginTop - marginBottom;
+        const usablePageHeightPx = usablePageHeightMm * effectivePxPerMm;
+  
+        // Get canvas height in mm and check if it fits the page
+        const canvasHeightInMM = canvas.height / effectivePxPerMm;
+  
+        const imgData = canvas.toDataURL('image/jpeg', 0.9);
+        const imgProps = pdf.getImageProperties(imgData);
+  
+        const imgPdfWidth = pageWidth;
+        let imgPdfHeight = (imgProps.height * imgPdfWidth) / imgProps.width;
+  
+        // If the canvas height is smaller than or equal to the available space, use one page
+        if (canvasHeightInMM <= usablePageHeightMm) {
+          // Add image to one page
+          pdf.addImage(imgData, 'JPEG', 0, marginTop, imgPdfWidth, imgPdfHeight);
+        } else {
+          // Split the canvas if it's too long for one page
+          const totalPages = Math.ceil(canvas.height / usablePageHeightPx);
+  
+          for (let page = 0; page < totalPages; page++) {
+            const sliceCanvas = document.createElement('canvas');
+            const sliceContext = sliceCanvas.getContext('2d')!;
+            sliceCanvas.width = canvas.width;
+            sliceCanvas.height = usablePageHeightPx;
+  
+            sliceContext.fillStyle = '#fff';
+            sliceContext.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
+  
+            sliceContext.drawImage(
+              canvas,
+              0,
+              page * usablePageHeightPx,
+              canvas.width,
+              usablePageHeightPx,
+              0,
+              0,
+              canvas.width,
+              usablePageHeightPx
+            );
+  
+            const sliceImgData = sliceCanvas.toDataURL('image/jpeg', 0.9);
+            const sliceImgProps = pdf.getImageProperties(sliceImgData);
+  
+            const sliceImgPdfHeight = (sliceImgProps.height * imgPdfWidth) / sliceImgProps.width;
+  
+            if (page > 0) pdf.addPage(); // Add new page for each slice
+  
+            // Add sliced image to the PDF
+            pdf.addImage(sliceImgData, 'JPEG', 0, marginTop, imgPdfWidth, sliceImgPdfHeight);
+          }
+        }
+  
+        // Add footer text at the bottom center on each page
+        pdf.setFontSize(9);
+        pdf.setTextColor(120); // gray
+        pdf.text(footerText, pageWidth / 2, pageHeight - 5, { align: 'center' });
+  
+        pdf.save(`${docName}.pdf`);
+        pdfElement.hidden = true;
+      });
+    }, 100);
+  }
+     
+
+  toDateString(date: Date): string {
+    return formatDate(date,'MMM d, y. hh:mm a',this.locale);
   }
   
   setIsSidebarOpened(isSidebarOpened: boolean){

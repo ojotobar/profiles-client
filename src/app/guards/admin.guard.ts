@@ -3,7 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { UserRoleEnum } from '../enums/user-role-enum';
 
 export const adminGuard: CanActivateFn = () => {
-  let role = localStorage.getItem('accessToken')
+  let role = localStorage.getItem('role')
   let isLoggedIn = role !== null;
   let router = inject(Router);
 

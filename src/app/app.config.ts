@@ -1,6 +1,5 @@
-import { ApplicationConfig, provideZoneChangeDetection, inject } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection, inject, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
@@ -9,14 +8,15 @@ import { HttpLink } from 'apollo-angular/http';
 import { ApolloLink, DefaultOptions, InMemoryCache } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
+import { QuillModule } from 'ngx-quill';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    importProvidersFrom(QuillModule.forRoot()),
     provideRouter(routes), 
     provideAnimationsAsync(), 
-    provideHttpClient(), 
-    
+    provideHttpClient(),
     provideApollo(() => {
       const url = 'https://localhost:7051/profilesql';
       const httpLink = inject(HttpLink);
@@ -32,21 +32,6 @@ export const appConfig: ApplicationConfig = {
         },
       }
     
-      // const headers = setContext((operation, context) => {
-      //   const token = localStorage.getItem('accessToken');
-    
-      //   if (token === null) {
-      //     return {};
-      //   } else {
-      //     return {
-      //       headers: {
-      //         Authorization: `Bearer ${token}`,
-      //         'GraphQL-Preflight': 1       
-      //       },
-      //     };
-      //   }
-      // });
-
       const authLink = setContext((operation, context) => {
         const token = localStorage.getItem('accessToken');
 
@@ -76,12 +61,6 @@ export const appConfig: ApplicationConfig = {
         cache: new InMemoryCache(),
         defaultOptions: defaultOptions,
       };
-    
-      // return {
-      //   link: ApolloLink.from([headers, httpLink.create({ uri: 'https://localhost:7051/profilesql' })]),
-      //   cache: new InMemoryCache(),
-      //   defaultOptions: defaultOptions
-      // };
     })
   ]
 };
