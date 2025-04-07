@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(), 
     provideHttpClient(),
     provideApollo(() => {
-      const url = 'https://localhost:7051/profilesql';
+      const url = window['env']?.backendUrl || 'https://localhost:7051/profilesql';
       const httpLink = inject(HttpLink);
     
       const defaultOptions: DefaultOptions = {

@@ -1,24 +1,24 @@
-# ===========================
-# Stage 1: Build Angular app
-# ===========================
-FROM node:20-alpine AS build
+# Use official Node image for building
+FROM node:20 AS build
 
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
 COPY . .
-RUN npm run build --configuration=production
 
-# ===========================
+# Install dependencies & build Angular app
+RUN npm install && npm run build
+
 # Stage 2: Serve with NGINX
-# ===========================
 FROM nginx:alpine
 
-WORKDIR /usr/share/nginx/html
-COPY --from=build /app/dist/pro-files .       
+# Copy built Angular app
+COPY --from=build /app/dist/pro-files /usr/share/nginx/html
 
+# Copy NGINX default config (optional, only if you’re customizing nginx.conf)
 COPY nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 80
+# Copy entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-CMD ["nginx", "-g", "daemon off;"]
+# Run the entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
