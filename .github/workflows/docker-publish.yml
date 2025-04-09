@@ -41,8 +41,8 @@ jobs:
             NEXT_VERSION=$((MAX_VERSION + 1))
           fi
 
-          echo "Next version: live-$NEXT_VERSION"
-          echo "VERSION=live-$NEXT_VERSION" >> $GITHUB_OUTPUT
+          echo "Next version: v$NEXT_VERSION"
+          echo "VERSION=v$NEXT_VERSION" >> $GITHUB_OUTPUT
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
