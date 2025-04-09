@@ -8,6 +8,7 @@ import { HttpLink } from 'apollo-angular/http';
 import { ApolloLink, DefaultOptions, InMemoryCache } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
+import { EnvService } from './services/env.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,7 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(), 
     provideHttpClient(),
     provideApollo(() => {
-      const url = window['env']?.backendUrl || 'https://localhost:7051/profilesql';
+      const url = inject(EnvService).coreServerUrl;
       const httpLink = inject(HttpLink);
     
       const defaultOptions: DefaultOptions = {

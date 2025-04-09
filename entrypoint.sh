@@ -1,12 +1,19 @@
 #!/bin/sh
 
-# Write the config.js file dynamically with environment variable
-cat <<EOF > /usr/share/nginx/html/assets/config.js
-window['env'] = {
-  backendUrl: "${BACKEND_URL}",
-  locationApiBaseUrl: "${LOCATION_URL}"
-};
+echo "Generating runtime environment..."
+
+# Make sure the directory exists
+mkdir -p /usr/share/nginx/html/assets/env
+
+# Write the runtime env JS file
+cat <<EOF > /usr/share/nginx/html/assets/env/runtime-env.js
+(function (window) {
+  window.__env = {
+    BACK_END_SERVER_URL: "${BACK_END_SERVER_URL}",
+    LOCATIONV1_API_URL: "${LOCATIONV1_API_URL}"
+  };
+})(this);
 EOF
 
-# Start NGINX
-nginx -g 'daemon off;'
+echo "Starting Nginx..."
+exec nginx -g 'daemon off;'
