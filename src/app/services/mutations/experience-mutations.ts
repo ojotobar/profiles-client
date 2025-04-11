@@ -3,9 +3,9 @@ import { gql } from "apollo-angular";
 export const AddExperienceMutation = gql`
     mutation AddExperience($input: AddExperiencesInput!){
         addExperiences(input: $input){
-            experiencesPayload{
-            message
-            success
+            payload{
+                message
+                success
             }
         }
     }
@@ -14,9 +14,9 @@ export const AddExperienceMutation = gql`
 export const DeleteExperienceMutation = gql`
     mutation DeleteExperience($input: DeleteExperienceInput!){
         deleteExperience(input: $input){
-            experiencePayload{
-            success
-            message
+            payload{
+                message
+                success
             }
         }
     }
@@ -25,9 +25,9 @@ export const DeleteExperienceMutation = gql`
 export const UpdateExperienceMutation = gql`
     mutation UpdateExperience($input: UpdateExperienceInput!){
         updateExperience(input: $input){
-            experiencePayload{
-            success
-            message
+            payload{
+                message
+                success
             }
         }
     }

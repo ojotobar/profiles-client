@@ -92,7 +92,7 @@ export class EditExperienceComponent {
         .subscribe({
           next: (data: any) => {
             this.isSaving = (<boolean>data.loading);
-            let result = <ResponseModel>data.data.updateExperience.experiencePayload;
+            let result = <ResponseModel>data.data.updateExperience.payload;
             if(result.success){
               this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success)
               this.appService.goBack()

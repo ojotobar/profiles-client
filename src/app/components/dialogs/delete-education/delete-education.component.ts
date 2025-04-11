@@ -8,6 +8,7 @@ import { EducationResult } from "../../../models/education/education-models";
 import { AppService } from "../../../services/app.service";
 import { EducationService } from "../../../services/education.service";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { GenericResponseModel } from "../../../models/common/common-models";
 
 @Component({
   selector: 'app-delete-education',
@@ -30,7 +31,7 @@ export class DeleteEducationComponent {
         .subscribe({
           next: (data: any) => {
             this.loading = (<boolean>data.loading);
-            let result = (<EducationResult>data.data.deleteEducation.educationResult);
+            let result = (<GenericResponseModel>data.data.deleteEducation).payload;
             if(result.success){
               this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
               this.data.refresh = true;

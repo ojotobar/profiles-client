@@ -15,5 +15,7 @@ import { AppService } from '../../../services/app.service';
 export class DocsComponent {
   supportEmail = 'support@pro-files.com';
   isLoggedIn = false;
+  apiKeyName = 'X-PPAPI-KEY';
+  imageName = 'blueclikk';
   _ = inject(AppService).getIsLoggedIn.subscribe(l => this.isLoggedIn = l);
 }

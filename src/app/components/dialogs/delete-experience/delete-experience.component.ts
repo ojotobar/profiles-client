@@ -30,7 +30,7 @@ export class DeleteExperienceComponent {
           .subscribe({
             next: (data: any) => {
               this.loading = (<boolean>data.loading);
-              let result = (<ResponseModel>data.data.deleteExperience.experiencePayload);
+              let result = (<ResponseModel>data.data.deleteExperience.payload);
               if(result.success){
                 this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
                 this.data.refresh = true;

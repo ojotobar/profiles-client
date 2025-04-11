@@ -64,7 +64,7 @@ export class AddCertiticationComponent {
         .subscribe({
           next: (data: any) => {
             this.loading = (<boolean>data.loading);
-            let result = (<ResponseModel>data.data.addCertifications.certificationsPayload);
+            let result = (<ResponseModel>data.data.addCertifications.payload);
             if(result.success){
               this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
               this.goBack()

@@ -51,7 +51,7 @@ export class AddProjectComponent {
         .subscribe({
           next: (data: any) => {
             this.loading = (<boolean>data.loading);
-            let result = (<ResponseModel>data.data.addProjects.projectsPayload);
+            let result = (<ResponseModel>data.data.addProjects.payload);
             if(result.success){
               this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
               this.appService.goBack()

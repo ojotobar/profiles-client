@@ -13,6 +13,7 @@ import { AccountVerificationModel } from '../models/account/account-verification
 import { ChangeForgottenPasswordModel, ChangePasswordModel } from '../models/account/accounts-models';
 import { getChangeForgottenPassInput, getChangePasswordInput, getConfirmAccountInput, getEmailInput, getLoginInput, getRegisterInput, getResendCodeInput } from './variable-inputs';
 import { AccountCodeTypeEnum } from '../enums/user-role-enum';
+import { GenericResponseModel } from '../models/common/common-models';
 
 @Injectable({
   providedIn: 'root'
@@ -24,57 +25,22 @@ export class AccountService {
   private isHidden = new BehaviorSubject(true);
   appService = inject(AppService);
   router = inject(Router)
-  claims = new UserClaimsModel()
   constructor(private readonly apollo: Apollo) { }
 
-  login(loginPayload: LoginModel){
-    this.apollo
+  loginObservable(loginPayload: LoginModel): Observable<any> {
+    return this.apollo
       .mutate({
         mutation: LoginMutation,
         variables: getLoginInput(loginPayload)
-      })
-      .subscribe({
-        next: (data: any) => {
-          let result = (<any>data).data.loginUser.loginResult
-          if(result.successful && result.accessToken){
-            localStorage.setItem('accessToken', result.accessToken);
-            localStorage.setItem('role', this.getUserRoles())
-            this.claims.accessToken = result.accessToken;
-            this.appService.setClaims(this.claims)
-            this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
-            this.appService.goBack()
-          }
-          else{
-            this.appService.openSnackBar(result.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
-          }
-        },
-        error: (e: Error) => {
-          this.appService.openSnackBar(e.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
-        }
-      });
+    });
   }
 
-  register(payload: RegisterModel){
-    this.apollo
+  registerObservable(payload: RegisterModel): Observable<any> {
+    return this.apollo
       .mutate({
         mutation: RegisterMutation,
         variables: getRegisterInput(payload)
-      }).subscribe({
-        next: (data: any) => {
-          let result = (<any>data).data.registerUser.accountResult;
-          if(result.successful){
-            this.router.navigate(['/account/confirm'], {
-              queryParams: { email: payload.emailAddress }
-            })
-            this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success)
-          } else{
-            this.appService.openSnackBar(result.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
-          }
-        },
-        error: (e: Error) => {
-          this.appService.openSnackBar(e.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
-        }
-      })
+    });
   }
 
   confirmAccountObservable(payload: AccountVerificationModel): Observable<any> {

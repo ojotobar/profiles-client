@@ -7,6 +7,7 @@ export const LoginMutation = gql`
         accessToken
         message
         successful
+        emailNotConfirmed
       }
     }
   }
@@ -15,10 +16,9 @@ export const LoginMutation = gql`
 export const RegisterMutation = gql`
   mutation RegisterUser($input: RegisterUserInput!){
     registerUser(input: $input){
-      accountResult{
-        email
+      payload{
         message
-        successful
+        success
       }
     }
   }
@@ -38,10 +38,9 @@ export const AccountConfirmationMutation = gql`
 export const ResendConfirmationCodeMutation = gql`
   mutation ResendCode($input: ResendCodeInput!){
     resendCode(input: $input){
-      accountResult{
-        email
-        successful
-        message
+      payload{
+          message
+          success
       }
     }
   }
