@@ -113,7 +113,7 @@ export class EditProjectComponent {
             this.isSaving = (<boolean>data.loading);
             let result = data.data;
             if(result){
-              let res = (<ResponseModel>result.updateProject.projectPayload)
+              let res = (<ResponseModel>result.updateProject.payload)
               if(res && res.success){
                 this.appService.openSnackBar(res.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
                 this.appService.goBack();

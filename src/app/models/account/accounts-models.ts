@@ -10,3 +10,10 @@ export interface ChangeForgottenPasswordModel{
     newPassword: string,
     confirmNewPassword: string
 }
+
+export interface LoginResultModel {
+    message: string,
+    accessToken: string,
+    successful: boolean,
+    emailNotConfirmed: boolean
+}

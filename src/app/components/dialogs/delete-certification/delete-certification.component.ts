@@ -31,7 +31,7 @@ export class DeleteCertificationComponent {
         .subscribe({
           next: (data: any) => {
             this.loading = (<boolean>data.loading);
-            let result = (<ResponseModel>data.data.deleteCertification.certificationPayload);
+            let result = (<ResponseModel>data.data.deleteCertification.payload);
             if(result.success){
               this.data.refresh = true;
               this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
