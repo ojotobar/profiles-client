@@ -38,7 +38,7 @@ export class DeleteProjectComponent {
           this.loading = (<boolean>data.loading);
           let result = data.data;
           if(result){
-            let res = (<ResponseModel>result.deleteProject.projectPayload);
+            let res = (<ResponseModel>result.deleteProject.payload);
             if(res && res.success){
               this.data.refresh = true;
               this.appService.closeDialog(this.dialogRef, this.data);

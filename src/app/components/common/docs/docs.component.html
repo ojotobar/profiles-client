@@ -42,7 +42,7 @@
                         <p>Run the following command in your terminal:</p>
                         <div class="code-holder px-3">
                             <code>
-                                docker pull pro-files/portfolio:tag-name
+                                docker pull {{imageName}}/portfolio:tag-name
                             </code>
                         </div>
                     </li>
@@ -50,7 +50,7 @@
                         <p>Use the following command to run the portfolio container:</p>
                         <div class="code-holder px-3">
                             <code>
-                                docker run -d -p 8080:80 -e API_KEY=your_api_key pro-files/portfolio:tag-name<br/>
+                                docker run -d -p 8080:80 -e {{apiKeyName}}=your_api_key {{imageName}}/portfolio:tag-name<br/>
                             </code>
                         </div>
                         <p class="pt-1">Replace `your_api_key` with the API key you generated earlier. Only the <span class="bg-secondary text-light"classic>classic</span> tag is available on free tier</p>
@@ -101,15 +101,15 @@
                 <p>To update your portfolio, pull the latest Docker image and restart the container:</p>
                 <div class="code-holder px-3">
                     <code>
-                        docker pull pro-files/portfolio:tag-name<br/>
-                        docker stop $(docker ps -q --filter ancestor=pro-files/portfolio:tag-name)<br/>
-                        docker run -d -p 8080:80 -e API_KEY=your_api_key pro-files/portfolio:tag-name<br/>
+                        docker pull {{imageName}}/portfolio:tag-name<br/>
+                        docker stop $(docker ps -q --filter ancestor={{imageName}}/portfolio:tag-name)<br/>
+                        docker run -d -p 8080:80 -e {{apiKeyName}}=your_api_key {{imageName}}/portfolio:tag-name<br/>
                     </code>
                 </div>
             </div>
             <div>
                 <p class="pt-3 fs-5 fw-bolder m-0 p-0">Conclusion</p>
-                <p><app-app-name fileClass="dark" /> makes it easy for professionals to create a stunning portfolio without coding. By following the steps outlined above, you can have your personal portfolio live in minutes. If you need any assistance, visit our <a [routerLink]="['/support']">support page</a> or reach out to our team on <a href="mailto:{{supportEmail}}">{{supportEmail}}</a>.</p>
+                <p><app-app-name fileClass="dark" /> makes it easy for professionals to create a stunning portfolio without coding. By following the steps outlined above, you can have your personal portfolio live in minutes. If you need any assistance, visit our <a [routerLink]="['/contact']">support page</a> or reach out to our team on <a href="mailto:{{supportEmail}}">{{supportEmail}}</a>.</p>
                 <p>Happy showcasing!</p>
             </div>
         </div>

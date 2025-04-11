@@ -18,7 +18,7 @@ import { ApiService } from "../../../services/api.service";
 import { AppService } from "../../../services/app.service";
 import { EducationService } from "../../../services/education.service";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { getGenericErrorMessage } from "../../../models/common/common-models";
+import { GenericResponseModel, getGenericErrorMessage } from "../../../models/common/common-models";
 import { OperationTypeEnum } from "../../../enums/operation-type-enum";
 
 @Component({
@@ -88,23 +88,23 @@ export class AddEducationComponent {
         level: form.level as EducationLevelEnum,
         location: location
       }
+
+      this.loading = true;
       this.educationService.addEducation(payload)
         .subscribe({
           next: (data: any) => {
             this.loading = (<boolean>data.loading);
-            let result = data.data.addEducation.educationResult;
-            let success = (<boolean>result.success);
-            let message = (<string>result.message);
-            if(success){
-              this.appService.openSnackBar(message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
+            let result = (<GenericResponseModel>data.data.addEducation).payload;
+            if(result.success){
+              this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
               this.appService.goBack()
             }else {
-              this.appService.openSnackBar(message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+              this.appService.openSnackBar(result.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
             }
           },
           error: (error: Error) => {
             this.loading = false;
-            this.appService.openSnackBar(error.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+            this.appService.openSnackBar(getGenericErrorMessage(OperationTypeEnum.add), SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
           }
         });
     }

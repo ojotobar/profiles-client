@@ -3,12 +3,9 @@ import { gql } from "apollo-angular";
 export const AddEducationMutations = gql`
     mutation AddEducation($input: AddEducationInput!){
         addEducation(input: $input){
-            educationResult{
-                education{
-                    id
-                }
-                success
+            payload{
                 message
+                success
             }
         }
     }
@@ -17,7 +14,7 @@ export const AddEducationMutations = gql`
 export const DeleteEducationMutation = gql`
     mutation DeleteEducation($input: DeleteEducationInput!){
         deleteEducation(input: $input){
-            educationResult{
+            payload{
                 message
                 success
             }
@@ -28,9 +25,9 @@ export const DeleteEducationMutation = gql`
 export const UpdateEducationMutation = gql`
     mutation UpdateEducation($input: UpdateEducationInput!){
         updateEducation(input: $input){
-            educationResult{
-            success
-            message
+            payload{
+                message
+                success
             }
         }
     }

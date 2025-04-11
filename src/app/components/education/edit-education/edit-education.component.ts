@@ -22,6 +22,8 @@ import { ApiService } from "../../../services/api.service";
 import { AppService } from "../../../services/app.service";
 import { EducationService } from "../../../services/education.service";
 import { AlertComponent } from "../../common/alert/alert.component";
+import { GenericResponseModel, getGenericErrorMessage } from "../../../models/common/common-models";
+import { OperationTypeEnum } from "../../../enums/operation-type-enum";
 
 @Component({
   selector: 'app-edit-education',
@@ -109,19 +111,17 @@ export class EditEducationComponent {
         .subscribe({
           next: (data: any) => {
             this.isSaving = (<boolean>data.loading);
-            let result = data.data.updateEducation.educationResult;
-            let success = (<boolean>result.success);
-            let message = (<string>result.message);
-            if(success){
-              this.appService.openSnackBar(message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
+            let result = (<GenericResponseModel>data.data.updateEducation).payload;
+            if(result.success){
+              this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
               this.appService.goBack()
             }else {
-              this.appService.openSnackBar(message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+              this.appService.openSnackBar(result.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
             }
           },
           error: (error: Error) => {
             this.isSaving = false;
-            this.appService.openSnackBar(error.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger);
+            this.appService.openSnackBar(getGenericErrorMessage(OperationTypeEnum.update), SnackbarClassEnum.Danger, SnackbarIconEnum.Danger);
           }
         })
     }

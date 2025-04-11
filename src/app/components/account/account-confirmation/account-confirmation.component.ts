@@ -51,7 +51,6 @@ export class AccountConfirmationComponent {
         otp: this.confirmationForm.value.otp as string,
         email: this.email as string
       }
-      console.log(payload)
 
       this.accountService.confirmAccountObservable(payload)
         .subscribe({
@@ -78,8 +77,8 @@ export class AccountConfirmationComponent {
     this.accountService.resendConfirmationCodeObservable(this.email, AccountCodeTypeEnum.Verification)
       .subscribe({
         next: (data: any) => {
-          let result = (<any>data).data.resendCode.accountResult;
-          if(result.successful){
+          let result = (<GenericResponseModel>data.data.resendCode).payload;
+          if(result.success){
             this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
           }else{
             this.appService.openSnackBar(result.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger);

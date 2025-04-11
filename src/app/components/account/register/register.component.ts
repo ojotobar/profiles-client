@@ -8,13 +8,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FieldErrorsDirective } from '../../../directives/field-errors.directive';
 import { GenderEnum } from '../../../enums/gender-enum';
 import { RegisterModel } from '../../../models/account/register-model';
 import { GenderOption } from '../../../models/profile/gender-option-model';
 import { AccountService } from '../../../services/account.service';
 import { AppService } from '../../../services/app.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { GenericResponseModel } from '../../../models/common/common-models';
+import { SnackbarClassEnum, SnackbarIconEnum } from '../../../enums/snackbar-enum';
 
 @Component({
   selector: 'app-register',
@@ -30,13 +33,15 @@ import { AppService } from '../../../services/app.service';
     MatSelectModule,
     RouterLink,
     MatCheckboxModule,
-    FieldErrorsDirective
+    FieldErrorsDirective,
+    MatProgressSpinnerModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
   isHidden: boolean = true;
+  loading: boolean = false;
   isTermAccepted: boolean = true;
   
   genderOptions: GenderOption[] = [
@@ -46,7 +51,7 @@ export class RegisterComponent {
   ]
   
   constructor(private accountService: AccountService,
-    private appService: AppService){
+    public appService: AppService, private readonly router: Router){
     this.accountService.hide
       .subscribe(h => this.isHidden = h);
   }
@@ -77,7 +82,28 @@ export class RegisterComponent {
           phoneNumber: this.registerForm.value.phoneNumber as string,
           gender: this.registerForm.value.gender as GenderEnum
         }
-        this.accountService.register(payload)
+
+        this.loading = true;
+        this.accountService.registerObservable(payload)
+          .subscribe({
+            next: (data: any) => {
+              this.loading = <boolean>data.loading;
+              let result = (<GenericResponseModel>data.data.registerUser).payload;
+              if(result.success){
+                this.router.navigate(['/account/confirm'], {
+                  queryParams: { email: payload.emailAddress }
+                })
+                this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success)
+              } else{
+                this.appService.openSnackBar(result.message, SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+              }
+            },
+            error: (e: Error) => {
+              this.loading = false;
+              this.appService.openSnackBar('Registration failed. Please try again later.', 
+                SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
+            }
+          })
       }
       else{
         this.isTermAccepted = false;
@@ -85,10 +111,6 @@ export class RegisterComponent {
     }else{
       this.isTermAccepted = false;
     }
-  }
-
-  goBack(){
-    this.appService.goBack();
   }
 
   clickEvent(e: MouseEvent){

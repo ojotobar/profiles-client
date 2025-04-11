@@ -109,7 +109,7 @@ export class EditCertiticationComponent {
         .subscribe({
           next: (data: any) => {
             this.isSaving = (<boolean>data.loading)
-            let result = (<ResponseModel>data.data.updateCertification.certificationPayload)
+            let result = (<ResponseModel>data.data.updateCertification.payload)
             if(result.success){
               this.appService.openSnackBar(result.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success);
               this.goBack();
