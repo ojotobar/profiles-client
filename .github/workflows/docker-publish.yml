@@ -73,3 +73,7 @@ jobs:
           tags: |
             ${{ secrets.PROFILES_PROD_USERNAME }}/pro-files-client:live
             ${{ secrets.PROFILES_PROD_USERNAME }}/pro-files-client:${{ steps.get_version.outputs.VERSION }}
+
+      - name: Trigger Automatic Deployment on Render
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
