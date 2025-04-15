@@ -1,12 +1,22 @@
 <mat-tab-group>
-    <mat-tab label="Users">
+    <mat-tab label="User Management">
         <ng-template matTabContent>
-            
+            <app-user-management />
         </ng-template>
     </mat-tab>
-    <mat-tab label="Privacy Policy">
+    <mat-tab label="Role Management">
         <ng-template matTabContent>
-            
+            <app-role-management />
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Audit Logs">
+        <ng-template matTabContent>
+            <app-audit-logs />
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="FAQs Management">
+        <ng-template matTabContent>
+            <app-faqs-management />
         </ng-template>
     </mat-tab>
 </mat-tab-group>

@@ -19,9 +19,17 @@ export interface ProfileModel{
     photoUrl: string | null,
     isDeprecated: boolean,
     createdOn: Date,
+    updatedOn: Date,
     lastLogin: Date,
     deactivatedOn: Date,
+    emailConfirmed: boolean,
+    role: string | '',
     location: ProfileLocationModel | null
+}
+
+export interface DetailedProfileModel{
+    profile: ProfileModel,
+    profileSummary: ProfileSummaryModel
 }
 
 export interface ProfileLocationModel extends EntityLocationModel {
@@ -31,17 +39,19 @@ export interface ProfileLocationModel extends EntityLocationModel {
 }
 
 export interface ProfileSummaryResponseModel {
-    userSummary: {
-      education: number,
-      experience: number,
-      skills: number,
-      projects: number,
-      certifications: number,
-      hasCareerSummary: boolean
-      progress: number,
-      canGenerateApiKey: boolean,
-      apiKey: string
-    }
+    userSummary: ProfileSummaryModel
+}
+
+export interface ProfileSummaryModel{
+    education: number,
+    experience: number,
+    skills: number,
+    projects: number,
+    certifications: number,
+    hasCareerSummary: boolean
+    progress: number,
+    canGenerateApiKey: boolean,
+    apiKey: string
 }
 
 export interface ApiKeyResponseModel {
@@ -56,6 +66,23 @@ export interface ProfileUpdateModel{
     otherName: string | null,
     phone: string,
     gender: GenderEnum
+}
+
+export interface ProfilesInputModel {
+    search: string | null,
+    status: UserStatusEnum | null,
+    premium: boolean | null,
+    confirmed: boolean | null,
+    gender: boolean | null
+}
+
+export interface ProfilesResponseModel{
+    items: ProfileModel[],
+    pageInfo: {
+        hasNextPage: boolean,
+        hasPreviousPage: boolean
+    },
+    totalCount: number
 }
 
 export const apiKeyTooltip = 'Your API key will be generated once you complete your profile, including skills, education, experience, and location. After generation, navigate to the \'API\' section in your account settings to view your key and explore available endpoints.';
