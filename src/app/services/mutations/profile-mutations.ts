@@ -43,3 +43,47 @@ export const UpdateProfileDetailsMutation = gql`
         }
     }
 `;
+
+export const StatusChangeMutation = gql`
+    mutation ChangeStatus($input: ChangeStatusInput!){
+        changeStatus(input: $input){
+            payload{
+                message
+                success
+            }
+        }
+    }
+`;
+
+export const ChangeRoleMutation = gql`
+    mutation ChangeRole($input: ChangeRoleInput!){
+        changeRole(input: $input){
+            payload{
+                message
+                success
+            }
+        }
+    }
+`;
+
+export const DeleteAccountMutation = gql`
+    mutation DeleteAccount($input: DeleteAccountInput!){
+        deleteAccount(input: $input){
+            payload{
+                message
+                success
+            }
+        }
+    }
+`;
+
+export const DeactivateAccountMutation = gql`
+    mutation DeactivateAccount {
+        deactivateAccount{
+            payload{
+                success
+                message
+            }
+        }
+    }
+`;

@@ -37,5 +37,5 @@ export class AppComponent implements OnInit {
 		this.getScreenWidth = window.innerWidth;
 		this.getScreenHeight = window.innerHeight;
 		this.sidebarExpanded = this.getScreenWidth >= 768 && !this.isSidebarClosed;
-	}
+	} 
 }

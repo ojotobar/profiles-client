@@ -14,7 +14,7 @@
                     <app-alert
                         [alertInputs]="alert"
                     />
-                } @else if (profile && profileSummary && profileSummary.userSummary) {
+                } @else if (profile && profileSummary) {
                     <div class="p-3">
                         <div>
                             <div class="profile-container">
@@ -64,27 +64,27 @@
                             <div class="row m-auto">
                                 <div class="col-sm-12 col-md-6 col-lg-4 mb-2 carded" [routerLink]="['/educations']">
                                     <div class="text-center p-2 rounded inset-box card-main fw-normal">
-                                        Education: {{profileSummary.userSummary.education}}
+                                        Education: {{profileSummary.education}}
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-4 mb-2 carded" [routerLink]="['/experiences']">
                                     <div class="text-center p-2 rounded inset-box card-main fw-normal">
-                                        Experience: {{profileSummary.userSummary.experience}}
+                                        Experience: {{profileSummary.experience}}
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-4 mb-2 carded" [routerLink]="['/skills']">
                                     <div class="text-center p-2 rounded inset-box card-main fw-normal">
-                                        Skills: {{profileSummary.userSummary.skills}}
+                                        Skills: {{profileSummary.skills}}
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-4 mb-2 carded" [routerLink]="['/projects']">
                                     <div class="text-center p-2 rounded inset-box card-main fw-normal">
-                                        Projects: {{profileSummary.userSummary.projects}}
+                                        Projects: {{profileSummary.projects}}
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-4 mb-2 carded" [routerLink]="['/certifications']">
                                     <div class="text-center p-2 rounded inset-box card-main fw-normal">
-                                        Certifications: {{profileSummary.userSummary.certifications}}
+                                        Certifications: {{profileSummary.certifications}}
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6 col-lg-4 mb-2 carded" [routerLink]="['/career-summary']">
@@ -109,17 +109,17 @@
                                 <div class="p-0 progress red-progress"></div>
                                 </div>
                                 <div class="mt-3 row m-auto">
-                                    @if(!profileSummary.userSummary.canGenerateApiKey){
+                                    @if(!profileSummary.canGenerateApiKey){
                                         <small class="text-warning">{{tasksText}}</small>
                                     }
                                     <div class="col-sm-12 col-md-6 my-1 py-2 bg-secondary m-auto">
                                         <span class="d-flex justify-content-between align-content-center">
-                                            @if(profileSummary.userSummary.canGenerateApiKey || profileSummary.userSummary.apiKey){
+                                            @if(profileSummary.canGenerateApiKey || profileSummary.apiKey){
                                                 <span class="text-white pt-2">***************</span>
                                             } @else {
                                                 <span class="text-danger py-1">xxxxxxxxxxxxxxx</span>
                                             }
-                                            @if(profileSummary.userSummary.canGenerateApiKey && apiKey){
+                                            @if(profileSummary.canGenerateApiKey && apiKey){
                                                 <span (click)="copy()"
                                                 >
                                                     @if(showCopyMessage){
@@ -139,7 +139,7 @@
                                         <button 
                                             class="text-center" 
                                             mat-raised-button 
-                                            disabled={{!profileSummary.userSummary.canGenerateApiKey}} 
+                                            disabled={{!profileSummary.canGenerateApiKey}} 
                                             (click)="generateApiKey()">
                                             @if(keyGenerating){
                                                 <mat-spinner 
@@ -148,7 +148,7 @@
                                                     mode="indeterminate"
                                                 />
                                             } @else {
-                                                @if(profileSummary.userSummary.apiKey){
+                                                @if(profileSummary.apiKey){
                                                     Regenerate API Key
                                                 } @else {
                                                     Generate API Key
@@ -185,6 +185,10 @@
                         </div>
                         <hr />
                     </div>
+                } @else {
+                    <app-alert
+                        [alertInputs]="alert"
+                    />
                 }
             </div>
         </div>

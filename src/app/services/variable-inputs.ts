@@ -1,11 +1,13 @@
-import { AccountCodeTypeEnum } from "../enums/user-role-enum";
+import { AuditActionEnum } from "../enums/audit-action-enum";
+import { UserStatusEnum } from "../enums/status-enum";
+import { AccountCodeTypeEnum, SystemRoleEnum, UserRoleEnum } from "../enums/user-role-enum";
 import { ChangeForgottenPasswordModel, ChangePasswordModel } from "../models/account/accounts-models";
 import { LoginModel } from "../models/account/login-model";
 import { RegisterModel } from "../models/account/register-model";
 import { CertificationModel } from "../models/certifications/certifications-models";
 import { EducationModel } from "../models/education/education-models";
 import { ExperienceModel } from "../models/experience/experience-models";
-import { ProfileLocationModel, ProfileUpdateModel } from "../models/profile/profile-models";
+import { ProfileLocationModel, ProfilesInputModel, ProfileUpdateModel } from "../models/profile/profile-models";
 import { ProjectModel } from "../models/project/project-models";
 import { SkillModel } from "../models/skills/skills-models";
 
@@ -257,6 +259,49 @@ export const getEmailInput = function(email: string){
       input: {
         email: email
       }
+    }
+  }
+}
+
+export const getAuditLogInput = function(search: string | null, action: AuditActionEnum | null) {
+  return {
+    input: {
+      search: search,
+      action: action
+    }
+  }
+}
+
+export const getProfilesInput = function(query: ProfilesInputModel | null, skip: number, take: number) {
+  return {
+    search: query,
+    skip: skip,
+    take: take
+  }
+}
+
+export function getStatusChangeInput(email: string, status: UserStatusEnum) {
+  return {
+    input: {
+      userEmail: email,
+      newStatus: status
+    }
+  }
+}
+
+export function getRoleChangeInput(email: string, role: SystemRoleEnum){
+  return {
+    input: {
+      userEmail: email,
+      role: role
+    }
+  }
+}
+
+export function getDeleteAccountInput(userId: string){
+  return {
+    input: {
+      userId: userId
     }
   }
 }

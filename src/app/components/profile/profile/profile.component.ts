@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
-import { ApiKeyResponseModel, apiKeyTooltip, ProfileModel, ProfileResultModel, ProfileSummaryResponseModel } from '../../../models/profile/profile-models';
+import { ApiKeyResponseModel, apiKeyTooltip, DetailedProfileModel, ProfileModel, ProfileSummaryModel } from '../../../models/profile/profile-models';
 import { AppService } from '../../../services/app.service';
 import { ProfileService } from '../../../services/profile.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -50,7 +50,7 @@ export class ProfileComponent {
   genderColor: string = 'not-specified-theme';
   keyGenerating: boolean = false;
   profile!: ProfileModel;
-  profileSummary!: ProfileSummaryResponseModel;
+  profileSummary!: ProfileSummaryModel;
   alert = new AlertModel();
   error!: Error;
   appService = inject(AppService);
@@ -60,8 +60,7 @@ export class ProfileComponent {
   router = inject(Router);
 
   ngOnInit(){
-    this.getProfile();
-    //this.getProfileSummary();
+    this.getDetailedProfile();
   }
 
   copy(){
@@ -74,53 +73,30 @@ export class ProfileComponent {
     }
   }
 
-  getProfile(){
+  getDetailedProfile(){
     this.loading = true;
-    this.profileService.getProfile()
+    this.profileService.getDetailedProfile()
       .valueChanges
       .subscribe({
         next: (data: any) => {
-          this.profile = (<ProfileModel>data.data.profile);
-          if(!this.profile){
+          this.loading = (<boolean>data.loading);
+          let result = (<DetailedProfileModel>data.data.detailedProfile);
+          if(!result){
             this.alert = this.appService.mapAlertMessage(this.alert,
               'No record', 'No record found for this profile. Please try again later',
               AlertIconEnum.danger, AlertClassEnum.danger
           )
           } else {
+            this.profile = result.profile;
+            this.profileSummary = result.profileSummary;
+            this.barWidth = this.profileSummary.progress + '%';
+            this.barColor = this.getProgressColor(this.profileSummary.progress);
+            this.apiKey = this.profileSummary.apiKey;
             this.genderColor = this.getGenderColor(this.profile.gender);
-            this.getProfileSummary()
           }
-          this.loading = (<boolean>data.loading);
         },
         error: (error: Error) => {
           this.loading = false;
-          this.error = error;
-          this.alert = this.appService.mapAlertMessage(this.alert,
-              'An error occurred', getGenericErrorMessage(OperationTypeEnum.get),
-              AlertIconEnum.danger, AlertClassEnum.danger
-          )
-        }
-      })
-  }
-
-  getProfileSummary(){
-    this.loading = true;
-    this.profileService.getProfileSummaryObservable()
-      .valueChanges
-      .subscribe({
-        next: (data: any) => {
-          this.profileSummary = (<ProfileSummaryResponseModel>data.data);
-          if(this.profileSummary && this.profileSummary.userSummary){
-            this.barWidth = this.profileSummary.userSummary.progress + '%';
-            this.barColor = this.getProgressColor(this.profileSummary.userSummary.progress);
-            this.apiKey = this.profileSummary.userSummary.apiKey;
-          } else {
-            this.alert = this.appService.mapAlertMessage(this.alert,
-              'No record', 'No profile summary record found. Please try again later',
-              AlertIconEnum.danger, AlertClassEnum.danger)
-          }
-        },
-        error: (error: Error) => {
           this.error = error;
           this.alert = this.appService.mapAlertMessage(this.alert,
               'An error occurred', getGenericErrorMessage(OperationTypeEnum.get),
@@ -144,7 +120,7 @@ export class ProfileComponent {
 
   get tasksText(): string {
     let tasks: string[] = [];
-    let summary = this.profileSummary.userSummary;
+    let summary = this.profileSummary;
 
     if(!this.profile.location){
       tasks.push('Location');
@@ -192,7 +168,7 @@ export class ProfileComponent {
     ref.afterClosed().subscribe(result => {
       let res = (<MatDialogFileUploadData>result);
       if(res.refreshAfterClose){
-        this.getProfile();
+        this.getDetailedProfile();
       }
     })
   }
@@ -209,7 +185,7 @@ export class ProfileComponent {
     ref.afterClosed().subscribe(result => {
       let res = (<MatDialogFileUploadData>result);
       if(res.refreshAfterClose){
-        this.getProfile();
+        this.getDetailedProfile();
       }
     })
   }
@@ -221,7 +197,7 @@ export class ProfileComponent {
     ref.afterClosed().subscribe(result => {
       let res = (<MatDialogData>result);
       if(res.refresh){
-        this.getProfile()
+        this.getDetailedProfile()
       }
     })
   }
@@ -242,7 +218,7 @@ export class ProfileComponent {
     ref.afterClosed().subscribe(result => {
       let res = (<MatDialogData>result);
       if(res && res.refresh){
-        this.getProfile();
+        this.getDetailedProfile();
       }
     })
   }
@@ -257,7 +233,7 @@ export class ProfileComponent {
           let response = (<ApiKeyResponseModel>data.data.apiKey);
           if(response.success){
             this.apiKey = response.apiKey;
-            this.profileSummary.userSummary.apiKey = response.apiKey;
+            this.profileSummary.apiKey = response.apiKey;
             this.appService.openSnackBar(response.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success)
           } else {
             this.appService.openSnackBar(response.message, SnackbarClassEnum.Success, SnackbarIconEnum.Success)
@@ -265,7 +241,7 @@ export class ProfileComponent {
         },
         error: (_: Error) => {
           this.keyGenerating = false;
-          let ops = this.profileSummary.userSummary.apiKey ? OperationTypeEnum.reGenerate : OperationTypeEnum.generate;
+          let ops = this.profileSummary.apiKey ? OperationTypeEnum.reGenerate : OperationTypeEnum.generate;
           this.appService.openSnackBar(getGenericErrorMessage(ops), SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
         }
       })

@@ -5,7 +5,7 @@ import { AccountConfirmationMutation, ChangeForgottenPasswordMutation, ChangePas
 import { LoginModel } from '../models/account/login-model';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../enums/snackbar-enum';
 import { Router } from '@angular/router';
-import { UserClaimsModel } from '../models/account/user-claims-model';
+import { JwtPayload, UserClaimsModel } from '../models/account/user-claims-model';
 import { UserClaimsEnum } from '../enums/user-claims-enum';
 import { AppService } from './app.service';
 import { RegisterModel } from '../models/account/register-model';
@@ -106,7 +106,7 @@ export class AccountService {
     } else{
       return '';
     }
-  }
+  } 
 
   canViewPage(roles: string[]): boolean {
     var role = this.getUserRoles();
@@ -114,6 +114,26 @@ export class AccountService {
       return true;
     } else{
       return false;
+    }
+  }
+
+  isTokenExpired(): boolean {
+    try {
+      const token = localStorage.getItem('accessToken');
+      if(token){
+        let jwtBodyArr = token.split('.');
+        if(jwtBodyArr.length > 1){
+          let decodedJWT = JSON.parse(window.atob(jwtBodyArr[1]));
+          const now = Math.floor(Date.now() / 1000);
+          return (<number>decodedJWT.exp) < now;
+        } else{
+          return true;
+        }
+      }else {
+        return true
+      }
+    } catch (e) {
+      return true;
     }
   }
 }

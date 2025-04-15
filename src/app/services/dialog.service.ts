@@ -12,6 +12,10 @@ import { MatDialogFileUploadData } from '../models/common/common-models';
 import { LocationComponent } from '../components/dialogs/location/location.component';
 import { UpdateProfileDetailsComponent } from '../components/dialogs/update-profile-details/update-profile-details.component';
 import { ChangePasswordComponent } from '../components/dialogs/change-password/change-password.component';
+import { ChangeUserStatusComponent } from '../components/dialogs/change-user-status/change-user-status.component';
+import { ChangeUserRoleComponent } from '../components/dialogs/change-user-role/change-user-role.component';
+import { DeleteUserComponent } from '../components/dialogs/delete-user/delete-user.component';
+import { ViewUserDetailsComponent } from '../components/dialogs/view-user-details/view-user-details.component';
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +102,38 @@ export class DialogService {
       position: { top: '12vh' },
       disableClose: true,
       data: data
+    })
+  }
+
+  openStatusChangeDialog(id: string, name: string): MatDialogRef<ChangeUserStatusComponent, any> {
+    return this.dialog.open(ChangeUserStatusComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openRoleChangeDialog(id: string, name: string): MatDialogRef<ChangeUserRoleComponent, any> {
+    return this.dialog.open(ChangeUserRoleComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openDeleteUserDialog(id: string, name: string): MatDialogRef<DeleteUserComponent, any> {
+    return this.dialog.open(DeleteUserComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openViewUserDialog(id: string): MatDialogRef<ViewUserDetailsComponent, any> {
+    return this.dialog.open(ViewUserDetailsComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id }
     })
   }
 }
