@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
-import { Apollo, gql } from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 import { RouterLink } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AlertComponent } from '../alert/alert.component';
@@ -48,12 +48,6 @@ export class FaqsComponent {
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
     this.getData(this.pageIndex * this.pageSize, this.pageSize, this.search.value)
-  }
-
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-    }
   }
 
   getData(skip: number, take: number, search: string | null){
