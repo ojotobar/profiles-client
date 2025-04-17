@@ -17,7 +17,7 @@ import { SnackbarAnnotatedComponent } from '../components/utilities/snackbar-ann
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { Apollo, TypedDocumentNode } from 'apollo-angular';
+import { Apollo, QueryRef, TypedDocumentNode } from 'apollo-angular';
 import { MatDialogFileUploadData } from '../models/common/common-models';
 import {formatDate} from '@angular/common';
 import jsPDF from 'jspdf';
@@ -25,6 +25,10 @@ import html2canvas from 'html2canvas';
 import { UserStatusEnum } from '../enums/status-enum';
 import { GenderEnum } from '../enums/gender-enum';
 import { SystemRoleEnum, UserRoleEnum } from '../enums/user-role-enum';
+import { OperationVariables } from '@apollo/client/core';
+import { GetAuditLogsFilterQuery } from './queries/common-queries';
+import { getAuditLogInput } from './variable-inputs';
+import { AuditActionEnum } from '../enums/audit-action-enum';
 
 @Injectable({
   providedIn: 'root'
@@ -319,4 +323,12 @@ export class AppService {
 		  );
 		});
 	}
+
+  getAuditLogsObservables(search: string | null, action: AuditActionEnum | null,
+    skip: number, take: number): QueryRef<any, OperationVariables> {
+    return this._apollo.watchQuery({
+      query: GetAuditLogsFilterQuery,
+      variables: getAuditLogInput(search, action, skip, take) as OperationVariables
+    })
+  }
 }

@@ -37,7 +37,6 @@ import { MatDialogData } from '../../../models/common/snackbar-model';
     MatProgressSpinnerModule,
     AlertComponent,
     MatPaginatorModule,
-    DatePipe,
     InitialsPipe,
     TitlecasedPipe,
     CustomDatePipe

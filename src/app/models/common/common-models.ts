@@ -1,3 +1,4 @@
+import { AuditActionEnum } from "../../enums/audit-action-enum";
 import { OperationTypeEnum } from "../../enums/operation-type-enum";
 import { UploadFileTypes, UploadTypeEnum } from "../../enums/upload-types-enums";
 
@@ -15,6 +16,26 @@ export interface MatDialogFileUploadData{
 
 export interface GenericResponseModel {
     payload: ResponseModel
+}
+
+export interface AuditLogResponseModel {
+    items: AuditLogModel[],
+    pageInfo: {
+        hasPreviousPage: boolean,
+        hasNextPage: boolean
+    },
+    totalCount: number
+}
+
+export interface AuditLogModel {
+    id: string,
+    userId: string,
+    performedBy: string,
+    actionId: AuditActionEnum,
+    action: string,
+    ipAddress: string | null,
+    platform: string
+    createdOn: Date  
 }
 
 export const genericErrorMessage = 'Something went wrong';
