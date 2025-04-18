@@ -19,12 +19,17 @@
                             @if(isBusy){
                                 <mat-spinner class="my-3 m-auto" [diameter]="30"/>
                             } @else {
-                                Change
+                                Add
                             }
                         </button>
                     </div>
                     <div class="col-sm-12 col-md-6 mb-1">
-                        <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="appService.closeDialog(dialogRef, data)" disabled={{isBusy}}>Back</button>
+                        <button 
+                            mat-raised-button 
+                            type="button" 
+                            class="bg-secondary text-light w-100" 
+                            (click)="appService.closeDialog(dialogRef, data)" 
+                            disabled={{isBusy}}>Back</button>
                     </div>
                 </div>
             </form>    
