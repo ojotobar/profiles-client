@@ -7,7 +7,6 @@ export const GetAuditLogsFilterQuery = gql`
         id
         userId
         performedBy
-        performedOn
         actionId
         action
         ipAddress
@@ -22,29 +21,6 @@ export const GetAuditLogsFilterQuery = gql`
     }
   }`
 ;
-
-export const GetAuditLogsQuery = function(skip: number, take: number, search: string | null = ""){
-  return gql`
-    query {
-      auditLogs(search: ${search} skip: ${skip} take: ${take}){
-        items{
-          id
-          userId
-          performedBy
-          actionId
-          action
-          ipAddress
-          platform
-          createdOn
-        }
-        pageInfo{
-          hasPreviousPage
-          hasNextPage
-        }
-        totalCount
-      }
-    }`;
-}
 
 export const GetFaqsQuery = function(){
   return gql`

@@ -263,12 +263,15 @@ export const getEmailInput = function(email: string){
   }
 }
 
-export const getAuditLogInput = function(search: string | null, action: AuditActionEnum | null) {
+export const getAuditLogInput = function(search: string | null, action: AuditActionEnum | null
+  , skip: number, take: number) {
   return {
     input: {
       search: search,
       action: action
-    }
+    },
+    skip: skip,
+    take: take
   }
 }
 
