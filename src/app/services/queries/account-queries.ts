@@ -5,6 +5,7 @@ export const GetSystemRolesQuery = gql`
     systemRoles{
       id
       name
+      users
     }
   }
 `;

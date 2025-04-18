@@ -20,5 +20,6 @@ export interface LoginResultModel {
 
 export interface SystemRoleResponseModel {
     id: string,
-    name: string
+    name: string,
+    users: number
 }

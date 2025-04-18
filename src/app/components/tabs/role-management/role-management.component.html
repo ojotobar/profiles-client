@@ -1,4 +1,7 @@
-<div class="container mb-5">
+<div class="container mt-3 mb-5">
+    <button mat-button class="app-bg text-white text-center" (click)="openAddRoleDialog()">
+        <mat-icon class="px-0 m-0 m-auto">add_box</mat-icon>
+    </button>
     <div class="table-responsive">
         @if(loading){
             <mat-spinner 
@@ -17,23 +20,23 @@
                 <caption>System Roles</caption>
                 <thead class="table-dark">
                     <tr>
-                      <th scope="col" style="width: 25%;">Name</th>
-                      <th scope="col" style="width: 23%;">Users In Role</th>
+                      <th scope="col" style="width: 60%;">Name</th>
+                      <th scope="col" style="width: 30%;">Users In Role</th>
                       <th scope="col" style="width: 10%;"></th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     @for (role of roles; track $index) {
                         <tr>
-                            <td style="width: 25%;"></td>
-                            <td style="width: 23%;"></td>
+                            <td style="width: 60%;">{{role.name}}</td>
+                            <td style="width: 30%;">{{role.users | number }}</td>
                             <td style="width: 10%;">
                                 <mat-select class="pr-2" placeholder="Actions">
-                                    <mat-option>
-                                        <mat-icon class="text-success m-0 m-auto">update</mat-icon>
+                                    <mat-option (click)="openUpdateRoleDialog(role.id, role.name)">
+                                        <mat-icon class="text-success m-0 m-auto">edit</mat-icon>
                                     </mat-option>
                                     <mat-option>
-                                        <mat-icon class="text-danger m-0 m-auto">delete</mat-icon>
+                                        <mat-icon class="text-danger m-0 m-auto" (click)="openDeleteRoleDialog(role.id, role.name)">delete</mat-icon>
                                     </mat-option>
                                 </mat-select>
                             </td>
