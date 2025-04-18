@@ -78,3 +78,37 @@ export const ChangeForgottenPasswordMutation = gql`
     }
   }
 `;
+
+
+export const AddSystemRoleMutation = gql`
+  mutation AddRole($input: AddSystemRoleInput!){
+    addSystemRole(input: $input){
+      payload{
+        message
+        success
+      }
+    }
+  }
+`;
+
+export const UpdateSystemRoleMutation = gql`
+  mutation UpdateRole($input: UpdateSystemRoleInput!){
+    updateSystemRole(input: $input){
+      payload{
+        success
+        message
+      }
+    }
+  }
+`;
+
+export const DeleteSystemRoleMutation = gql`
+  mutation DeleteRole($input: DeleteSystemRoleInput!){
+    deleteSystemRole(input: $input){
+      payload{
+        message
+        success
+      }
+    }
+  }
+`;
