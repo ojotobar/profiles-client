@@ -16,6 +16,9 @@ import { ChangeUserStatusComponent } from '../components/dialogs/change-user-sta
 import { ChangeUserRoleComponent } from '../components/dialogs/change-user-role/change-user-role.component';
 import { DeleteUserComponent } from '../components/dialogs/delete-user/delete-user.component';
 import { ViewUserDetailsComponent } from '../components/dialogs/view-user-details/view-user-details.component';
+import { AddRoleComponent } from '../components/dialogs/add-role/add-role.component';
+import { UpdateRoleComponent } from '../components/dialogs/update-role/update-role.component';
+import { DeleteRoleComponent } from '../components/dialogs/delete-role/delete-role.component';
 
 @Injectable({
   providedIn: 'root'
@@ -134,6 +137,30 @@ export class DialogService {
       position: { top: '12vh' },
       disableClose: true,
       data: { id: id }
+    })
+  }
+
+  openAddRoleDialog(name: string): MatDialogRef<AddRoleComponent, any> {
+    return this.dialog.open(AddRoleComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { name: name }
+    })
+  }
+
+  openUpdateRoleDialog(id: string, name: string): MatDialogRef<UpdateRoleComponent, any> {
+    return this.dialog.open(UpdateRoleComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openDeleteRoleDialog(id: string, name: string): MatDialogRef<DeleteRoleComponent, any> {
+    return this.dialog.open(DeleteRoleComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
     })
   }
 }

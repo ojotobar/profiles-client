@@ -17,3 +17,9 @@ export interface LoginResultModel {
     successful: boolean,
     emailNotConfirmed: boolean
 }
+
+export interface SystemRoleResponseModel {
+    id: string,
+    name: string,
+    users: number
+}

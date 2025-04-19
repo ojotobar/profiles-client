@@ -308,3 +308,22 @@ export function getDeleteAccountInput(userId: string){
     }
   }
 }
+
+export function getAddRoleInput(name: string){
+  return {
+    input: {
+      roleName: name
+    }
+  }
+}
+
+export function getUpdateRoleInput(id: string, name: string){
+  return {
+    input: {
+      input: {
+        id: id,
+        name: name
+      }
+    }
+  }
+}
