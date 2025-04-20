@@ -19,6 +19,9 @@ import { ViewUserDetailsComponent } from '../components/dialogs/view-user-detail
 import { AddRoleComponent } from '../components/dialogs/add-role/add-role.component';
 import { UpdateRoleComponent } from '../components/dialogs/update-role/update-role.component';
 import { DeleteRoleComponent } from '../components/dialogs/delete-role/delete-role.component';
+import { DeleteFaqsComponent } from '../components/dialogs/delete-faqs/delete-faqs.component';
+import { AddFaqsComponent } from '../components/dialogs/add-faqs/add-faqs.component';
+import { UpdateFaqsComponent } from '../components/dialogs/update-faqs/update-faqs.component';
 
 @Injectable({
   providedIn: 'root'
@@ -161,6 +164,30 @@ export class DialogService {
       position: { top: '12vh' },
       disableClose: true,
       data: { id: id, name: name }
+    })
+  }
+
+  openDeleteFaqsDialog(id: string, name: string): MatDialogRef<DeleteFaqsComponent, any> {
+    return this.dialog.open(DeleteFaqsComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openAddFaqsDialog(name: string): MatDialogRef<AddFaqsComponent, any> {
+    return this.dialog.open(AddFaqsComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { name: name }
+    })
+  }
+
+  openUpdateFaqsDialog(id: string): MatDialogRef<UpdateFaqsComponent, any> {
+    return this.dialog.open(UpdateFaqsComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id }
     })
   }
 }

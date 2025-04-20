@@ -52,15 +52,7 @@ export class FaqsComponent {
 
   getData(skip: number, take: number, search: string | null){
     this.loading = true;
-    this.apollo
-      .watchQuery({
-        query: GetFaqsQuery(),
-        variables: {
-          search: search,
-          skip: skip,
-          take: take
-        }
-      })
+    this.appService.getFaqsObservable(search, skip, take)
       .valueChanges.subscribe({
         next: (data: any) => {
           this.loading = (<boolean>data.loading);
@@ -75,7 +67,6 @@ export class FaqsComponent {
           }
         },
         error: (error: Error) => {
-          console.log(error)
           this.alertInputs = this.appService.mapAlertMessage(this.alertInputs,
             'An error occurred!', 'An error occurred why getting the data. Please try again later.', 
             AlertIconEnum.danger, AlertClassEnum.danger
