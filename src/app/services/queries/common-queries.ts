@@ -22,8 +22,7 @@ export const GetAuditLogsFilterQuery = gql`
   }`
 ;
 
-export const GetFaqsQuery = function(){
-  return gql`
+export const GetFaqsQuery = gql`
     query GetFaqs($search: String, $skip: Int, $take: Int) {
       faqs(search: $search, skip: $skip take: $take){
         items{
@@ -31,6 +30,8 @@ export const GetFaqsQuery = function(){
           title
           content
           isDeprecated
+          createdOn
+          updatedOn
         }
         pageInfo{
           hasNextPage
@@ -40,4 +41,16 @@ export const GetFaqsQuery = function(){
       }
     }
   `;
-}
+
+  export const GetFaqQuery = gql`
+    query GetFaq($id: UUID!){
+      faq(id: $id){
+        id
+        title
+        content
+        createdOn
+        updatedOn
+        isDeprecated
+      }
+    }
+  `;

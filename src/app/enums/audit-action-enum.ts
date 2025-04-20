@@ -8,5 +8,7 @@ export enum AuditActionEnum {
     PasswordReset = 'PASSWORD_RESET',
     ForgottenPasswordChange = 'FORGOTTEN_PASSWORD_CHANGE',
     Deprecated = 'DEPRECATED',
-    Deleted = 'DELETED'
+    Deleted = 'DELETED',
+    AuditLogs = 'AUDIT_LOGS',
+    RoleAdmin = 'ROLE_ADMIN'
 }

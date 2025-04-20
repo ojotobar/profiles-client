@@ -26,9 +26,10 @@ import { UserStatusEnum } from '../enums/status-enum';
 import { GenderEnum } from '../enums/gender-enum';
 import { SystemRoleEnum, UserRoleEnum } from '../enums/user-role-enum';
 import { OperationVariables } from '@apollo/client/core';
-import { GetAuditLogsFilterQuery } from './queries/common-queries';
+import { GetAuditLogsFilterQuery, GetFaqQuery, GetFaqsQuery } from './queries/common-queries';
 import { getAuditLogInput } from './variable-inputs';
 import { AuditActionEnum } from '../enums/audit-action-enum';
+import { AddFaqsMutation, DeleteFaqsMutation, UpdateFaqsMutation } from './mutations/faqs-mutations';
 
 @Injectable({
   providedIn: 'root'
@@ -329,6 +330,66 @@ export class AppService {
     return this._apollo.watchQuery({
       query: GetAuditLogsFilterQuery,
       variables: getAuditLogInput(search, action, skip, take) as OperationVariables
+    })
+  }
+
+  getFaqsObservable(search: string | null, skip: number, take: number): QueryRef<any, OperationVariables> {
+    return this._apollo.watchQuery({
+      query: GetFaqsQuery,
+      variables: {
+        search: search,
+        skip: skip,
+        take: take
+      } as OperationVariables
+    })
+  }
+
+  getFaqObservable(id: string): QueryRef<any, OperationVariables> {
+    return this._apollo.watchQuery({
+      query: GetFaqQuery,
+      variables: {
+        id: id
+      } as OperationVariables
+    })
+  }
+
+  updateFaqObservable(id: string, title: string, content: string): Observable<any>{
+    return this._apollo.mutate({
+      mutation: UpdateFaqsMutation,
+      variables: {
+        input: {
+          id: id,
+          input: {
+            title: title,
+            content: content
+          }
+        }
+      }
+    })
+  }
+
+  addFaqObservable(title: string, content: string): Observable<any>{
+    return this._apollo.mutate({
+      mutation: AddFaqsMutation,
+      variables: {
+        input: {
+          input: {
+            title: title,
+            content: content
+          }
+        }
+      }
+    })
+  }
+
+  deleteFaqObservable(id: string): Observable<any>{
+    return this._apollo.mutate({
+      mutation: DeleteFaqsMutation,
+      variables: {
+        input: {
+          id: id
+        }
+      }
     })
   }
 }
