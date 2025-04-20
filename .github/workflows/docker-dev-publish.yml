@@ -32,9 +32,9 @@ jobs:
 
           TAGS=$(curl -s -u "$DOCKERHUB_USERNAME:$DOCKERHUB_PASSWORD" \
             "https://hub.docker.com/v2/repositories/$REPO/tags/?page_size=100" \
-            | jq -r '.results[].name' | grep '^live-[0-9]*$' || echo "")
+            | jq -r '.results[].name' | grep '^v[0-9]*$' || echo "")
 
-          MAX_VERSION=$(echo "$TAGS" | sed 's/live-//' | sort -n | tail -n 1)
+          MAX_VERSION=$(echo "$TAGS" | sed 's/v//' | sort -n | tail -n 1)
           if [[ -z "$MAX_VERSION" ]]; then
             NEXT_VERSION=1
           else
