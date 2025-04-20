@@ -13,6 +13,8 @@ export interface FaqsItemModel{
     id: string,
     title: string,
     content: string,
-    isDeprecated: boolean
+    isDeprecated: boolean,
+    createdOn: Date,
+    updatedOn: Date
 }
 

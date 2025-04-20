@@ -58,3 +58,79 @@ export const GenerateApiKeyQuery = gql`
         }
     }
 `;
+
+export const GetProfilesQuery = gql`
+    query GetUsers($search: UserFilterInput!, $skip: Int, $take: Int){
+        users(search: $search, skip: $skip, take: $take){
+            items{
+                id
+                firstName
+                lastName
+                otherName
+                lastLogin
+                status
+                gender
+                email
+                phoneNumber
+                emailConfirmed
+                photoUrl
+                cvUrl
+                createdOn
+                updatedOn
+                role
+                deactivatedOn
+                isDeprecated
+            }
+            pageInfo{
+                hasNextPage
+                hasPreviousPage
+            }
+            totalCount
+    }
+}
+`;
+
+export const GetDetailedProfileQuery = gql`
+    query {
+        detailedProfile{
+            profile{
+                id
+                firstName
+                lastName
+                otherName
+                gender
+                email
+                emailConfirmed
+                phoneNumber
+                photoUrl
+                cvUrl
+                createdOn
+                status
+                isDeprecated
+                deactivatedOn
+                lastLogin
+                updatedOn
+                location{
+                    line1
+                    line2
+                    city
+                    postalCode
+                    state
+                    country
+                    longitude
+                    latitude
+                }
+            }
+            profileSummary{
+                skills
+                hasCareerSummary
+                projects
+                progress
+                certifications
+                canGenerateApiKey
+                education
+                experience
+            }
+        }
+    }
+`;

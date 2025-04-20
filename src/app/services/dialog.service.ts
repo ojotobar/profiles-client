@@ -12,6 +12,16 @@ import { MatDialogFileUploadData } from '../models/common/common-models';
 import { LocationComponent } from '../components/dialogs/location/location.component';
 import { UpdateProfileDetailsComponent } from '../components/dialogs/update-profile-details/update-profile-details.component';
 import { ChangePasswordComponent } from '../components/dialogs/change-password/change-password.component';
+import { ChangeUserStatusComponent } from '../components/dialogs/change-user-status/change-user-status.component';
+import { ChangeUserRoleComponent } from '../components/dialogs/change-user-role/change-user-role.component';
+import { DeleteUserComponent } from '../components/dialogs/delete-user/delete-user.component';
+import { ViewUserDetailsComponent } from '../components/dialogs/view-user-details/view-user-details.component';
+import { AddRoleComponent } from '../components/dialogs/add-role/add-role.component';
+import { UpdateRoleComponent } from '../components/dialogs/update-role/update-role.component';
+import { DeleteRoleComponent } from '../components/dialogs/delete-role/delete-role.component';
+import { DeleteFaqsComponent } from '../components/dialogs/delete-faqs/delete-faqs.component';
+import { AddFaqsComponent } from '../components/dialogs/add-faqs/add-faqs.component';
+import { UpdateFaqsComponent } from '../components/dialogs/update-faqs/update-faqs.component';
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +108,86 @@ export class DialogService {
       position: { top: '12vh' },
       disableClose: true,
       data: data
+    })
+  }
+
+  openStatusChangeDialog(id: string, name: string): MatDialogRef<ChangeUserStatusComponent, any> {
+    return this.dialog.open(ChangeUserStatusComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openRoleChangeDialog(id: string, name: string): MatDialogRef<ChangeUserRoleComponent, any> {
+    return this.dialog.open(ChangeUserRoleComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openDeleteUserDialog(id: string, name: string): MatDialogRef<DeleteUserComponent, any> {
+    return this.dialog.open(DeleteUserComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openViewUserDialog(id: string): MatDialogRef<ViewUserDetailsComponent, any> {
+    return this.dialog.open(ViewUserDetailsComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id }
+    })
+  }
+
+  openAddRoleDialog(name: string): MatDialogRef<AddRoleComponent, any> {
+    return this.dialog.open(AddRoleComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { name: name }
+    })
+  }
+
+  openUpdateRoleDialog(id: string, name: string): MatDialogRef<UpdateRoleComponent, any> {
+    return this.dialog.open(UpdateRoleComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openDeleteRoleDialog(id: string, name: string): MatDialogRef<DeleteRoleComponent, any> {
+    return this.dialog.open(DeleteRoleComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openDeleteFaqsDialog(id: string, name: string): MatDialogRef<DeleteFaqsComponent, any> {
+    return this.dialog.open(DeleteFaqsComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id, name: name }
+    })
+  }
+
+  openAddFaqsDialog(name: string): MatDialogRef<AddFaqsComponent, any> {
+    return this.dialog.open(AddFaqsComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { name: name }
+    })
+  }
+
+  openUpdateFaqsDialog(id: string): MatDialogRef<UpdateFaqsComponent, any> {
+    return this.dialog.open(UpdateFaqsComponent, {
+      position: { top: '12vh' },
+      disableClose: true,
+      data: { id: id }
     })
   }
 }

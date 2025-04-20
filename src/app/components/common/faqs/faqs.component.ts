@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {PageEvent, MatPaginatorModule} from '@angular/material/paginator';
-import { Apollo, gql } from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 import { RouterLink } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AlertComponent } from '../alert/alert.component';
@@ -9,6 +9,8 @@ import { AlertIconEnum, AlertClassEnum } from '../../../enums/alert-enums';
 import { AlertModel } from '../../../models/common/alert-models';
 import { FaqsItemModel, FaqsData } from '../../../models/common/faqs-models';
 import { AppService } from '../../../services/app.service';
+import { GetFaqsQuery } from '../../../services/queries/common-queries';
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -28,6 +30,7 @@ export class FaqsComponent {
   appService = inject(AppService)
   pageSize = 10;
   pageIndex = 0;
+  search = new FormControl('');
   pageSizeOptions = [10, 25, 50];
   faqs: FaqsItemModel[] = [];
   loading = true;
@@ -37,42 +40,19 @@ export class FaqsComponent {
   constructor(private readonly apollo: Apollo) { }
 
   ngOnInit(){
-    this.getData(this.pageIndex * this.pageSize, this.pageSize)
+    this.getData(this.pageIndex * this.pageSize, this.pageSize, this.search.value)
   }
 
   handlePageEvent(e: PageEvent) {
     this.length = e.length;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.getData(this.pageIndex * this.pageSize, this.pageSize)
+    this.getData(this.pageIndex * this.pageSize, this.pageSize, this.search.value)
   }
 
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-    }
-  }
-
-  getData(skip: number, take: number){
-    this.apollo
-      .watchQuery({
-        query: gql`
-          query GetFaqs{
-            faqs(skip: ${skip}, take: ${take}) {
-              items{
-                id
-                title
-                content
-                isDeprecated
-              },
-            pageInfo{
-              hasNextPage
-              hasPreviousPage
-            },
-            totalCount
-          }
-        }
-      `})
+  getData(skip: number, take: number, search: string | null){
+    this.loading = true;
+    this.appService.getFaqsObservable(search, skip, take)
       .valueChanges.subscribe({
         next: (data: any) => {
           this.loading = (<boolean>data.loading);
@@ -93,6 +73,6 @@ export class FaqsComponent {
           )
           this.loading = false;
         }
-      });
+    });
   }
 }

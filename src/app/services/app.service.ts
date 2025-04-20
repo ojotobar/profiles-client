@@ -17,11 +17,19 @@ import { SnackbarAnnotatedComponent } from '../components/utilities/snackbar-ann
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { Apollo, TypedDocumentNode } from 'apollo-angular';
+import { Apollo, QueryRef, TypedDocumentNode } from 'apollo-angular';
 import { MatDialogFileUploadData } from '../models/common/common-models';
 import {formatDate} from '@angular/common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { UserStatusEnum } from '../enums/status-enum';
+import { GenderEnum } from '../enums/gender-enum';
+import { SystemRoleEnum, UserRoleEnum } from '../enums/user-role-enum';
+import { OperationVariables } from '@apollo/client/core';
+import { GetAuditLogsFilterQuery, GetFaqQuery, GetFaqsQuery } from './queries/common-queries';
+import { getAuditLogInput } from './variable-inputs';
+import { AuditActionEnum } from '../enums/audit-action-enum';
+import { AddFaqsMutation, DeleteFaqsMutation, UpdateFaqsMutation } from './mutations/faqs-mutations';
 
 @Injectable({
   providedIn: 'root'
@@ -207,6 +215,7 @@ export class AppService {
       new MessageSubjectModel('General Inquiry', MessageSubjectEnum.GeneralInquiry),
       new MessageSubjectModel('Support', MessageSubjectEnum.Support),
       new MessageSubjectModel('Business Inquiry', MessageSubjectEnum.BusinessInquiry),
+      new MessageSubjectModel('Account Deletion Request', MessageSubjectEnum.DeletionRequest),
       new MessageSubjectModel('Other', MessageSubjectEnum.Other)
     ]
   }
@@ -220,6 +229,30 @@ export class AppService {
         { label: 'Masters', value: EducationLevelEnum.Masters },
         { label: 'Doctorate', value: EducationLevelEnum.Doctorate }
       ]
+  }
+
+  getUserStatusOptions() {
+    return [
+      { label: 'Active', value: UserStatusEnum.Active },
+      { label: 'Inactive', value: UserStatusEnum.Inactive },
+      { label: 'Suspended', value: UserStatusEnum.Suspended }
+    ]
+  }
+
+  getUserRoleOptions() {
+    return [
+      { label: 'Professional', value: SystemRoleEnum.professional },
+      { label: 'Read Only', value: SystemRoleEnum.readOnly },
+      { label: 'Admin', value: SystemRoleEnum.admin }
+    ]
+  }
+
+  getUserGenderOptions() {
+    return [
+      { label: 'Male', value: GenderEnum.Male },
+      { label: 'Female', value: GenderEnum.Female },
+      { label: 'Not Specified', value: GenderEnum.NotSpecified }
+    ]
   }
 
   sendContactMessage(payload: ContactMessageModel){
@@ -277,5 +310,86 @@ export class AppService {
     onWindowResize() {
       this.viewportHeight.next(window.innerHeight);
       this.viewportWidth.next(window.innerWidth)
+  }
+
+  getGeoLocation(): Promise<{ lat: number, lon: number } | null> {
+		return new Promise((resolve) => {
+		  if (!navigator.geolocation) return resolve(null);
+		  navigator.geolocation.getCurrentPosition(
+			(position) => resolve({ 
+			  lat: position.coords.latitude, 
+			  lon: position.coords.longitude 
+			}),
+			() => resolve(null)
+		  );
+		});
+	}
+
+  getAuditLogsObservables(search: string | null, action: AuditActionEnum | null,
+    skip: number, take: number): QueryRef<any, OperationVariables> {
+    return this._apollo.watchQuery({
+      query: GetAuditLogsFilterQuery,
+      variables: getAuditLogInput(search, action, skip, take) as OperationVariables
+    })
+  }
+
+  getFaqsObservable(search: string | null, skip: number, take: number): QueryRef<any, OperationVariables> {
+    return this._apollo.watchQuery({
+      query: GetFaqsQuery,
+      variables: {
+        search: search,
+        skip: skip,
+        take: take
+      } as OperationVariables
+    })
+  }
+
+  getFaqObservable(id: string): QueryRef<any, OperationVariables> {
+    return this._apollo.watchQuery({
+      query: GetFaqQuery,
+      variables: {
+        id: id
+      } as OperationVariables
+    })
+  }
+
+  updateFaqObservable(id: string, title: string, content: string): Observable<any>{
+    return this._apollo.mutate({
+      mutation: UpdateFaqsMutation,
+      variables: {
+        input: {
+          id: id,
+          input: {
+            title: title,
+            content: content
+          }
+        }
+      }
+    })
+  }
+
+  addFaqObservable(title: string, content: string): Observable<any>{
+    return this._apollo.mutate({
+      mutation: AddFaqsMutation,
+      variables: {
+        input: {
+          input: {
+            title: title,
+            content: content
+          }
+        }
+      }
+    })
+  }
+
+  deleteFaqObservable(id: string): Observable<any>{
+    return this._apollo.mutate({
+      mutation: DeleteFaqsMutation,
+      variables: {
+        input: {
+          id: id
+        }
+      }
+    })
   }
 }

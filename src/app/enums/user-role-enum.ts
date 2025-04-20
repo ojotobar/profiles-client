@@ -1,10 +1,18 @@
-export enum UserRoleEnum{
+export enum UserRoleEnum {
     professional = 'Professional',
     readOnly = 'ReadOnly',
-    admin = 'Admin'
+    admin = 'Admin',
+    supportAgent = 'SupportAgent'
 }
 
-export enum AccountCodeTypeEnum{
+export enum SystemRoleEnum {
+    professional = 'PROFESSIONAL',
+    readOnly = 'READ_ONLY',
+    admin = 'ADMIN',
+    supportAgent = 'SUPPORT_AGENT'
+}
+
+export enum AccountCodeTypeEnum {
     Verification = 'VERIFICATION',
     PasswordReset = 'PASSWORDRESET'
 }
