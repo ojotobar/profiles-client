@@ -8,22 +8,8 @@
                 <mat-icon>menu</mat-icon>
             }
         </button>
-        <span class="fw-bolder mx-3" [routerLink]="['/']" [style]="'cursor: pointer'">
-            <img src="assets/images/brand-logo.svg" alt="Logo">  
+        <span class="fw-bolder mx-3 fs-4" [routerLink]="['/']" [style]="'cursor: pointer'">
+            <app-app-name />  
         </span>
-		<!-- Step 3: Toggle the value of the property when the toggler button is clicked. -->
-		<button 
-            mat-icon-button
-            class="navbar-toggler" 
-            type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
-            <mat-icon>menu</mat-icon>
-        </button>
-		<div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-			<ul class="navbar-nav d-flex justify-content-end w-75 px-5">
-                <li class="nav-item active" role="button">
-                    <mat-icon class="text-primary">facebook</mat-icon>
-                </li>
-			</ul>
-		</div>
 	</div>
 </nav>

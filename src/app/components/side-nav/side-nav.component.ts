@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {FormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { UserRoleEnum } from '../../enums/user-role-enum';
 import { AccountService } from '../../services/account.service';
 import { AppService } from '../../services/app.service';
+import { VersionService } from '../../services/version.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -28,6 +29,8 @@ export class SideNavComponent implements OnInit {
   @Output() toggleSidebar: EventEmitter<boolean> = new EventEmitter<boolean>();
   isSidebarOpened: boolean = false;
   isLoggedIn: boolean = false;
+  version: string = '';
+  versionService = inject(VersionService);
 
   constructor(private readonly appService: AppService, private readonly accountService: AccountService){
     this.appService.getIsSidebarOpened
@@ -36,9 +39,12 @@ export class SideNavComponent implements OnInit {
     this.appService.getIsLoggedIn
       .subscribe(l => this.isLoggedIn = l);
   }
-
+  
   ngOnInit(): void {
-    
+    this.versionService.version$.subscribe({
+      next: (v) => this.version = v,
+      error: () => this.version = '',
+    });
   }
 
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);

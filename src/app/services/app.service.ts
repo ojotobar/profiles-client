@@ -88,7 +88,7 @@ export class AppService {
   
         const marginTop = 10; // mm
         const marginBottom = 10; // mm
-        const footerText = `© Pro-files ${new Date().getFullYear()} | ${appDns}`;
+        const footerText = `© Profile Host ${new Date().getFullYear()} | ${appDns}`;
   
         const pxPerMm = 3.78;
         const scale = 2;

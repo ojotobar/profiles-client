@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { VersionService } from '../../../services/version.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-
+  version: string = '';
+  versionService = inject(VersionService);
+  
+  ngOnInit(): void {
+    this.versionService.version$.subscribe({
+      next: (v) => this.version = v,
+      error: () => this.version = '',
+    });
+  }
 }

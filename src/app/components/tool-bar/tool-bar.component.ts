@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { SnackbarModel } from '../../models/common/snackbar-model';
 import { AppService } from '../../services/app.service';
+import { VersionService } from '../../services/version.service';
+import { AppNameComponent } from "../common/app-name/app-name.component";
 
 @Component({
   selector: 'app-tool-bar',
@@ -17,8 +19,9 @@ import { AppService } from '../../services/app.service';
     MatButtonModule,
     MatIconModule,
     NgbCollapseModule,
-    RouterLink
-  ],
+    RouterLink,
+    AppNameComponent
+],
   templateUrl: './tool-bar.component.html',
   styleUrl: './tool-bar.component.scss'
 })
@@ -28,7 +31,7 @@ export class ToolBarComponent implements OnInit {
   snackBarModel: SnackbarModel = new SnackbarModel();
   isMenuCollapsed = true;
 
-  constructor(private readonly appService: AppService, private dialog: MatDialog){
+  constructor(private readonly appService: AppService){
     this.appService.getIsSidebarOpened
       .subscribe(s => this.isSideBarOpened = s);
 
