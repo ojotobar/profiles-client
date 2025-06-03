@@ -1,4 +1,4 @@
-name: Build And Push Pro-files Client Docker Image To Docker Hub
+name: Build And Push Profile Host Client Docker Image To Docker Hub
 
 on:
   pull_request:
@@ -39,7 +39,7 @@ jobs:
           DOCKERHUB_USERNAME: ${{ secrets.PROFILES_PROD_USERNAME }}
           DOCKERHUB_PASSWORD: ${{ secrets.PROFILES_PROD_HUB_SECRET }}
         run: |
-          IMAGE_NAME="pro-files-client"
+          IMAGE_NAME="profile-host"
           REPO="$DOCKERHUB_USERNAME/$IMAGE_NAME"
 
           echo "Fetching tags for $REPO..."
@@ -69,6 +69,10 @@ jobs:
           echo "Next version: v$NEXT_VERSION"
           echo "VERSION=v$NEXT_VERSION" >> $GITHUB_OUTPUT
 
+      - name: Write version.json to Angular assets
+        run: |
+          echo "{ \"version\": \"${{ steps.get_version.outputs.VERSION }}\" }" > src/assets/version.json
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
@@ -82,8 +86,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ secrets.PROFILES_PROD_USERNAME }}/pro-files-client:live
-            ${{ secrets.PROFILES_PROD_USERNAME }}/pro-files-client:${{ steps.get_version.outputs.VERSION }}
+            ${{ secrets.PROFILES_PROD_USERNAME }}/profile-host:live
+            ${{ secrets.PROFILES_PROD_USERNAME }}/profile-host:${{ steps.get_version.outputs.VERSION }}
 
       - name: Trigger Automatic Deployment on Render
         run: |

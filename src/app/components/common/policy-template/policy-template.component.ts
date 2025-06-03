@@ -10,5 +10,5 @@ import { DatePipe } from '@angular/common';
 })
 export class PolicyTemplateComponent {
   lastUpdated: Date = new Date(2025, 4, 25, 15, 43);
-  email: string = 'info@pro-files.com';
+  email: string = 'info@profile-host.com';
 }
