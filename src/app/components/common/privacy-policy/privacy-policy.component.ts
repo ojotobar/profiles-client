@@ -14,6 +14,6 @@ import { MatButtonModule } from '@angular/material/button';
 export class PrivacyPolicyComponent {
   elementId: string = 'pdf-content';
   dns: string = window.location.origin;
-  docName: string = 'pro-files-privacy-policy';
+  docName: string = 'profile-host-privacy-policy';
   appService = inject(AppService)
 }

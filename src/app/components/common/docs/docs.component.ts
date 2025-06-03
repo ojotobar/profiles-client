@@ -13,7 +13,7 @@ import { AppService } from '../../../services/app.service';
   styleUrl: './docs.component.scss'
 })
 export class DocsComponent {
-  supportEmail = 'support@pro-files.com';
+  supportEmail = 'support@profile-host.com';
   isLoggedIn = false;
   apiKeyName = 'X-PPAPI-KEY';
   imageName = 'blueclikk';

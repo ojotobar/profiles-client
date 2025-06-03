@@ -28,7 +28,7 @@ import { AppService } from '../../../services/app.service';
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
-  supportEmail: string = 'support@profiles.com';
+  supportEmail: string = 'support@profile-host.com';
   subjectOptions = inject(AppService).getMessageSubjectOptions();
   appService = inject(AppService);
 

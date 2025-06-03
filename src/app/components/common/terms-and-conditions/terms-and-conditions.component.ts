@@ -14,6 +14,6 @@ import { InlineBackComponent } from '../inline-back/inline-back.component';
 export class TermsAndConditionsComponent {
   baseAddress: string = window.location.origin;
   elementId: string = 'pdf-content';
-  docName: string = 'pro-files-terms-and-condotions'
+  docName: string = 'profile-host-terms-and-condotions'
   appService = inject(AppService);       
 }
