@@ -8,5 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class AppNameComponent {
   @Input() isDark: boolean = false;
-  @Input() fileClass: string = ''
+  @Input() fileClass: string = '';
+  @Input() profilePlusStyle = '';
+  @Input() hostPlusStyle = '';
 }

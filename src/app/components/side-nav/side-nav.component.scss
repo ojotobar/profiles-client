@@ -164,3 +164,9 @@
   .hide {
     display: none;
   }
+
+  @media (max-width: 767px) {
+    .toggle{
+      display: none;
+    }
+  }  

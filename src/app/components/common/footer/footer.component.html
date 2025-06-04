@@ -1,6 +1,9 @@
 <div class="footer text-center">
-    <div class="container">
-        &copy; 2025 <span class="text-danger fw-bolder">Pro</span>
-        <span class=" fw-bold">file</span>. All rights reserved.
+    <div class="footer-content">
+      <app-socials />
+      <div class="fs-6">
+        &copy; {{currentYear}} <app-app-name profilePlusStyle="glossy-dark-red" hostPlusStyle="glossy-white-text" />. All rights reserved.
+      </div>
+        <small class="text-secondary">{{ version }}</small>
     </div>
 </div>
