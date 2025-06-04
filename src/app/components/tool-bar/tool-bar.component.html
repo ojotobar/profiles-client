@@ -1,15 +1,20 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
-	<div class="container-fluid">
-		<!-- <a class="navbar-brand" [routerLink]="'.'">Responsive navbar</a> -->
-        <button mat-icon-button (click)="toggleShowSidebar()">
-            @if(isSideBarOpened){
-                <mat-icon>cancel</mat-icon>
-            } @else {
-                <mat-icon>menu</mat-icon>
-            }
-        </button>
-        <span class="fw-bolder mx-3 fs-4" [routerLink]="['/']" [style]="'cursor: pointer'">
-            <app-app-name />  
-        </span>
-	</div>
+    <button mat-icon-button (click)="toggleShowSidebar()">
+        @if(isSideBarOpened){
+            <mat-icon>cancel</mat-icon>
+        } @else {
+            <mat-icon>menu</mat-icon>
+        }
+    </button>
+    <a class="navbar-brand" [routerLink]="['/']" [style]="'cursor: pointer'">
+        <div class="d-flex">
+            <img src="assets/images/logo-192x192.png" alt="Logo" class="logo"/>
+            <span class="fw-bolder fs-4">
+                <app-app-name 
+                    profilePlusStyle="glossy-dark-red"
+                    hostPlusStyle="glossy-white-text"
+                />  
+            </span>
+        </div>
+    </a>
 </nav>

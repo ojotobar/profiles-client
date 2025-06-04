@@ -1,6 +1,32 @@
 .footer {
     color: white;
-    margin: 0;
-    padding: 0;
     background: #0f1017;
-}
+    padding: 20px 0;
+    font-size: 14px;
+    text-align: center;
+    transition: margin-left 0.3s ease;
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+  
+    .footer-links {
+      display: flex;
+      gap: 20px;
+  
+      a {
+        text-decoration: none;
+        color: #555;
+  
+        &:hover {
+          color: white; // your theme color if set
+        }
+      }
+    }
+  }

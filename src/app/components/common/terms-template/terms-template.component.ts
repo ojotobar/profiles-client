@@ -10,6 +10,6 @@ import { RouterLink } from '@angular/router';
   styles: ``
 })
 export class TermsTemplateComponent {
-  email: string = 'info@pro-file.com'
+  email: string = 'info@profile-host.com'
   lastUpdatedDate: Date = new Date(2025, 4, 25, 13, 45, 45)
 }
