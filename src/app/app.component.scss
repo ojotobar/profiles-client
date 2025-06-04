@@ -16,5 +16,9 @@
       &.sidebarExpanded {
           margin-left: 60px;
       }
+
+      &.isSidebarClosed{
+        margin-left: 0;
+      }
     }
 }
