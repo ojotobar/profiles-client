@@ -169,4 +169,11 @@
     .toggle{
       display: none;
     }
+
+    .sidebar {
+      width: 60px;
+      &.expanded {
+        width: 60px;
+      }
+    }
   }  
