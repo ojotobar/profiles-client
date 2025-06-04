@@ -9,3 +9,12 @@
         margin-left: 0;
     }
 }
+
+@media only screen and (max-width: 767px) {
+    .content {
+      margin-left: 60px;
+      &.sidebarExpanded {
+          margin-left: 60px;
+      }
+    }
+}
