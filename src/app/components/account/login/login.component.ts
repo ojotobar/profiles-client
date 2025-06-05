@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,6 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SnackbarClassEnum, SnackbarIconEnum } from '../../../enums/snackbar-enum';
 import { UserClaimsModel } from '../../../models/account/user-claims-model';
 import { LoginResultModel } from '../../../models/account/accounts-models';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,7 @@ export class LoginComponent {
   claims = new UserClaimsModel()
 
   constructor(public appService: AppService, 
-    private accountService: AccountService, private router: Router){}
+    private accountService: AccountService, private router: Router, private cdr: ChangeDetectorRef){}
 
   hide = signal(true);
   clickEvent(event: MouseEvent) {
@@ -78,9 +79,12 @@ export class LoginComponent {
                 })
               }
             }
+            
+            this.cdr.detectChanges();
           },
           error: (e: Error) => {
             this.loading = false;
+            this.cdr.detectChanges();
             this.appService.openSnackBar('Something went wrong. Login failed. Please try again later.', 
               SnackbarClassEnum.Danger, SnackbarIconEnum.Danger)
           }

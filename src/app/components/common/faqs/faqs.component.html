@@ -21,7 +21,7 @@
                 } @else if(faqs && faqs.length > 0){
                     <mat-accordion>
                         @for (faq of faqs; track $index) {
-                            <mat-expansion-panel>
+                            <mat-expansion-panel class="p-3">
                                 <mat-expansion-panel-header>
                                   <mat-panel-title>{{faq.title}}</mat-panel-title>
                                 </mat-expansion-panel-header>
