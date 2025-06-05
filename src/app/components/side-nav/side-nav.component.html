@@ -12,7 +12,11 @@
         </div>
         <div class="content">
           <div class="link">
-            <div class="content py-3" [routerLink]="['/']" [routerLinkActive]="'active'">
+            <div class="content py-3" 
+              [routerLink]="['/']" 
+              [routerLinkActive]="'active'"
+              (click)="closeIfNotExpanded()"
+            >
               <div class="icon">
                 <mat-icon>home</mat-icon>
               </div>
@@ -21,7 +25,11 @@
           </div>
           @if(canViewDashboard()){
             <div class="link">
-                <div class="content py-3" [routerLink]="['/dashboard']" [routerLinkActive]="'active'">
+                <div class="content py-3" 
+                  [routerLink]="['/dashboard']" 
+                  [routerLinkActive]="'active'"
+                  (click)="closeIfNotExpanded()"
+                >
                     <div class="icon">
                         <mat-icon>dashboard</mat-icon>
                     </div>
@@ -31,7 +39,11 @@
           }
           @if(isLoggedIn){
             <div class="link">
-              <div class="content py-3" [routerLink]="['/pro-dashboard']" [routerLinkActive]="'active'">
+              <div class="content py-3" 
+                [routerLink]="['/pro-dashboard']" 
+                [routerLinkActive]="'active'"
+                (click)="closeIfNotExpanded()"
+              >
                   <div class="icon">
                       <mat-icon class="text-danger">dashboard</mat-icon>
                   </div>
@@ -40,7 +52,11 @@
             </div>
           }
           <div class="link">
-            <div class="content py-3" [routerLink]="['/docs/v1']" [routerLinkActive]="'active'">
+            <div class="content py-3" 
+              [routerLink]="['/docs/v1']" 
+              [routerLinkActive]="'active'"
+              (click)="closeIfNotExpanded()"
+            >
               <div class="icon">
                 <mat-icon>description</mat-icon>
               </div>
@@ -48,7 +64,11 @@
             </div>
           </div>
           <div class="link">
-            <div class="content py-3" [routerLink]="['/about']" [routerLinkActive]="'active'">
+            <div class="content py-3" 
+              [routerLink]="['/about']" 
+              [routerLinkActive]="'active'"
+              (click)="closeIfNotExpanded()"
+            >
               <div class="icon">
                 <mat-icon>info</mat-icon>
               </div>
@@ -56,7 +76,11 @@
             </div>
           </div>
           <div class="link">
-            <div class="content py-3" [routerLink]="['/contact']" [routerLinkActive]="'active'">
+            <div class="content py-3" 
+              [routerLink]="['/contact']" 
+              [routerLinkActive]="'active'"
+              (click)="closeIfNotExpanded()"
+            >
               <div class="icon">
                 <mat-icon>question_answer</mat-icon>
               </div>
@@ -64,7 +88,11 @@
             </div>
           </div>
           <div class="link">
-            <div class="content py-3 text-info" [routerLink]="['/faqs']" [routerLinkActive]="'active'">
+            <div class="content py-3 text-info" 
+              [routerLink]="['/faqs']" 
+              [routerLinkActive]="'active'"
+              (click)="closeIfNotExpanded()"
+            >
               <div class="icon">
                 <mat-icon>help</mat-icon>
               </div>
@@ -73,7 +101,11 @@
           </div>
           @if(isLoggedIn){
             <div class="link" >
-              <div class="content py-3" [routerLink]="['/profile']" [routerLinkActive]="'active'">
+              <div class="content py-3" 
+                [routerLink]="['/profile']" 
+                [routerLinkActive]="'active'"
+                (click)="closeIfNotExpanded()"
+              >
                 <div class="icon">
                   <mat-icon>account_circle</mat-icon>
                 </div>
@@ -81,7 +113,10 @@
               </div>
             </div>
             <div class="link" >
-              <div class="content py-3 text-danger" [routerLinkActive]="'active'" (click)="logOut()">
+              <div class="content py-3 text-danger" 
+                [routerLinkActive]="'active'" 
+                (click)="logOut()"
+              >
                 <div class="icon">
                   <mat-icon>power_settings_new</mat-icon>
                 </div>
@@ -90,7 +125,11 @@
             </div>
           } @else {
             <div class="link" >
-              <div class="content py-3 text-success" [routerLink]="['/account/login']" [routerLinkActive]="'active'">
+              <div class="content py-3 text-success" 
+                [routerLink]="['/account/login']" 
+                [routerLinkActive]="'active'"
+                (click)="closeIfNotExpanded()"
+              >
                 <div class="icon">
                   <mat-icon>login</mat-icon>
                 </div>
@@ -98,7 +137,11 @@
               </div>
             </div>
             <div class="link" >
-              <div class="content py-3 text-primary" [routerLink]="['/account/register']" [routerLinkActive]="'active'">
+              <div class="content py-3 text-primary" 
+                [routerLink]="['/account/register']" 
+                [routerLinkActive]="'active'"
+                (click)="closeIfNotExpanded()"
+              >
                 <div class="icon">
                   <mat-icon>person_add</mat-icon>
                 </div>
