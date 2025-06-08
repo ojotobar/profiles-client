@@ -1,4 +1,5 @@
 import { SnackbarClassEnum, SnackbarIconEnum } from "../../enums/snackbar-enum";
+import { SocialMediaModel } from "../profile/profile-models";
 
 export class SnackbarModel{
     message: string = "Success!!!";

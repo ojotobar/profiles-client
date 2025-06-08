@@ -7,7 +7,7 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
-import { MatSelectModule } from "@angular/material/select";
+import { MatSelectChange, MatSelectModule } from "@angular/material/select";
 import { FieldErrorsDirective } from "../../../directives/field-errors.directive";
 import { EducationLevelEnum } from "../../../enums/education-level-enum";
 import { SnackbarClassEnum, SnackbarIconEnum } from "../../../enums/snackbar-enum";
@@ -20,6 +20,7 @@ import { EducationService } from "../../../services/education.service";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { GenericResponseModel, getGenericErrorMessage } from "../../../models/common/common-models";
 import { OperationTypeEnum } from "../../../enums/operation-type-enum";
+import { TitlecasedPipe } from "../../../pipes/titlecased.pipe";
 
 @Component({
   selector: 'app-add-education',
@@ -36,7 +37,8 @@ import { OperationTypeEnum } from "../../../enums/operation-type-enum";
     FieldErrorsDirective,
     MatDatepickerModule,
     MatCheckbox,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    TitlecasedPipe
   ],
   templateUrl: './add-education.component.html',
   styleUrl: './add-education.component.scss'
@@ -47,26 +49,32 @@ export class AddEducationComponent {
   readonly apiService = inject(ApiService);
   readonly educationService = inject(EducationService)
   loading: boolean = false;
+  showOtherForm: boolean = false;
   endDateDisabled: boolean = false;
-  levelOptions = this.appService.getEducationLevelOptions();
+  levelOptions= Object.values(EducationLevelEnum);
   countries: CountryModel[] = [];
   states: StateModel[] = [];
 
   ngOnInit() {
     this.fetchCountries();
+
+    this.addEducationForm.get('level')?.valueChanges.subscribe(value => {
+      this.toggleCustomLevel(value as EducationLevelEnum);
+    });
   }
 
   addEducationForm = new FormGroup({
     schoolName: new FormControl('', Validators.required),
     course: new FormControl('', Validators.required),
-    level: new FormControl(EducationLevelEnum.Other),
+    level: new FormControl(),
     startDate: new FormControl(Date(), Validators.required),
     endDate: new FormControl(),
     city: new FormControl('', Validators.required),
     country: new FormControl('', Validators.required),
     state: new FormControl('', Validators.required),
     longitude: new FormControl(''),
-    latitude: new FormControl('')
+    latitude: new FormControl(''),
+    otherLevelSpecification: new FormControl('')
   });
 
   ProcessAddEducation() {
@@ -86,7 +94,8 @@ export class AddEducationComponent {
         startDate: form.startDate ? new Date(form.startDate) : new Date(),
         endDate: form.endDate ? new Date(form.endDate) : null,
         level: form.level as EducationLevelEnum,
-        location: location
+        location: location,
+        otherLevelSpecification: form.otherLevelSpecification as string | null
       }
 
       this.loading = true;
@@ -124,6 +133,25 @@ export class AddEducationComponent {
     if(selectedCountry){
       this.fetchStates(selectedCountry.Id)
     }
+  }
+
+  onLevelSelected(event: MatSelectChange) {
+    const selectedValue = event.value as EducationLevelEnum;
+    this.toggleCustomLevel(selectedValue);
+  }
+
+  toggleCustomLevel(value: EducationLevelEnum) {
+    this.showOtherForm = value === EducationLevelEnum.Other;
+    const customLevelControl = this.addEducationForm.get('otherLevelSpecification');
+
+    if (this.showOtherForm) {
+      customLevelControl?.setValidators([Validators.required]);
+    } else {
+      customLevelControl?.clearValidators();
+      customLevelControl?.setValue('');
+    }
+
+    customLevelControl?.updateValueAndValidity();
   }
 
   onStateSelectionChange(event: any) {

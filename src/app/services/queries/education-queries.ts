@@ -11,14 +11,15 @@ export const GetEducationQuery = gql`
             level
             levelDescription
             location{
-            city
-            state
-            country
-            latitude
-            longitude
+                city
+                state
+                country
+                latitude
+                longitude
+            }
+            otherLevelSpecification
         }
     }
-}
 `;
 
 export const GetEducationsQuery = gql`
@@ -32,11 +33,13 @@ export const GetEducationsQuery = gql`
             startDate
             endDate
             location{
-            city
-            state
-            country
-            longitude
-            latitude
-        }
+                city
+                state
+                country
+                longitude
+                latitude
+            }
+            otherLevelSpecification
+        }        
     }
-}`;
+`;

@@ -22,6 +22,7 @@ import { MatDialogData } from '../../../models/common/snackbar-model';
 import { UploadFileTypes, UploadTypeEnum } from '../../../enums/upload-types-enums';
 import { AddressPipe } from '../../../pipes/address.pipe';
 import { AccountService } from '../../../services/account.service';
+import { SocialsComponent } from '../socials/socials.component';
 
 @Component({
   selector: 'app-profile',
@@ -35,7 +36,8 @@ import { AccountService } from '../../../services/account.service';
     DatePipe,
     MatTooltipModule,
     MatButtonModule,
-    AddressPipe
+    AddressPipe,
+    SocialsComponent
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
@@ -143,6 +145,9 @@ export class ProfileComponent {
     if(!summary.hasCareerSummary){
       tasks.push('Professional Summary')
     }
+    if(!this.profile.socialMedia){
+      tasks.push("Social Media")
+    }
 
     let multiple = tasks.length > 1;
     let record = multiple ? ' records ' : ' record ';
@@ -188,6 +193,10 @@ export class ProfileComponent {
         this.getDetailedProfile();
       }
     })
+  }
+
+  goToSocialMedia(id: string) {
+    this.router.navigate([`/profile`, id, 'social-media']);
   }
 
   openLocationDialog() {

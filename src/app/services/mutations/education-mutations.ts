@@ -4,11 +4,11 @@ export const AddEducationMutations = gql`
     mutation AddEducation($input: AddEducationInput!){
         addEducation(input: $input){
             payload{
-                message
                 success
+                message
             }
-        }
     }
+}
 `;
 
 export const DeleteEducationMutation = gql`

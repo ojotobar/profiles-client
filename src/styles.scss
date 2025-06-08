@@ -146,3 +146,13 @@ body { margin: 0; font-family: Arial, Roboto, "Helvetica Neue", sans-serif; }
 .logo:hover {
   transform: scale(1.05);     /* slight zoom on hover */
 }
+
+.social {
+    margin-top: 1rem;
+    a {
+        margin-right: 1rem;
+        font-size: 1.4rem;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+}

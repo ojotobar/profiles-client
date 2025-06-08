@@ -38,6 +38,7 @@ import { AddSkillComponent } from './components/skill/add-skill/add-skill.compon
 import { EditSkillComponent } from './components/skill/edit-skill/edit-skill.component';
 import { ForgotPasswordComponent } from './components/account/forgot-password/forgot-password.component';
 import { PrivacyPolicyComponent } from './components/common/privacy-policy/privacy-policy.component';
+import { AddOrUpdateSocialsComponent } from './components/profile/add-or-update-socials/add-or-update-socials.component';
 
 export const routes: Routes = [
     {
@@ -73,6 +74,11 @@ export const routes: Routes = [
     {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [authGuard]
+    },
+    {
+        path: 'profile/:id/social-media',
+        component: AddOrUpdateSocialsComponent,
         canActivate: [authGuard]
     },
     {

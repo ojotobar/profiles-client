@@ -58,22 +58,46 @@
                         <div class="col-sm-12 col-md-5">
                             <mat-form-field class="w-100">
                                 <mat-label>Level</mat-label>
-                                <mat-select name="level" formControlName="level">
+                                <mat-select name="level" formControlName="level" (selectionChange)="onLevelSelected($event)">
+                                    <mat-option value="" disabled selected>{{ 'SELECT_LEVEL' | titlecased:'_' }}</mat-option>
                                     @for (level of levelOptions; track level) {
-                                        <mat-option [value]="level.value">{{level.label}}</mat-option>
+                                        @if(level !== 'SELECT_LEVEL') {
+                                            <mat-option [value]="level">{{ level | titlecased:'_' }}</mat-option>
+                                        }
                                     }
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div class="col-sm-12 col-md-7">
-                            <mat-form-field class="w-100">
-                                <mat-label>City/Town</mat-label>
-                                <mat-icon matSuffix>location_city</mat-icon>
-                                <input matInput name="city" formControlName="city">
-                                <mat-error appFieldErrors></mat-error>
-                            </mat-form-field>
-                        </div>
+                        @if(showOtherForm){
+                            <div class="col-sm-12 col-md-7">
+                                <mat-form-field class="w-100">
+                                    <mat-label>Specify Level</mat-label>
+                                    <input matInput name="otherLevelSpecification" formControlName="otherLevelSpecification">
+                                </mat-form-field>
+                            </div>
+                        }@else {
+                            <div class="col-sm-12 col-md-7">
+                                <mat-form-field class="w-100">
+                                    <mat-label>City/Town</mat-label>
+                                    <mat-icon matSuffix>location_city</mat-icon>
+                                    <input matInput name="city" formControlName="city">
+                                    <mat-error appFieldErrors></mat-error>
+                                </mat-form-field>
+                            </div>
+                        }
                     </div>
+                    @if(showOtherForm){
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <mat-form-field class="w-100">
+                                    <mat-label>City/Town</mat-label>
+                                    <mat-icon matSuffix>location_city</mat-icon>
+                                    <input matInput name="city" formControlName="city">
+                                    <mat-error appFieldErrors></mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    }
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
                             <mat-form-field class="w-100">
