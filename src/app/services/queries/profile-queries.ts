@@ -29,6 +29,26 @@ export const GetProfileQuery = gql`
                 longitude
                 latitude
             }
+            socialMedia{
+                name
+                link
+                type
+                iconName
+            }
+        }
+    }
+`;
+
+export const GetSocialMediaQuery = gql`
+    query {
+        socialMedia{
+            success
+            socialMedia{
+                name
+                iconName
+                link
+                type
+            }
         }
     }
 `;
@@ -119,6 +139,12 @@ export const GetDetailedProfileQuery = gql`
                     country
                     longitude
                     latitude
+                }
+                socialMedia{
+                    name
+                    link
+                    type
+                    iconName
                 }
             }
             profileSummary{

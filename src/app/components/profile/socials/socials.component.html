@@ -1,0 +1,15 @@
+<div>
+    <div class="social d-flex justify-content-center my-0 py-0">
+        @if(data.length <= 0){
+            <app-alert
+                [alertInputs]="alert"
+            />
+        }@else {
+            @for (media of data; track $index) {
+                <a href="{{media.link}}" target="_blank">
+                    <i class="bi bi-{{media.iconName}}"></i>
+                </a>
+            }
+        }
+    </div>
+</div>
