@@ -69,8 +69,6 @@ export class LocationComponent {
     if(!this.data.new){
       this.getProfile();
     }
-
-    this.fetchCountries();
   }
 
   AddOrUpdateLocation() {
@@ -106,7 +104,6 @@ export class LocationComponent {
         .valueChanges
         .subscribe({
           next: (data: any) => {
-            this.loading = (<boolean>data.loading);
             this.profile = (<ProfileModel>data.data.profile);
             if(!this.profile){
               this.alert = this.appService.mapAlertMessage(this.alert,
@@ -114,9 +111,12 @@ export class LocationComponent {
                 AlertIconEnum.danger, AlertClassEnum.danger)
             } else{
               if(this.profile.location){
+                this.fetchCountries();
                 this.locationForm.patchValue(this.profile.location);
               }
             }
+
+            this.loading = false;
           },
           error: (error: Error) => {
             this.loading = false;

@@ -47,18 +47,19 @@ export function getUpdateExperienceInput(id: string, payload: ExperienceModel) {
 }
 
 export function getAddEducationInput(payload: EducationModel){
-    return {
-        input: {
-            input: {
-                schoolName: payload.schoolName,
-                course: payload.course,
-                startDate: payload.startDate,
-                endDate: payload.endDate,
-                level: payload.level,
-                location: payload.location
-            }
-        }
+  return {
+    input: {
+      input: {
+        course: payload.course,
+        level: payload.level,
+        schoolName: payload.schoolName,
+        startDate: payload.startDate,
+        endDate: payload.endDate,
+        location: payload.location,
+        otherLevelSpecification: payload.otherLevelSpecification
+      }
     }
+  }
 }
 
 export function getUpdateEducationInput(id: string, payload: EducationModel){
@@ -77,7 +78,8 @@ export function getUpdateEducationInput(id: string, payload: EducationModel){
               country: payload.location.country,
               latitude: payload.location.latitude,
               longitude: payload.location.longitude
-            }
+            },
+            otherLevelSpecification: payload.otherLevelSpecification
           }
         }
     }

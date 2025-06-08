@@ -8,7 +8,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { MatProgressSpinner } from "@angular/material/progress-spinner";
-import { MatSelectModule } from "@angular/material/select";
+import { MatSelectChange, MatSelectModule } from "@angular/material/select";
 import { ActivatedRoute } from "@angular/router";
 import { FieldErrorsDirective } from "../../../directives/field-errors.directive";
 import { AlertIconEnum, AlertClassEnum } from "../../../enums/alert-enums";
@@ -24,6 +24,7 @@ import { EducationService } from "../../../services/education.service";
 import { AlertComponent } from "../../common/alert/alert.component";
 import { GenericResponseModel, getGenericErrorMessage } from "../../../models/common/common-models";
 import { OperationTypeEnum } from "../../../enums/operation-type-enum";
+import { TitlecasedPipe } from "../../../pipes/titlecased.pipe";
 
 @Component({
   selector: 'app-edit-education',
@@ -41,7 +42,8 @@ import { OperationTypeEnum } from "../../../enums/operation-type-enum";
     MatDatepickerModule,
     MatCheckbox,
     MatProgressSpinner,
-    AlertComponent
+    AlertComponent,
+    TitlecasedPipe
   ],
   templateUrl: './edit-education.component.html',
   styleUrl: './edit-education.component.scss'
@@ -59,8 +61,9 @@ export class EditEducationComponent {
   appService = inject(AppService);
   apiService = inject(ApiService);
   editEducationForm!: FormGroup;
-  levelOptions = this.appService.getEducationLevelOptions();
+  levelOptions = Object.values(EducationLevelEnum);
   alertInputs = new AlertModel();
+  showOtherForm: boolean = false;
 
   constructor(private readonly aRoute: ActivatedRoute, private fb: FormBuilder){
     this.aRoute.paramMap.subscribe(p => {
@@ -81,9 +84,28 @@ export class EditEducationComponent {
       state: ['', Validators.required],
       longitude: [''],
       latitude: [''],
-      isEndDateNull: [false]
+      isEndDateNull: [false],
+      otherLevelSpecification: [null]
     })
     this.fetchCountries();
+
+    this.editEducationForm.get('level')?.valueChanges.subscribe(value => {
+      this.toggleCustomLevel(value as EducationLevelEnum);
+    });
+  }
+
+  toggleCustomLevel(value: EducationLevelEnum) {
+    this.showOtherForm = value === EducationLevelEnum.Other;
+    const customLevelControl = this.editEducationForm.get('otherLevelSpecification');
+
+    if (this.showOtherForm) {
+      customLevelControl?.setValidators([Validators.required]);
+    } else {
+      customLevelControl?.clearValidators();
+      customLevelControl?.setValue('');
+    }
+
+    customLevelControl?.updateValueAndValidity();
   }
 
   ProcessEditEducation() {
@@ -103,7 +125,8 @@ export class EditEducationComponent {
         startDate: form.startDate ? new Date(form.startDate) : new Date(),
         endDate: form.endDate && !this.endDateDisabled ? new Date(form.endDate) : null,
         level: form.level as EducationLevelEnum,
-        location: location
+        location: location,
+        otherLevelSpecification: form.otherLevelSpecification as string | null
       }
 
       this.isSaving = true;
@@ -134,17 +157,21 @@ export class EditEducationComponent {
         .valueChanges
         .subscribe({
           next: (data: any) => {
-            this.loading = (<boolean>data.loading);
             this.education = (<EducationResultModel>data.data.education);
             if(this.education){
               this.endDateDisabled = this.education.endDate === null;
+              this.showOtherForm = this.education.level === EducationLevelEnum.Other;
+              this.fetchCountries();
               this.editEducationForm.patchValue(this.PatchValues(this.education))
+
             } else{
               this.alertInputs = this.appService.mapAlertMessage(this.alertInputs,
                 'An error occurred!', 'An error occurred why getting the data. Please try again later.', 
                 AlertIconEnum.danger, AlertClassEnum.danger
               )
             }
+
+            this.loading = false;
           },
           error: (error: Error) => {
             this.loading = false;
@@ -187,6 +214,11 @@ export class EditEducationComponent {
     });
   }
 
+  onLevelSelected(event: MatSelectChange) {
+    const selectedValue = event.value as EducationLevelEnum;
+    this.toggleCustomLevel(selectedValue);
+  }
+
   onCheckboxChange(event: any) {
     this.endDateDisabled = event.checked;
     this.editEducationForm.patchValue({ endDate: null });
@@ -223,7 +255,8 @@ export class EditEducationComponent {
       country: data.location?.country,
       latitude: data.location?.latitude,
       longitude: data.location?.longitude,
-      isEndDateNull: data.endDate === null
+      isEndDateNull: data.endDate === null,
+      otherLevelSpecification: data.otherLevelSpecification
     }
 
     return result;

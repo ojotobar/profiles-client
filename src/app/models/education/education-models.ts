@@ -13,7 +13,8 @@ export interface EducationResultModel{
     levelDescription: string,
     startDate: Date,
     endDate: Date | null,
-    location: EntityLocationModel
+    location: EntityLocationModel,
+    otherLevelSpecification: string | null
 }
 
 export interface EducationModel {
@@ -22,7 +23,8 @@ export interface EducationModel {
     startDate: Date,
     endDate: Date | null,
     level: EducationLevelEnum,
-    location: EntityLocationModel
+    location: EntityLocationModel,
+    otherLevelSpecification: string | null
 }
 
 export interface EducationResult{
@@ -41,5 +43,6 @@ export interface EducationPatchModel{
     state: string,
     longitude: string | null,
     latitude: string | null,
-    isEndDateNull: boolean
+    isEndDateNull: boolean,
+    otherLevelSpecification: string | null
 }
