@@ -1,4 +1,5 @@
 import { GenderEnum } from "../../enums/gender-enum"
+import { SocialMediaEnum } from "../../enums/social-media-enum"
 import { UserStatusEnum } from "../../enums/status-enum"
 import { EntityLocationModel } from "../common/entity-location-model"
 
@@ -24,7 +25,15 @@ export interface ProfileModel{
     deactivatedOn: Date,
     emailConfirmed: boolean,
     role: string | '',
-    location: ProfileLocationModel | null
+    location: ProfileLocationModel | null,
+    socialMedia: SocialMediaModel[]
+}
+
+export interface SocialMediaModel{
+    name: string,
+    link: string
+    type: SocialMediaEnum,
+    iconName: string
 }
 
 export interface DetailedProfileModel{
@@ -83,6 +92,13 @@ export interface ProfilesResponseModel{
         hasPreviousPage: boolean
     },
     totalCount: number
+}
+
+export interface SocialMediaResponseModel {
+    socialMedia: {
+      success: boolean,
+      socialMedia: SocialMediaModel[]
+    }
 }
 
 export const apiKeyTooltip = 'Your API key will be generated once you complete your profile, including skills, education, experience, and location. After generation, navigate to the \'API\' section in your account settings to view your key and explore available endpoints.';

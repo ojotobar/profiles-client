@@ -95,6 +95,14 @@
                             </div>
                         </div>
                         <hr />
+                        <div class="row">
+                            <p class="fs-6 fw-bold border-bottom pb-0 mb-1">Social Media</p>
+                            <div class="my-0 py-0 d-flex justify-content-end">
+                                <p class="linked" (click)="goToSocialMedia(profile.id)">Add Social Media</p>
+                            </div>
+                            <app-socials [data]="profile.socialMedia"/>
+                        </div>
+                        <hr />
                         <div>
                             <div class="d-flex justify-content-between">
                                 <p class="fs-6 fw-bold border-bottom pb-0 mb-1">Account Completion: {{barWidth}}</p>

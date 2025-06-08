@@ -123,7 +123,7 @@ export class EditEducationComponent {
             this.isSaving = false;
             this.appService.openSnackBar(getGenericErrorMessage(OperationTypeEnum.update), SnackbarClassEnum.Danger, SnackbarIconEnum.Danger);
           }
-        })
+      })
     }
   }
 

@@ -7,7 +7,7 @@ import { RegisterModel } from "../models/account/register-model";
 import { CertificationModel } from "../models/certifications/certifications-models";
 import { EducationModel } from "../models/education/education-models";
 import { ExperienceModel } from "../models/experience/experience-models";
-import { ProfileLocationModel, ProfilesInputModel, ProfileUpdateModel } from "../models/profile/profile-models";
+import { ProfileLocationModel, ProfilesInputModel, ProfileUpdateModel, SocialMediaModel } from "../models/profile/profile-models";
 import { ProjectModel } from "../models/project/project-models";
 import { SkillModel } from "../models/skills/skills-models";
 
@@ -324,6 +324,14 @@ export function getUpdateRoleInput(id: string, name: string){
         id: id,
         name: name
       }
+    }
+  }
+}
+
+export function getAddOrUpdateSMInput(socialMedia: SocialMediaModel[]){
+  return {
+    "input": {
+      "inputs": socialMedia
     }
   }
 }

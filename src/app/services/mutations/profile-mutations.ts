@@ -87,3 +87,14 @@ export const DeactivateAccountMutation = gql`
         }
     }
 `;
+
+export const AddOrUpdateSocialMediaMutation = gql`
+    mutation AddOrUpdateSocialMedia($input: AddOrUpdateSocialMediaInput!){
+        addOrUpdateSocialMedia(input: $input){
+            payload{
+                message
+                success
+            }
+        }
+    }
+`;
