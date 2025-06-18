@@ -5,7 +5,8 @@ export const CareerSummaryByIdQuery = gql`
         professionalSummaryById(id: $id){
             id
             summary
-            userId
+            userId,
+            heading
         }
     }
 `;
@@ -16,6 +17,7 @@ export const CareerSummaryByUserQuery = gql`
             id
             userId
             summary
+            heading
         }
     }
 `;

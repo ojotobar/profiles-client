@@ -28,17 +28,17 @@ export class CareerSummaryService {
     })
   }
   
-  addSummaryObservable(summary: string): Observable<any> {
+  addSummaryObservable(summary: string, heading: string): Observable<any> {
     return this.apollo.mutate({
       mutation: AddCareerSummaryMutation,
-      variables: getAddCareerSummaryInput(summary)
+      variables: getAddCareerSummaryInput(summary, heading)
     })
   }
 
-  updateSummaryObservable(id: string, summary: string): Observable<any> {
+  updateSummaryObservable(id: string, summary: string, heading: string): Observable<any> {
     return this.apollo.mutate({
       mutation: UpdateCareerSummaryMutation,
-      variables: getUpdateCareerSummaryInput(id, summary)
+      variables: getUpdateCareerSummaryInput(id, summary, heading)
     })
   }
 
