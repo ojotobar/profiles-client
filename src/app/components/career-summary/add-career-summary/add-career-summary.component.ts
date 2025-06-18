@@ -32,7 +32,8 @@ export class AddCareerSummaryComponent {
 
   constructor(private readonly fb: FormBuilder){
     this.addForm = this.fb.group({
-      summary: ['', Validators.required]
+      summary: ['', Validators.required],
+      heading: ['', Validators.required]
     })
   }
 
@@ -40,7 +41,7 @@ export class AddCareerSummaryComponent {
     if(this.addForm.valid){
       this.loading = true;
 
-      this.summaryService.addSummaryObservable(this.addForm.value.summary as string)
+      this.summaryService.addSummaryObservable(this.addForm.value.summary as string, this.addForm.value.heading as string)
         .subscribe({
           next: (data: any) => {
             this.loading = (<boolean>data.loading);
