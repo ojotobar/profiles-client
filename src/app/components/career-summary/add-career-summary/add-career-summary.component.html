@@ -6,40 +6,40 @@
             <hr class="mt-0 pt-0"/>
             <form [formGroup]="addForm" (ngSubmit)="ProcessAddSummary()">
                 <div class="row">
-                        <mat-form-field class="w-100">
-                            <mat-label>Profile Heading</mat-label>
-                            <input matInput name="heading" formControlName="heading" placeholder="Software Engineer">
+                    <mat-form-field class="w-100">
+                        <mat-label>Profile Heading</mat-label>
+                        <input matInput name="heading" formControlName="heading" placeholder="Software Engineer">
+                        <mat-error appFieldErrors></mat-error>
+                    </mat-form-field>
+                    <div class="col">
+                        <mat-form-field class="w-100 mb-0 pb-0">
+                            <mat-label>Your Professional Summary</mat-label>
+                            <textarea matInput placeholder="Write something..."
+                                cdkTextareaAutosize
+                                #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="3"
+                                cdkAutosizeMaxRows="7"
+                                name="summary"
+                                formControlName="summary"
+                            ></textarea>
                             <mat-error appFieldErrors></mat-error>
                         </mat-form-field>
-                        <div class="col">
-                            <mat-form-field class="w-100 mb-0 pb-0">
-                                <mat-label>Your Professional Summary</mat-label>
-                                <textarea matInput placeholder="Write something..."
-                                    cdkTextareaAutosize
-                                    #autosize="cdkTextareaAutosize"
-                                    cdkAutosizeMinRows="3"
-                                    cdkAutosizeMaxRows="7"
-                                    name="summary"
-                                    formControlName="summary"
-                                ></textarea>
-                                <mat-error appFieldErrors></mat-error>
-                            </mat-form-field>
-                        </div>
                     </div>
-                    <div class="row mt-0 pt-0 mx-1 mb-3">
-                        <div class="col-sm-12 col-md-6 mb-1">
-                            <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{loading}}>
-                                @if(loading){
-                                    <mat-spinner class="my-3 m-auto" [diameter]="30"/>
-                                } @else {
-                                    Update
-                                }
-                            </button>
-                        </div>
-                        <div class="col-sm-12 col-md-6 mb-1">
-                            <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="appService.goBack()" disabled={{loading}}>Back</button>
-                        </div>
+                </div>
+                <div class="row mt-0 pt-0 mx-1 mb-3">
+                    <div class="col-sm-12 col-md-6 mb-1">
+                        <button mat-raised-button type="submit" class="app-bg text-white w-100" disabled={{loading}}>
+                            @if(loading){
+                                <mat-spinner class="my-3 m-auto" [diameter]="30"/>
+                            } @else {
+                                Update
+                            }
+                        </button>
                     </div>
+                    <div class="col-sm-12 col-md-6 mb-1">
+                        <button mat-raised-button type="button" class="bg-secondary text-light w-100" (click)="appService.goBack()" disabled={{loading}}>Back</button>
+                    </div>
+                </div>
             </form>           
         </div>
         <div class="col-sm-0 col-md-1 col-lg-2"></div>
