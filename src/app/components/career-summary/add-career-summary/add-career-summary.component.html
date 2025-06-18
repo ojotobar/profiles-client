@@ -7,6 +7,13 @@
             <form [formGroup]="addForm" (ngSubmit)="ProcessAddSummary()">
                 <div class="row">
                     <div class="col">
+                        <mat-form-field class="w-100">
+                            <mat-label>Profile Heading</mat-label>
+                            <input matInput name="heading" formControlName="heading" placeholder="Software Engineer">
+                            <mat-error appFieldErrors></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
                         <mat-form-field class="w-100 mb-0 pb-0">
                             <mat-label>Your Professional Summary</mat-label>
                             <textarea matInput placeholder="Write something..."

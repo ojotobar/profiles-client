@@ -50,7 +50,8 @@ export class EditCareerSummaryComponent {
   ngOnInit(){
     this.getCareerSummaryById(this.id)
     this.editForm = this.fb.group({
-      summary: ['', Validators.required]
+      summary: ['', Validators.required],
+      heading: ['', Validators.required]
     })
   }
 
@@ -86,7 +87,7 @@ export class EditCareerSummaryComponent {
   ProcessEditSummary(){
     if(this.editForm.valid && this.id){
       this.isBusy = true;
-      this.summaryService.updateSummaryObservable(this.id, this.editForm.value.summary as string)
+      this.summaryService.updateSummaryObservable(this.id, this.editForm.value.summary as string, this.editForm.value.heading as string)
         .subscribe({
           next: (data: any) => {
             this.isBusy = (<boolean>data.loading);

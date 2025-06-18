@@ -130,22 +130,24 @@ export const getUpdateProjectInput = function(id: string, payload: ProjectModel)
     }
 }
 
-export const getUpdateCareerSummaryInput = function(id: string, summary: string){
+export const getUpdateCareerSummaryInput = function(id: string, summary: string, heading: string){
     return {
         input: {
           id: id,
           input: {
-            summary: summary
+            summary: summary,
+            heading: heading
           }
         }
     }
 }
 
-export const getAddCareerSummaryInput = function(summary: string){
+export const getAddCareerSummaryInput = function(summary: string, heading: string){
     return {
         input: {
           input: {
-            summary: summary
+            summary: summary,
+            heading: heading
           }
         }
     }
