@@ -156,6 +156,7 @@ export const GetDetailedProfileQuery = gql`
                 canGenerateApiKey
                 education
                 experience
+                apiKey
             }
         }
     }
