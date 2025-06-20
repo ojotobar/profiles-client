@@ -46,7 +46,7 @@ export class TagsComponent implements OnInit {
             this.versions = (<VersionTagModel[]>data.data.portfolioVersions);
             if(!this.versions || this.versions.length <= 0){
               this.alertInputs = this.appService.mapAlertMessage(this.alertInputs,
-                'No record found', 'No certification record found. Please add some.', AlertIconEnum.info, AlertClassEnum.info
+                'No record found', 'No portfolio tags record found. Please add some.', AlertIconEnum.info, AlertClassEnum.info
               )
             }
           },
