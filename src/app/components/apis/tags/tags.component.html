@@ -34,8 +34,8 @@
                                             <td>None</td>
                                         }
                                         <td>{{ version.latestVersion }}</td>
-                                        <td>{{ version.createdOn| date: 'MMM-dd-yy' }}</td>
-                                        <td>{{ version.updatedOn| date: 'MMM-dd-yy' }}</td>
+                                        <td>{{ version.createdOn| date: 'MMM dd, yyyy. HH:mm' }}</td>
+                                        <td>{{ version.updatedOn| date: 'MMM dd, yyyy. HH:mm' }}</td>
                                         @if(version.isPremium){
                                             <td>Yes</td>
                                         }@else {
