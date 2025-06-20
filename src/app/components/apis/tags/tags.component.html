@@ -1,0 +1,58 @@
+<div class="container mb-5">
+    <div class="card-container inset-box">
+        <main class="content">
+            <div class="p-3">
+                <p class="fs-3 fw-bolder pb-0 mb-0">Tags For Deployment</p>
+                <hr class="pt-0 mt-0"/>
+                <div class="table-responsive">
+                    @if(loading){
+                        <mat-spinner class="my-3 m-auto" mode="indeterminate" [diameter]="70"></mat-spinner>
+                    } @else if(error){
+                        <app-alert 
+                            [alertInputs]="alertInputs"
+                        />
+                    } @else if(versions && versions.length > 0) {
+                        <table class="table table-striped table-hover caption-top mt-3">
+                            <caption>Available Tags</caption>
+                            <thead class="table-dark">
+                                <tr>
+                                  <th scope="col">Tag</th>
+                                  <th scope="col">Previous Version</th>
+                                  <th scope="col">Latest Version</th>
+                                  <th scope="col">Date Created</th>
+                                  <th scope="col">Last Updated</th>
+                                  <th scope="col">Premium</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                @for (version of versions; track $index) {
+                                    <tr [hidden]="version.isDeprecated">
+                                        <td>{{version.name}}</td>
+                                        @if(version.oldVersion){
+                                            <td>{{ version.oldVersion }}</td>
+                                        }@else {
+                                            <td>None</td>
+                                        }
+                                        <td>{{ version.latestVersion }}</td>
+                                        <td>{{ version.createdOn| date: 'MMM-dd-yy' }}</td>
+                                        <td>{{ version.updatedOn| date: 'MMM-dd-yy' }}</td>
+                                        @if(version.isPremium){
+                                            <td>Yes</td>
+                                        }@else {
+                                            <td>No</td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    } @else {
+                        <app-alert 
+                            [alertInputs]="alertInputs"
+                        />
+                    }
+                </div>
+                <span class="linked" (click)="goBack()">Back</span>
+            </div>
+        </main>
+    </div>
+</div>

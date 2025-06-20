@@ -6,6 +6,7 @@ import { ExperienceApiComponent } from '../experience-api/experience-api.compone
 import { ProjectsApiComponent } from '../projects-api/projects-api.component';
 import { SkillsApiComponent } from '../skills-api/skills-api.component';
 import { CertificationsApiComponent } from '../certifications-api/certifications-api.component';
+import { TagsComponent } from '../tags/tags.component';
 
 @Component({
   selector: 'app-api-home',
@@ -16,6 +17,7 @@ import { CertificationsApiComponent } from '../certifications-api/certifications
     ExperienceApiComponent,
     ProjectsApiComponent,
     SkillsApiComponent,
+    TagsComponent,
     CertificationsApiComponent
   ],
   templateUrl: './api-home.component.html',
