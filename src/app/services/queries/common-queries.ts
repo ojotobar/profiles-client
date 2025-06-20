@@ -54,3 +54,18 @@ export const GetFaqsQuery = gql`
       }
     }
   `;
+
+  export const GetAvailableTagsQuery = gql`
+    query {
+      portfolioVersions{
+        id
+        name
+        oldVersion
+        latestVersion
+        createdOn
+        updatedOn
+        isPremium
+        isDeprecated
+      }
+    }
+  `;

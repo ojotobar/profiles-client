@@ -38,6 +38,17 @@ export interface AuditLogModel {
     createdOn: Date  
 }
 
+export interface VersionTagModel{
+    id: string,
+    name: string,
+    oldVersion: string | null,
+    latestVersion: string,
+    createdOn: Date,
+    updatedOn: Date,
+    isPremium: boolean,
+    isDeprecated: boolean
+}
+
 export const genericErrorMessage = 'Something went wrong';
 
 export function getGenericErrorMessage(type: OperationTypeEnum): string {
